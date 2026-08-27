@@ -1,0 +1,10 @@
+[
+  { "id": "g-1", "title": "Volt Line", "category": "slots", "provider": "Northspin" },
+  { "id": "g-2", "title": "Harbor Roulette", "category": "live", "provider": "Atlas Live" },
+  { "id": "g-3", "title": "Red Tape Holdem", "category": "table", "provider": "Red Tape" },
+  { "id": "g-4", "title": "Kite Ways", "category": "slots", "provider": "Kite" },
+  { "id": "g-5", "title": "Night Circuit", "category": "slots", "provider": "Northspin" },
+  { "id": "g-6", "title": "Atlas Blackjack", "category": "live", "provider": "Atlas Live" },
+  { "id": "g-7", "title": "Quartz Jackpot", "category": "jackpot", "provider": "Harbor" },
+  { "id": "g-8", "title": "Drift Baccarat", "category": "live", "provider": "Atlas Live" }
+]

@@ -1,0 +1,78 @@
+.tx-section {
+  position: relative;
+  margin-bottom: var(--shell-section-gap);
+}
+
+.tx-section__more {
+  position: absolute;
+  top: 2.5rem;
+  right: 0;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--color-primary);
+}
+
+.tx-table {
+  width: 100%;
+  min-height: var(--shell-table-height);
+  border-collapse: collapse;
+  border-radius: var(--shell-radius);
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.tx-table th,
+.tx-table td {
+  height: var(--shell-row-height);
+  padding: 0 var(--space-4);
+  text-align: left;
+  font-size: var(--text-sm);
+}
+
+.tx-table th {
+  background: var(--color-surface-elevated);
+  color: var(--color-text-secondary);
+  font-weight: var(--weight-medium);
+}
+
+.tx-table td {
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+.tx-table__name {
+  color: var(--color-primary);
+}
+
+.tx-table-wrap {
+  overflow-x: auto;
+}
+
+@media (max-width: 1023px) {
+  .tx-section__more {
+    position: static;
+    display: inline-block;
+    margin-bottom: var(--space-3);
+  }
+}
+
+ui-tabs.tabs--pills .tabs__list {
+  border-bottom: 0;
+  gap: var(--shell-tab-gap);
+  margin-bottom: var(--space-4);
+}
+
+ui-tabs.tabs--pills .tabs__tab {
+  min-height: var(--shell-tab-height);
+  padding: var(--shell-tab-pad-y) var(--shell-tab-pad-x);
+  border-radius: var(--shell-radius);
+  border: var(--border-width) solid color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+}
+
+ui-tabs.tabs--pills .tabs__tab.is-active {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  border-color: var(--color-primary);
+}

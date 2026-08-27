@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NEXA</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("nexa:theme") || "dark";
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div data-include="header"></div>
+    <div data-include="sidebar"></div>
+    <div data-include="nav"></div>
+    <main id="main" class="page" data-page="page-id">
+      <ui-container>
+        <!-- Page content only -->
+      </ui-container>
+    </main>
+    <div data-include="footer"></div>
+    <div data-include="chat"></div>
+    <div data-include="mobile-nav"></div>
+    <div data-include="modal"></div>
+    <div data-include="toast"></div>
+    <script src="js/boot.js"></script>
+  </body>
+</html>

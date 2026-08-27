@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NEXA · Lobby</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("nexa:theme") || "dark";
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body data-layout="shell">
+    <div data-include="header"></div>
+    <div data-include="sidebar"></div>
+    <main id="main" class="page page--home" data-page="home">
+      <div class="shell-main">
+        <ui-hero>
+          <img class="hero__image" src="assets/images/banners/hero-banner.jpg" alt="" />
+          <img class="hero__image" src="assets/images/banners/02-jw-v2.jpg" alt="" />
+          <img class="hero__image" src="assets/images/banners/03-xclusive.jpg" alt="" />
+          <img class="hero__image" src="assets/images/banners/04-jw-general.jpg" alt="" />
+          <img class="hero__image" src="assets/images/banners/05-deposit-crypto.jpg" alt="" />
+          <img class="hero__image" src="assets/images/banners/06-crypto-withdrawal.jpg" alt="" />
+          <img class="hero__image" src="assets/images/banners/07-desktop-en.jpg" alt="" />
+          <img class="hero__image" src="assets/images/banners/08-football.png" alt="" />
+        </ui-hero>
+
+        <section class="shortcut-row" aria-label="Shortcuts">
+          <a class="shortcut-card" href="casino.html">
+            <img class="shortcut-card__art" src="assets/images/shortcuts/number-game.gif" alt="" />
+            <span class="shortcut-card__title">Number Game</span>
+            <span class="shortcut-card__action">Play Now</span>
+          </a>
+          <a class="shortcut-card shortcut-card--2" href="promotions.html">
+            <img class="shortcut-card__art" src="assets/images/shortcuts/ranking-board.gif" alt="" />
+            <span class="shortcut-card__title">Ranking Board</span>
+            <span class="shortcut-card__action">Play Now</span>
+          </a>
+          <a class="shortcut-card shortcut-card--3" href="sports.html">
+            <img class="shortcut-card__art" src="assets/images/shortcuts/prediction.gif" alt="" />
+            <span class="shortcut-card__title">Prediction</span>
+            <span class="shortcut-card__action">Play Now</span>
+          </a>
+          <a class="shortcut-card shortcut-card--4" href="account.html">
+            <img class="shortcut-card__art" src="assets/images/shortcuts/personal-achievement.gif" alt="" />
+            <span class="shortcut-card__title">Personal Achievement</span>
+            <span class="shortcut-card__action">Play Now</span>
+          </a>
+        </section>
+
+        <section class="provider-section" aria-labelledby="providers-title">
+          <h2 class="home-section__title" id="providers-title">Providers</h2>
+          <div class="provider-rail">
+            <a class="provider-card" href="live.html"><img src="assets/images/providers/ebet.jpg" alt="EBET" /></a>
+            <a class="provider-card" href="live.html"><img src="assets/images/providers/evo.jpg" alt="Evolution" /></a>
+            <a class="provider-card" href="live.html"><img src="assets/images/providers/gp.jpg" alt="GP" /></a>
+            <a class="provider-card" href="live.html"><img src="assets/images/providers/hg.jpg" alt="HG" /></a>
+            <a class="provider-card" href="live.html"><img src="assets/images/providers/pp.jpg" alt="Pragmatic Play" /></a>
+            <a class="provider-card" href="live.html"><img src="assets/images/providers/pt.jpg" alt="Playtech" /></a>
+            <a class="provider-card" href="live.html"><img src="assets/images/providers/sg.jpg" alt="SA Gaming" /></a>
+            <a class="provider-card" href="live.html"><img src="assets/images/providers/ag.jpg" alt="Asia Gaming" /></a>
+            <a class="provider-card" href="live.html"><img src="assets/images/providers/allbet.jpg" alt="Allbet" /></a>
+            <a class="provider-card" href="live.html"><img src="assets/images/providers/dg.jpg" alt="Dream Gaming" /></a>
+            <a class="provider-card" href="casino.html"><img src="assets/images/providers/spade.jpg" alt="Spade" /></a>
+            <a class="provider-card" href="casino.html"><img src="assets/images/providers/cq9.jpg" alt="CQ9" /></a>
+          </div>
+        </section>
+
+        <section class="tx-section" aria-labelledby="tx-title">
+          <h2 class="home-section__title" id="tx-title">Recent bets</h2>
+          <a class="tx-section__more" href="account.html">View more</a>
+          <ui-tabs class="tabs--pills">
+            <button type="button" data-tab="all">All bets</button>
+            <button type="button" data-tab="top">Daily top</button>
+            <div data-panel="all">
+              <div class="tx-table-wrap">
+                <table class="tx-table">
+                  <thead>
+                    <tr>
+                      <th>Game</th>
+                      <th>Player</th>
+                      <th>Time</th>
+                      <th>Region</th>
+                      <th>Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Table Hold'em</td><td class="tx-table__name">Player 01</td><td>12:01</td><td>MY</td><td>12.50</td></tr>
+                    <tr><td>Volt Line</td><td class="tx-table__name">Player 02</td><td>12:02</td><td>SG</td><td>40.00</td></tr>
+                    <tr><td>City vs Rovers</td><td class="tx-table__name">Player 03</td><td>12:03</td><td>VN</td><td>8.25</td></tr>
+                    <tr><td>Harbor Roulette</td><td class="tx-table__name">Player 04</td><td>12:04</td><td>MY</td><td>15.00</td></tr>
+                    <tr><td>Kite Ways</td><td class="tx-table__name">Player 05</td><td>12:05</td><td>SG</td><td>22.10</td></tr>
+                    <tr><td>Night Circuit</td><td class="tx-table__name">Player 06</td><td>12:06</td><td>MY</td><td>5.00</td></tr>
+                    <tr><td>Atlas Blackjack</td><td class="tx-table__name">Player 07</td><td>12:07</td><td>VN</td><td>31.80</td></tr>
+                    <tr><td>Drift Baccarat</td><td class="tx-table__name">Player 08</td><td>12:08</td><td>SG</td><td>9.40</td></tr>
+                    <tr><td>Red Tape</td><td class="tx-table__name">Player 09</td><td>12:09</td><td>MY</td><td>18.00</td></tr>
+                    <tr><td>Quartz Jackpot</td><td class="tx-table__name">Player 10</td><td>12:10</td><td>SG</td><td>50.00</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div data-panel="top">
+              <div class="tx-table-wrap">
+                <table class="tx-table">
+                  <thead>
+                    <tr>
+                      <th>Game</th>
+                      <th>Player</th>
+                      <th>Time</th>
+                      <th>Region</th>
+                      <th>Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Quartz Jackpot</td><td class="tx-table__name">Player 10</td><td>11:40</td><td>SG</td><td>50.00</td></tr>
+                    <tr><td>Volt Line</td><td class="tx-table__name">Player 02</td><td>11:22</td><td>SG</td><td>40.00</td></tr>
+                    <tr><td>Atlas Blackjack</td><td class="tx-table__name">Player 07</td><td>11:18</td><td>VN</td><td>31.80</td></tr>
+                    <tr><td>Kite Ways</td><td class="tx-table__name">Player 05</td><td>11:05</td><td>SG</td><td>22.10</td></tr>
+                    <tr><td>Red Tape</td><td class="tx-table__name">Player 09</td><td>10:51</td><td>MY</td><td>18.00</td></tr>
+                    <tr><td>Harbor Roulette</td><td class="tx-table__name">Player 04</td><td>10:44</td><td>MY</td><td>15.00</td></tr>
+                    <tr><td>Table Hold'em</td><td class="tx-table__name">Player 01</td><td>10:31</td><td>MY</td><td>12.50</td></tr>
+                    <tr><td>Drift Baccarat</td><td class="tx-table__name">Player 08</td><td>10:20</td><td>SG</td><td>9.40</td></tr>
+                    <tr><td>City vs Rovers</td><td class="tx-table__name">Player 03</td><td>10:12</td><td>VN</td><td>8.25</td></tr>
+                    <tr><td>Night Circuit</td><td class="tx-table__name">Player 06</td><td>10:02</td><td>MY</td><td>5.00</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </ui-tabs>
+        </section>
+
+        <section class="trust-row" aria-label="Partners">
+          <div>
+            <h2 class="home-section__title">Partners</h2>
+            <img class="trust-media" src="assets/images/sponsor-anj.png" alt="ANJ" />
+          </div>
+          <div class="trust-profile">
+            <div class="trust-profile__copy">
+              <h2 class="home-section__title">Ambassador</h2>
+              <p>Jacky</p>
+              <p>Official brand ambassador.</p>
+              <p>0 followers</p>
+            </div>
+            <img class="trust-profile__photo" src="assets/images/ambassador-jacky.png" alt="Jacky" />
+          </div>
+        </section>
+
+        <section class="app-promo" aria-labelledby="app-title">
+          <div class="app-promo__copy">
+            <p>Mobile app</p>
+            <h2 id="app-title">Play on your phone</h2>
+            <p>Download the app to play on the go.</p>
+            <div class="app-promo__actions">
+              <a class="app-promo__store" href="#">
+                <img src="assets/images/app/app-store.webp" alt="Download on the App Store" />
+              </a>
+              <a class="app-promo__store" href="#">
+                <img src="assets/images/app/google-play.webp" alt="Get it on Google Play" />
+              </a>
+            </div>
+          </div>
+          <div class="app-promo__visual">
+            <img src="assets/images/app/download-app.webp" alt="" />
+          </div>
+        </section>
+      </div>
+    </main>
+    <div data-include="footer"></div>
+    <div data-include="chat"></div>
+    <div data-include="mobile-nav"></div>
+    <div data-include="modal"></div>
+    <div data-include="toast"></div>
+    <script src="js/boot.js"></script>
+  </body>
+</html>

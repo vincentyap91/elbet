@@ -1,0 +1,32 @@
+.provider-section {
+  margin-bottom: var(--shell-section-gap);
+}
+
+.provider-rail {
+  display: flex;
+  gap: var(--shell-provider-gap);
+  overflow-x: auto;
+}
+
+.provider-card {
+  flex: 0 0 var(--shell-provider-width);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--shell-provider-height);
+  overflow: hidden;
+  border-radius: var(--shell-radius);
+  border: var(--border-width) solid color-mix(in srgb, var(--color-primary) 28%, var(--color-border));
+  background: var(--color-surface);
+}
+
+.provider-card:hover {
+  border-color: var(--color-primary);
+}
+
+.provider-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

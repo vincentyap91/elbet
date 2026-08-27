@@ -1,0 +1,239 @@
+/* NEXA design tokens — source of truth.
+   Raw values live here. Themes only override semantic color tokens.
+   Identity: charcoal field + gold primary + copper heat. */
+
+:root {
+  /* ---- Breakpoints (media queries must repeat the px value) ---- */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+
+  /* ---- Spacing (4px base) ---- */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 2.5rem;
+  --space-8: 3rem;
+  --space-9: 4rem;
+  --space-10: 5rem;
+  --space-section: var(--space-8);
+  --space-card: var(--space-4);
+
+  /* ---- Radius ---- */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1.125rem;
+  --radius-pill: 999px;
+
+  /* ---- Typography ---- */
+  --font-display: "Avenir Next", "Segoe UI Variable Display", "Segoe UI", "PingFang SC", "Noto Sans SC", sans-serif;
+  --font-body: "Segoe UI Variable Text", "Segoe UI", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --font-numeric: "Segoe UI", "Avenir Next", "Tabular-Nums", ui-sans-serif, sans-serif;
+  --font-mono: "Cascadia Code", "Segoe UI Mono", ui-monospace, monospace;
+  --font-sans: var(--font-body);
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.875rem;
+  --text-3xl: 2.5rem;
+  --text-display: 3rem;
+
+  --leading-none: 1;
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.5;
+  --leading-loose: 1.7;
+
+  --tracking-tight: -0.03em;
+  --tracking-display: -0.025em;
+  --tracking-wide: 0.08em;
+  --tracking-numeric: 0.04em;
+  --tracking-logo: 0.04em;
+
+  --weight-regular: 400;
+  --weight-medium: 600;
+  --weight-bold: 700;
+
+  /* ---- Controls & chrome ---- */
+  --tap-min: 2.75rem;
+  --control-height-sm: 2.25rem;
+  --control-height: 2.75rem;
+  --control-height-lg: 3.25rem;
+  --shell-header-height: 4.875rem;
+  --shell-sidebar-width: 3.875rem;
+  --shell-main-width: 81.25rem;
+  --shell-banner-height: 20rem;
+  --shell-banner-top: 1.8125rem;
+  --shell-banner-bottom: 1.25rem;
+  --shell-shortcut-height: 4.375rem;
+  --shell-shortcut-gap: 0.625rem;
+  --shell-provider-width: 9.875rem;
+  --shell-provider-height: 3rem;
+  --shell-provider-gap: 0.9375rem;
+  --shell-section-gap: 3.75rem;
+  --shell-block-gap: 4.0625rem;
+  --shell-radius: 0.9375rem;
+  --shell-tab-height: 2.25rem;
+  --shell-tab-pad-y: 0.625rem;
+  --shell-tab-pad-x: 2.1875rem;
+  --shell-tab-gap: 1rem;
+  --shell-row-height: 2.75rem;
+  --shell-table-height: 30.8125rem;
+  --shell-trust-gap: 4.375rem;
+  --shell-trust-media-width: 39.25rem;
+  --shell-trust-media-height: 18.875rem;
+  --shell-app-height: 21.25rem;
+  --shell-app-left: 33.5625rem;
+  --shell-app-pad: 4.125rem;
+  --shell-footer-links-height: 12.375rem;
+  --shell-arrow-size: 2.5rem;
+  --shell-chat-width: 15.9375rem;
+  --shell-chat-height: 3.125rem;
+  --header-height: var(--shell-header-height);
+  --nav-height: 3.25rem;
+  --mobile-nav-height: 4rem;
+  --icon-size: 1.25rem;
+  --icon-size-sm: 1rem;
+
+  /* ---- Layout ---- */
+  --layout-max: 80rem;
+  --container-narrow: 40rem;
+  --container-md: 68rem;
+  --container-lg: var(--layout-max);
+  --gutter-mobile: var(--space-4);
+  --gutter-tablet: var(--space-6);
+  --gutter-desktop: var(--space-8);
+  --container-gutter: var(--gutter-mobile);
+  --card-min: 16rem;
+  --card-media-height: 8.5rem;
+  --odds-min-width: 4.5rem;
+
+  /* ---- Motion ---- */
+  --duration-fast: 120ms;
+  --duration-med: 200ms;
+  --duration-slow: 320ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ---- Elevation ---- */
+  --shadow-sm: 0 1px 2px color-mix(in srgb, var(--color-shadow) 20%, transparent);
+  --shadow-md: 0 10px 28px color-mix(in srgb, var(--color-shadow) 28%, transparent);
+  --shadow-lg: 0 24px 56px color-mix(in srgb, var(--color-shadow) 40%, transparent);
+  --shadow-live: 0 0 0 1px color-mix(in srgb, var(--color-live) 50%, transparent);
+
+  /* ---- Z-index ---- */
+  --z-base: 1;
+  --z-nav: 90;
+  --z-header: 100;
+  --z-sidebar: 105;
+  --z-mobile-nav: 110;
+  --z-chat: 115;
+  --z-dropdown: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--color-primary) 42%, transparent);
+  --color-primary-soft: color-mix(in srgb, var(--color-primary) 14%, transparent);
+  --border-width: 1px;
+}
+
+/* Dark is the product default. */
+:root,
+[data-theme="dark"] {
+  --color-primary: #edc34a;
+  --color-primary-hover: #f4d36a;
+  --color-on-primary: #16140c;
+
+  --color-secondary: #8b9bff;
+  --color-secondary-hover: #aeb8ff;
+  --color-on-secondary: #0a0e18;
+
+  --color-accent: #c9843a;
+  --color-accent-hover: #d99852;
+  --color-on-accent: #1a1206;
+
+  --color-bg: #0b0b0d;
+  --color-surface: #141416;
+  --color-surface-elevated: #1b1b1e;
+  --color-surface-hover: #232326;
+  --color-border: #2f2f34;
+  --color-overlay: color-mix(in srgb, #050506 74%, transparent);
+
+  --color-text-primary: #f4f4f2;
+  --color-text-secondary: #b4b4ae;
+  --color-text-muted: #7a7a74;
+
+  --color-success: #3ddc97;
+  --color-on-success: #052318;
+  --color-warning: #d4923a;
+  --color-on-warning: #1a1404;
+  --color-error: #ff5a7a;
+  --color-on-error: #2a0810;
+  --color-live: #ff3d6e;
+  --color-on-live: #ffffff;
+  --color-live-soft: color-mix(in srgb, var(--color-live) 18%, transparent);
+
+  --color-shadow: #000000;
+
+  /* Compatibility aliases used by existing component markup */
+  --color-text: var(--color-text-primary);
+  --color-text-subtle: var(--color-text-muted);
+  --color-bg-elevated: var(--color-surface-elevated);
+  --color-danger: var(--color-error);
+  --color-on-danger: var(--color-on-error);
+  --color-info: var(--color-secondary);
+  --logo-mark: var(--color-primary);
+}
+
+[data-theme="light"] {
+  --color-primary: #c9a227;
+  --color-primary-hover: #a9861a;
+  --color-on-primary: #16140c;
+
+  --color-secondary: #3f52d4;
+  --color-secondary-hover: #2c3cbb;
+  --color-on-secondary: #ffffff;
+
+  --color-accent: #c47a22;
+  --color-accent-hover: #a86416;
+  --color-on-accent: #ffffff;
+
+  --color-bg: #f3f5f9;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #ffffff;
+  --color-surface-hover: #e8ecf4;
+  --color-border: #d3dae8;
+  --color-overlay: color-mix(in srgb, #070a10 46%, transparent);
+
+  --color-text-primary: #101623;
+  --color-text-secondary: #4a5670;
+  --color-text-muted: #6b7690;
+
+  --color-success: #0b9d74;
+  --color-on-success: #ffffff;
+  --color-warning: #c47a22;
+  --color-on-warning: #1a1404;
+  --color-error: #d6455d;
+  --color-on-error: #ffffff;
+  --color-live: #e11d48;
+  --color-on-live: #ffffff;
+  --color-live-soft: color-mix(in srgb, var(--color-live) 14%, transparent);
+
+  --color-shadow: #101623;
+
+  --color-text: var(--color-text-primary);
+  --color-text-subtle: var(--color-text-muted);
+  --color-bg-elevated: var(--color-surface-elevated);
+  --color-danger: var(--color-error);
+  --color-on-danger: var(--color-on-error);
+  --color-info: var(--color-secondary);
+  --logo-mark: var(--color-primary);
+}

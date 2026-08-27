@@ -1,0 +1,15 @@
+[
+  {
+    "id": "p-1",
+    "title": "First deposit matched to 500",
+    "kicker": "Welcome",
+    "featured": true,
+    "copy": "Match credited after your first deposit. Open Account to claim. 18+ only."
+  },
+  {
+    "id": "p-2",
+    "title": "Midweek acca boost",
+    "featured": false,
+    "copy": "Five-fold football slips get a 10% boost, paid on settled returns."
+  }
+]

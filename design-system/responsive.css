@@ -1,0 +1,163 @@
+/* Breakpoints and layout behavior. Mobile first.
+   --bp-sm 640 | --bp-md 768 | --bp-lg 1024 | --bp-xl 1280
+   CSS cannot use custom properties in @media, so px values are repeated. */
+
+:root {
+  --container-gutter: var(--gutter-mobile);
+  --space-section: var(--space-8);
+}
+
+/* Large phone / small tablet */
+@media (min-width: 640px) {
+  .dropdown__menu {
+    min-width: 12rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .dropdown__menu {
+    min-width: 100%;
+    right: 0;
+  }
+
+  .type-display,
+  h1 {
+    font-size: var(--text-2xl);
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  :root {
+    --container-gutter: var(--gutter-tablet);
+    --space-section: var(--space-9);
+  }
+
+  .site-footer__links {
+    flex-wrap: nowrap;
+  }
+
+  .modal {
+    align-items: center;
+    padding: var(--space-6);
+  }
+
+  .modal__dialog {
+    border-radius: var(--radius-lg);
+  }
+
+  .promo-card {
+    padding: var(--space-6);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  :root {
+    --container-gutter: var(--gutter-desktop);
+    --space-section: var(--space-10);
+  }
+
+  .site-header__menu,
+  .site-drawer {
+    display: none !important;
+  }
+
+  .site-header__menus {
+    display: flex;
+  }
+
+  .site-nav {
+    display: block;
+  }
+
+  .mobile-nav {
+    display: none;
+  }
+
+  .page {
+    min-height: calc(100vh - var(--header-height) - var(--nav-height));
+    padding-bottom: var(--space-6);
+  }
+
+  .site-footer {
+    padding-bottom: var(--space-8);
+  }
+
+  .toast-stack {
+    bottom: var(--space-5);
+  }
+
+  .game-card__play {
+    cursor: pointer;
+  }
+
+  .banner {
+    grid-template-columns: minmax(16rem, 2fr) minmax(20rem, 3fr);
+    min-height: 22rem;
+  }
+
+  .banner__copy {
+    padding: var(--space-6) var(--space-7);
+  }
+
+  .banner__media {
+    min-height: 22rem;
+    order: 0;
+  }
+
+  .banner__media::after {
+    background: linear-gradient(90deg, var(--color-bg) 0%, transparent 42%);
+  }
+
+  .rail {
+    grid-auto-columns: minmax(22rem, 1fr);
+  }
+
+  .match-row {
+    grid-template-columns: minmax(10rem, 16rem) minmax(12rem, 1fr) auto;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
+  }
+
+  .promo-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .promo-grid .promo-card {
+    min-height: 14rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  .page {
+    min-height: calc(100vh - var(--header-height) - var(--mobile-nav-height));
+    padding-bottom: calc(var(--space-6) + var(--mobile-nav-height));
+  }
+
+  .site-footer {
+    padding-bottom: calc(var(--space-8) + var(--mobile-nav-height));
+  }
+
+  .game-card__play {
+    opacity: 1;
+    background: transparent;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: var(--space-2);
+  }
+
+  .game-card:hover .game-card__play,
+  .game-card:focus-within .game-card__play {
+    background: transparent;
+  }
+}
+
+/* Wide desktop */
+@media (min-width: 1280px) {
+  .card-grid,
+  .game-grid {
+    gap: var(--space-5);
+  }
+}

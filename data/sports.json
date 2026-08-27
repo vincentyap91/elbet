@@ -1,0 +1,45 @@
+[
+  {
+    "id": "s-1",
+    "sport": "football",
+    "league": "Premier League",
+    "home": "City",
+    "away": "Rovers",
+    "status": "live",
+    "score": "1-0",
+    "clock": "67'",
+    "odds": { "1": 1.85, "x": 3.6, "2": 4.4 }
+  },
+  {
+    "id": "s-2",
+    "sport": "basketball",
+    "league": "Euroleague",
+    "home": "Osaka",
+    "away": "Seoul",
+    "status": "live",
+    "score": "78-74",
+    "clock": "Q3",
+    "odds": { "1": 1.92, "2": 1.88 }
+  },
+  {
+    "id": "s-3",
+    "sport": "tennis",
+    "league": "ATP",
+    "home": "Alcaraz",
+    "away": "Rune",
+    "status": "live",
+    "score": "1-0",
+    "clock": "Set 2",
+    "odds": { "1": 1.45, "2": 2.8 }
+  },
+  {
+    "id": "s-4",
+    "sport": "football",
+    "league": "Championship",
+    "home": "North United",
+    "away": "Harbor FC",
+    "status": "upcoming",
+    "kickoff": "Sun 18:00",
+    "odds": { "1": 2.1, "x": 3.25, "2": 3.4 }
+  }
+]

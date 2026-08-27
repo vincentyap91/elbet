@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NEXA · Component playground</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("nexa:theme") || "dark";
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/playground.css" />
+  </head>
+  <body>
+    <div data-include="header"></div>
+    <div data-include="sidebar"></div>
+    <div data-include="nav"></div>
+    <main id="main" class="page" data-page="playground">
+      <ui-container size="lg">
+        <header class="playground-hero">
+          <ui-badge variant="accent">Foundation</ui-badge>
+          <h1>Component playground</h1>
+          <p>
+            Shared chrome is loaded once from <code>components/</code>. Change a component file, refresh any page,
+            and the update applies everywhere. This is not the homepage.
+          </p>
+        </header>
+
+        <section class="playground-section">
+          <h2>Button</h2>
+          <div class="row">
+            <ui-button variant="primary">Primary</ui-button>
+            <ui-button variant="secondary">Secondary</ui-button>
+            <ui-button variant="ghost">Ghost</ui-button>
+            <ui-button variant="danger">Danger</ui-button>
+            <ui-button variant="primary" size="sm">Small</ui-button>
+            <ui-button variant="primary" size="lg">Large</ui-button>
+            <ui-button variant="primary" disabled>Disabled</ui-button>
+          </div>
+        </section>
+
+        <section class="playground-section">
+          <h2>Icon button</h2>
+          <div class="row">
+            <ui-icon-button name="search" label="Search"></ui-icon-button>
+            <ui-icon-button name="user" label="Account" variant="ghost"></ui-icon-button>
+            <ui-icon-button name="menu" label="Menu" variant="accent"></ui-icon-button>
+          </div>
+        </section>
+
+        <section class="playground-section">
+          <h2>Badge</h2>
+          <div class="row">
+            <ui-badge variant="accent">Live</ui-badge>
+            <ui-badge variant="success">Won</ui-badge>
+            <ui-badge variant="warning">Pending</ui-badge>
+            <ui-badge variant="danger">Failed</ui-badge>
+            <ui-badge variant="info">Info</ui-badge>
+          </div>
+        </section>
+
+        <section class="playground-section">
+          <h2>Card</h2>
+          <div class="card-grid">
+            <ui-card>
+              <h3 class="card__title">Default card</h3>
+              <p class="card__meta">Outlined surface for games, events, or promos.</p>
+            </ui-card>
+            <ui-card variant="elevated">
+              <div data-slot="media"></div>
+              <h3 class="card__title">Elevated</h3>
+              <p class="card__meta">Use for featured tiles.</p>
+            </ui-card>
+            <ui-card variant="outlined">
+              <h3 class="card__title">Outlined</h3>
+              <p class="card__meta">Quiet container with no fill.</p>
+            </ui-card>
+          </div>
+        </section>
+
+        <section class="playground-section">
+          <h2>Dropdown</h2>
+          <ui-dropdown label="Odds format">
+            <button type="button" data-value="decimal">Decimal</button>
+            <button type="button" data-value="fractional">Fractional</button>
+            <button type="button" data-value="american">American</button>
+          </ui-dropdown>
+        </section>
+
+        <section class="playground-section">
+          <h2>Tabs</h2>
+          <ui-tabs>
+            <button type="button" data-tab="all">All</button>
+            <button type="button" data-tab="live">Live</button>
+            <button type="button" data-tab="soon">Upcoming</button>
+            <div data-panel="all">All markets would list here.</div>
+            <div data-panel="live">Live markets would list here.</div>
+            <div data-panel="soon">Upcoming markets would list here.</div>
+          </ui-tabs>
+        </section>
+
+        <section class="playground-section">
+          <h2>Modal and toast</h2>
+          <div class="row">
+            <ui-button variant="primary" data-demo="open-modal">Open modal</ui-button>
+            <ui-button variant="secondary" data-demo="toast-success">Success toast</ui-button>
+            <ui-button variant="danger" data-demo="toast-danger">Danger toast</ui-button>
+          </div>
+          <p class="playground-note">Pages never copy modal markup. They emit <code>app:modal:open</code> and <code>app:toast:show</code>.</p>
+        </section>
+
+        <section class="playground-section">
+          <h2>Loading</h2>
+          <ui-loading label="Loading markets"></ui-loading>
+          <ui-loading variant="skeleton" lines="4"></ui-loading>
+        </section>
+
+        <section class="playground-section">
+          <h2>Empty</h2>
+          <ui-empty title="No bets yet" description="When a list is empty, use this shared state instead of custom copy on every page.">
+            <ui-button variant="primary" href="casino.html">Browse casino</ui-button>
+          </ui-empty>
+        </section>
+      </ui-container>
+    </main>
+    <div data-include="footer"></div>
+    <div data-include="chat"></div>
+    <div data-include="mobile-nav"></div>
+    <div data-include="modal"></div>
+    <div data-include="toast"></div>
+    <script src="js/boot.js"></script>
+  </body>
+</html>

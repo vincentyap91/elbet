@@ -1,0 +1,64 @@
+.shortcut-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--shell-shortcut-gap);
+  margin-bottom: var(--shell-block-gap);
+}
+
+.shortcut-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--shell-shortcut-height);
+  overflow: hidden;
+  padding: 0 0.75rem;
+  border-radius: var(--shell-radius);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+.shortcut-card__art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.shortcut-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 58%;
+  background: linear-gradient(90deg, var(--color-surface) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.shortcut-card__title {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.shortcut-card__action {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  min-height: 1.75rem;
+  padding: 0 var(--space-3);
+  border-radius: var(--shell-radius);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+}
+
+@media (min-width: 1024px) {
+  .shortcut-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

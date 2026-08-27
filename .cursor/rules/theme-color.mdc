@@ -1,0 +1,25 @@
+---
+description: Paint with NEXA tokens. Dark theme primary is gold. Never hard-code operator greys.
+alwaysApply: true
+---
+
+# Theme color
+
+ECLBET (`eclbet04.com`) is a **structure / copy / chrome-behavior** reference. Color always comes from [`design-system/tokens.css`](design-system/tokens.css).
+
+- Dark `--color-primary` is **gold** (`#edc34a`): Join, selected, hover bars, scroll thumbs, “go” states.
+- Light `--color-primary` is the same gold family, darker for paper surfaces.
+- Surfaces, text, and borders use `--color-surface`, `--color-text-secondary`, `--color-text-muted`, `--color-border`.
+- Do not hard-code `#2d2e30`, `#333435`, `#b2b2b2`, `#202023`, or Rubik-as-brand-color. Do not paste operator hex into CSS; change the token instead.
+
+```css
+/* BAD */
+.site-sidebar { background: #2d2e30; }
+.selected { color: #fabb2e; }
+
+/* GOOD */
+.site-sidebar { background: var(--color-surface); }
+.selected { color: var(--color-primary); }
+```
+
+Identity lock: [`PROJECT_DESIGN.md`](PROJECT_DESIGN.md) and [`design-system/MASTER.md`](design-system/MASTER.md).
