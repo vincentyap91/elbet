@@ -1,0 +1,26 @@
+---
+description: Input + trailing button rows must share one control height via .control-inline.
+alwaysApply: true
+---
+
+# Control inline (input + button)
+
+When an input (or select) sits beside a button on the right, wrap both in `.control-inline` from [`design-system/components.css`](design-system/components.css).
+
+- Heights must match via `--control-inline-height` — do not set one child to `--tap-min` and the other to `--control-height-sm`.
+- Size modifiers: `.control-inline--sm` (compact rows), default (standard), `.control-inline--lg`.
+- Icon trailing actions: use `.icon-btn` inside the row; square size comes from the row height.
+
+```html
+<!-- GOOD -->
+<div class="control-inline control-inline--sm">
+  <input type="text" />
+  <button type="button" class="icon-btn icon-btn--ghost icon-btn--sm" aria-label="Add">…</button>
+</div>
+
+<!-- BAD — mismatched heights -->
+<input class="field-sm" />
+<button class="icon-btn" style="height: var(--tap-min)">+</button>
+```
+
+Auth “Send” / “Show” overlays (`.auth-field__action`) are a different pattern — absolute inside the field, not side-by-side.

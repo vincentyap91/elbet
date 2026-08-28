@@ -2,3 +2,41 @@
   <img class="chat-dock__icon" src="assets/images/icons/chat.png" alt="" />
   <span class="chat-dock__label">Chat now</span>
 </button>
+
+<section class="chitchat" id="chitchat-panel" data-chitchat hidden>
+  <header class="chitchat__head">
+    <h2 class="chitchat__title" id="chitchat-title">ChitChat</h2>
+    <div class="chitchat__tools">
+      <button type="button" class="chitchat__tool" data-chitchat-pin aria-pressed="false" aria-label="Pinned messages"></button>
+      <button type="button" class="chitchat__rules-btn" data-chitchat-rules>Rules</button>
+      <button type="button" class="chitchat__tool" data-action="chitchat-close" aria-label="Close ChitChat"></button>
+    </div>
+  </header>
+  <p class="chitchat__pinned">
+    <span class="chitchat__pinned-icon" aria-hidden="true"></span>
+    No pinned message.
+  </p>
+  <div class="chitchat__thread">
+    <div class="chitchat__log" data-chitchat-log></div>
+    <div class="chitchat__rules" data-chitchat-rules-panel hidden>
+      <h3>Room rules</h3>
+      <ul>
+        <li>Keep it civil. No spam, scams, or account trading.</li>
+        <li>Do not share passwords, codes, or payment details.</li>
+        <li>Promo codes belong in official channels only.</li>
+        <li>Staff replies are marked Admin. Everyone else is a player.</li>
+      </ul>
+    </div>
+  </div>
+  <form class="chitchat__compose" data-chitchat-form>
+    <label class="sr-only" for="chitchat-input">Message</label>
+    <div class="chitchat__field">
+      <textarea id="chitchat-input" name="message" rows="2" maxlength="120" placeholder="Type your message" data-chitchat-input></textarea>
+      <button type="button" class="chitchat__emoji" data-chitchat-emoji aria-label="Insert smile"></button>
+    </div>
+    <div class="chitchat__compose-bar">
+      <span class="chitchat__count" data-chitchat-count>0/120</span>
+      <button type="submit" class="btn btn--primary btn--sm chitchat__send">Send</button>
+    </div>
+  </form>
+</section>

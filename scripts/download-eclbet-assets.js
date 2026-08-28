@@ -1,6 +1,7 @@
 /**
- * Downloads ECLBET homepage image assets into assets/images.
- * Usage: node scripts/download-eclbet-assets.js
+ * Downloads ECLBET image assets into assets/images.
+ * Usage: node scripts/download-eclbet-assets.js [--force]
+ * --force re-downloads files smaller than 4KB (placeholder/error pages).
  */
 const fs = require("fs");
 const path = require("path");
@@ -8,8 +9,11 @@ const https = require("https");
 const http = require("http");
 
 const root = path.resolve(__dirname, "..");
+const force = process.argv.includes("--force");
+const MIN_BYTES = 4096;
+/** Brand logo is locked. Never download over assets/images/logo.png. */
+const PROTECTED = new Set(["assets/images/logo.png"]);
 const files = [
-  ["https://www.eclbet04.com/static/images/ECLBET/logo/logo.png", "assets/images/logo.png"],
   ["https://www.eclbet04.com/static/images/burger_menu_left.svg", "assets/images/icons/burger-menu.svg"],
   ["https://www.eclbet04.com/static/images/icons/icon-banner-arrow-left.png", "assets/images/icons/banner-arrow-left.png"],
   ["https://www.eclbet04.com/static/images/icons/icon-banner-arrow-right.png", "assets/images/icons/banner-arrow-right.png"],
@@ -82,6 +86,19 @@ const files = [
   ["https://www.eclbet04.com/static/images/menu/icon-vip.svg", "assets/images/menu/icon-vip.svg"],
   ["https://www.eclbet04.com/static/images/menu/icon-quest.svg", "assets/images/menu/icon-quest.svg"],
   ["https://www.eclbet04.com/static/images/menu/icon-sponsor.svg", "assets/images/menu/icon-sponsor.svg"],
+  ["https://www.eclbet04.com/static/images/menu/icon-games.gif", "assets/images/menu/icon-games.gif"],
+  ["https://www.eclbet04.com/static/images/menu/icon-events.gif", "assets/images/menu/icon-events.gif"],
+  ["https://www.eclbet04.com/static/images/menu/icon-function.gif", "assets/images/menu/icon-function.gif"],
+  ["https://www.eclbet04.com/static/images/menu/icon-contact.svg", "assets/images/menu/icon-contact.svg"],
+  ["https://www.eclbet04.com/static/images/menu/icon-faq.svg", "assets/images/menu/icon-faq.svg"],
+  ["https://www.eclbet04.com/static/images/menu/icon-ranking.svg", "assets/images/menu/icon-ranking.svg"],
+  ["https://www.eclbet04.com/static/images/icons/icon-arrow-down.svg", "assets/images/icons/arrow-down.svg"],
+  ["https://www.eclbet04.com/static/images/account.svg", "assets/images/icons/account.svg"],
+  ["https://www.eclbet04.com/static/images/social-media/icon-color-facebook.svg", "assets/images/social/facebook-color.svg"],
+  ["https://www.eclbet04.com/static/images/social-media/icon-color-instagram.svg", "assets/images/social/instagram-color.svg"],
+  ["https://www.eclbet04.com/static/images/social-media/icon-color-youtube.svg", "assets/images/social/youtube-color.svg"],
+  ["https://www.eclbet04.com/static/images/social-media/icon-color-telegram.svg", "assets/images/social/telegram-color.svg"],
+  ["https://www.eclbet04.com/static/images/social-media/icon-color-twitter.svg", "assets/images/social/twitter-color.svg"],
 
   ["https://www.eclbet04.com/static/images/social-media/icon-facebook.svg", "assets/images/social/facebook.svg"],
   ["https://www.eclbet04.com/static/images/social-media/icon-instagram.svg", "assets/images/social/instagram.svg"],
@@ -103,10 +120,130 @@ const files = [
   ["https://www.eclbet04.com/static/images/icons/icon-history.svg", "assets/images/icons/history.svg"],
   ["https://www.eclbet04.com/static/images/icons/icon-inbox.svg", "assets/images/icons/inbox.svg"],
   ["https://www.eclbet04.com/static/images/icons/icon-promotion.svg", "assets/images/icons/promotion.svg"],
-  ["https://www.eclbet04.com/static/images/icons/icon-vip.svg", "assets/images/icons/vip.svg"],
+  ["https://www.eclbet04.com/static/images/icons/icon-sponsor.svg", "assets/images/icons/sponsor.svg"],
   ["https://www.eclbet04.com/static/images/icons/icon-voucher.svg", "assets/images/icons/voucher.svg"],
+  ["https://www.eclbet04.com/static/images/icons/icon-ticket-center.svg", "assets/images/icons/ticket-center.svg"],
+  ["https://www.eclbet04.com/static/images/icons/icon-transaction.svg", "assets/images/icons/transaction.svg"],
+  ["https://www.eclbet04.com/static/images/icons/icon-rebates.svg", "assets/images/icons/rebates.svg"],
+  ["https://www.eclbet04.com/static/images/icons/icon-update.svg", "assets/images/icons/update.svg"],
+  ["https://www.eclbet04.com/static/images/icons/icon-vip.svg", "assets/images/icons/vip.svg"],
   ["https://www.eclbet04.com/static/images/icons/icon-live-chat.svg", "assets/images/icons/live-chat.svg"],
   ["https://www.eclbet04.com/static/images/icons/icon-close.svg", "assets/images/icons/close.svg"],
+
+  ["https://www.eclbet04.com/static/images/footer/icon-footer-home-unselect.png", "assets/images/nav/home-unselect.png"],
+  ["https://www.eclbet04.com/static/images/footer/icon-footer-home-selected.svg", "assets/images/nav/home-selected.svg"],
+  ["https://www.eclbet04.com/static/images/footer/icon-footer-chat-unselect.svg", "assets/images/nav/chat-unselect.svg"],
+  ["https://www.eclbet04.com/static/images/footer/icon-footer-chat-selected.svg", "assets/images/nav/chat-selected.svg"],
+  ["https://www.eclbet04.com/static/images/footer/icon-footer-live-chat-unselect.png", "assets/images/nav/live-chat-unselect.png"],
+  ["https://www.eclbet04.com/static/images/footer/icon-footer-live-chat-selected.svg", "assets/images/nav/live-chat-selected.svg"],
+  ["https://www.eclbet04.com/static/images/footer/icon-footer-wallet-unselect.png", "assets/images/nav/wallet-unselect.png"],
+  ["https://www.eclbet04.com/static/images/footer/icon-footer-wallet-selected.svg", "assets/images/nav/wallet-selected.svg"],
+  ["https://www.eclbet04.com/static/images/footer/icon-footer-profile-unselect.png", "assets/images/nav/profile-unselect.png"],
+  ["https://www.eclbet04.com/static/images/footer/icon-footer-profile-unselect.svg", "assets/images/nav/profile-unselect.svg"],
+  ["https://www.eclbet04.com/static/images/footer/icon-footer-profile-selected.svg", "assets/images/nav/profile-selected.svg"],
+  ["https://www.eclbet04.com/static/images/footer/icon-footer-profile-selected.png", "assets/images/nav/profile-selected.png"],
+
+  ["https://www.eclbet04.com/static/images/ECLBET/banners/en/desktop/number-game2.webp", "assets/images/number-game/hero.webp"],
+  ["https://www.eclbet04.com/static/images/ECLBET/banners/en/desktop/ranking.webp", "assets/images/ranking/hero.webp"],
+  ["https://www.eclbet04.com/static/images/ECLBET/banners/en/desktop/prediction.webp", "assets/images/prediction/hero.webp"],
+  ["https://www.eclbet04.com/static/images/ECLBET/banners/en/desktop/personal-achievement.webp", "assets/images/achievements/hero.webp"],
+
+  ["https://www.eclbet04.com/static/images/ECLBET/banners/en/desktop/esports.webp", "assets/images/esports/hero.webp"],
+  ["https://www.eclbet04.com/static/images/ECLBET/banners/en/desktop/sports.webp", "assets/images/sports/hero.webp"],
+  ["https://www.eclbet04.com/static/images/ECLBET/banners/en/desktop/live-casino.webp", "assets/images/live/hero.webp"],
+  ["https://www.eclbet04.com/static/images/ECLBET/banners/en/desktop/slots.webp", "assets/images/slots/hero.webp"],
+  ["https://www.eclbet04.com/static/images/ECLBET/banners/en/desktop/lottery-4d.webp", "assets/images/4d/hero.webp"],
+  ["https://www.eclbet04.com/static/images/ECLBET/banners/en/desktop/fast-games.webp", "assets/images/fast-game/hero.webp"],
+
+  /* Category page icons (reference H1 row) */
+  ["https://www.eclbet04.com/static/images/icon-page/esports.png", "assets/images/icon-page/esports.png"],
+  ["https://www.eclbet04.com/static/images/icon-page/sports.png", "assets/images/icon-page/sports.png"],
+  ["https://www.eclbet04.com/static/images/icon-page/live-casino.png", "assets/images/icon-page/live-casino.png"],
+  ["https://www.eclbet04.com/static/images/icon-page/slots.png", "assets/images/icon-page/slots.png"],
+  ["https://www.eclbet04.com/static/images/icon-page/lottery-4d.png", "assets/images/icon-page/lottery-4d.png"],
+
+  /* Esports providers (webp tiles from reference) */
+  ["https://www.eclbet04.com/static/images/esports/saba-sport.webp", "assets/images/esports/saba-sport.webp"],
+  ["https://www.eclbet04.com/static/images/esports/saba-esports.webp", "assets/images/esports/saba-esports.webp"],
+  ["https://www.eclbet04.com/static/images/esports/inplay-matrix.webp", "assets/images/esports/inplay-matrix.webp"],
+  ["https://www.eclbet04.com/static/images/esports/cmd368.webp", "assets/images/esports/cmd368.webp"],
+  ["https://www.eclbet04.com/static/images/esports/tf-gaming.webp", "assets/images/esports/tf-gaming.webp"],
+  ["https://www.eclbet04.com/static/images/esports/ia-gaming.webp", "assets/images/esports/ia-gaming.webp"],
+
+  /* Sports providers */
+  ["https://www.eclbet04.com/static/images/sports/images/saba-sport.webp", "assets/images/sports/saba-sport.webp"],
+  ["https://www.eclbet04.com/static/images/sports/images/cmd368.webp", "assets/images/sports/cmd368.webp"],
+  ["https://www.eclbet04.com/static/images/sports/images/bti.webp", "assets/images/sports/bti.webp"],
+
+  /* Live casino providers */
+  ["https://www.eclbet04.com/static/images/live-casino/images/evo-asia.webp", "assets/images/live/evo-asia.webp"],
+  ["https://www.eclbet04.com/static/images/live-casino/images/pp-club.webp", "assets/images/live/pp-club.webp"],
+  ["https://www.eclbet04.com/static/images/live-casino/images/pt-club.webp", "assets/images/live/pt-club.webp"],
+  ["https://www.eclbet04.com/static/images/live-casino/images/winfinity-club.webp", "assets/images/live/winfinity-club.webp"],
+  ["https://www.eclbet04.com/static/images/live-casino/images/on-casino.webp", "assets/images/live/on-casino.webp"],
+  ["https://www.eclbet04.com/static/images/live-casino/images/allbet-club.webp", "assets/images/live/allbet-club.webp"],
+  ["https://www.eclbet04.com/static/images/live-casino/images/dg-club.webp", "assets/images/live/dg-club.webp"],
+  ["https://www.eclbet04.com/static/images/live-casino/images/sg-club.webp", "assets/images/live/sg-club.webp"],
+  ["https://www.eclbet04.com/static/images/live-casino/images/ag-club.webp", "assets/images/live/ag-club.webp"],
+  ["https://www.eclbet04.com/static/images/live-casino/images/ezugi-club.webp", "assets/images/live/ezugi-club.webp"],
+  ["https://www.eclbet04.com/static/images/live-casino/images/gp-club.webp", "assets/images/live/gp-club.webp"],
+  ["https://www.eclbet04.com/static/images/live-casino/images/wm-club.webp", "assets/images/live/wm-club.webp"],
+  ["https://www.eclbet04.com/static/images/live-casino/images/creedroomz.webp", "assets/images/live/creedroomz.webp"],
+
+  /* 4D operator logos */
+  ["https://www.eclbet04.com/static/images/lottery/logo_magnum.png", "assets/images/4d/logo-magnum.png"],
+  ["https://www.eclbet04.com/static/images/lottery/logo_toto.png", "assets/images/4d/logo-toto.png"],
+  ["https://www.eclbet04.com/static/images/lottery/logo_damacai.png", "assets/images/4d/logo-damacai.png"],
+  ["https://www.eclbet04.com/static/images/lottery/logo_singapore.png", "assets/images/4d/logo-singapore.png"],
+  ["https://www.eclbet04.com/static/images/lottery/logo_sabah.png", "assets/images/4d/logo-sabah.png"],
+  ["https://www.eclbet04.com/static/images/lottery/logo_sandakan.png", "assets/images/4d/logo-sandakan.png"],
+  ["https://www.eclbet04.com/static/images/lottery/logo_cashsweep.png", "assets/images/4d/logo-cashsweep.png"],
+
+  /* Slots / fast-game browse chrome */
+  ["https://www.eclbet04.com/static/images/slots/hotgames.png", "assets/images/slots/hotgames.png"],
+  ["https://www.eclbet04.com/static/images/icons/icon-search.svg", "assets/images/icons/icon-search.svg"],
+
+  /* Game thumbnails (reference CDN) */
+  ["https://cdv2defn.cloudcdnetw.com/games/v21/vs20olympecl.png", "assets/images/games/olympus.png"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v21/vs20fruitsw-v2.gif", "assets/images/games/sweet-bonanza.gif"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v21/vs20olympgate.gif", "assets/images/games/gates-of-olympus.gif"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v21/vs20starlight-v2.gif", "assets/images/games/starlight-princess.gif"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v21/vs40wildwest.gif", "assets/images/games/wild-west-gold.gif"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v21/vs10bbbonanza.png", "assets/images/games/big-bass.png"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v3/aogro.jpg", "assets/images/games/age-of-the-gods.jpg"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v21/vs10bblpop1.jpg", "assets/images/games/bubble-pop.jpg"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v90/INOUT_chicken-road.png", "assets/images/games/chicken-road.png"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v21/1301.png", "assets/images/games/aviator.png"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v21/ar10plinko.png", "assets/images/games/plinko.png"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v21/ar1minehnt.png", "assets/images/games/mines.png"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v21/ar1limboplus.png", "assets/images/games/limbo.png"],
+  ["https://godeftmc029ak.cloudcdnetw.com/img/?img=games/v45/GAMEID_62_EN.png", "assets/images/games/dice.png"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v21/1320.png", "assets/images/games/crash-x.png"],
+  ["https://godeftmc029ak.cloudcdnetw.com/img/?img=games/v45/GAMEID_232_EN.png", "assets/images/games/tower.png"],
+  ["https://godeftmc029ak.cloudcdnetw.com/img/?img=games/v45/GAMEID_236_EN.png", "assets/images/games/wheel.png"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v21/kna.png", "assets/images/games/keno-blast.png"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v3/gpas_cashitmpjp_pop.png", "assets/images/games/coin-flip.jpg"],
+  ["https://cdv2defn.cloudcdnetw.com/games/v21/ar1spire.png", "assets/images/games/rocket.png"],
+
+  ["https://www.eclbet04.com/static/images/icons/icon-timer-ng.svg", "assets/images/number-game/icon-timer.svg"],
+  ["https://www.eclbet04.com/static/images/icons/icon_calander_draw_date.png", "assets/images/number-game/icon-calendar.png"],
+  ["https://www.eclbet04.com/static/images/icons/icon_number_game.svg", "assets/images/number-game/icon-game.svg"],
+  ["https://www.eclbet04.com/static/images/icons/icon-add-circle.svg", "assets/images/number-game/icon-add.svg"],
+  ["https://www.eclbet04.com/static/images/icons/icon-information-question.svg", "assets/images/number-game/icon-info.svg"],
+  ["https://www.eclbet04.com/static/images/icons/icon-light-bulb.svg", "assets/images/number-game/icon-bulb.svg"],
+  ["https://www.eclbet04.com/static/images/others/number-game-daily-drawing.gif", "assets/images/number-game/drawing.gif"],
+  ["https://www.eclbet04.com/static/images/others/fire-animation.gif", "assets/images/number-game/fire.gif"],
+  ["https://staging-ecl.xyz/ecl/images/s3/ETH_JACKPOT.png", "assets/images/number-game/eth.png"],
+  ["https://staging-ecl.xyz/ecl/images/s3/TRC20_JACKPOT.png", "assets/images/number-game/trc20.png"],
+  ["https://staging-ecl.xyz/ecl/images/s3/BEP20_JACKPOT.png", "assets/images/number-game/bep20.png"],
+  ["https://staging-ecl.xyz/ecl/images/s3/GRAND_JACKPOT.png", "assets/images/number-game/grand.png"],
+
+  ["https://www.eclbet04.com/static/images/icons/icon-gold-1.png", "assets/images/achievements/gold-1.png"],
+  ["https://www.eclbet04.com/static/images/icons/icon-gold-2.png", "assets/images/achievements/gold-2.png"],
+  ["https://www.eclbet04.com/static/images/icons/icon-gold-3.png", "assets/images/achievements/gold-3.png"],
+  ["https://www.eclbet04.com/static/images/icons/icon-gold-4.png", "assets/images/achievements/gold-4.png"],
+  ["https://www.eclbet04.com/static/images/icons/icon-gold-5.png", "assets/images/achievements/gold-5.png"],
+  ["https://www.eclbet04.com/static/images/avatar/nba-players/1.png", "assets/images/achievements/avatar.png"],
 ];
 
 function fetchBuffer(url) {
@@ -147,8 +284,18 @@ function fetchBuffer(url) {
   let ok = 0;
   let fail = 0;
   for (const [url, dest] of files) {
+    const destNorm = dest.replace(/\\/g, "/");
+    if (PROTECTED.has(destNorm) || destNorm === "assets/images/logo.png") {
+      console.log("PROTECTED", dest);
+      continue;
+    }
     const out = path.join(root, dest);
     fs.mkdirSync(path.dirname(out), { recursive: true });
+    if (fs.existsSync(out) && !force && fs.statSync(out).size >= MIN_BYTES) {
+      ok += 1;
+      console.log("SKIP", dest);
+      continue;
+    }
     try {
       const buf = await fetchBuffer(url);
       fs.writeFileSync(out, buf);
@@ -160,5 +307,5 @@ function fetchBuffer(url) {
     }
   }
   console.log("Done", { ok, fail, total: files.length });
-  if (fail) process.exit(1);
+  if (fail) process.exitCode = 1;
 })();

@@ -1,0 +1,21 @@
+---
+description: Brand logo is locked at assets/images/logo.png. Never change or delete it.
+alwaysApply: true
+---
+
+# Logo lock
+
+Canonical brand file: [`assets/images/logo.png`](assets/images/logo.png).
+
+- Do not delete, rename, overwrite, convert, regenerate, or download over this file.
+- Do not swap it for `logo.svg`, an ECLBET CDN logo, or a generated mark.
+- Header, sidebar, footer, and auth pages must use `assets/images/logo.png`.
+- `scripts/download-eclbet-assets.js` must never list this path as a download destination.
+
+```html
+<!-- GOOD -->
+<img src="assets/images/logo.png" alt="ELBET" />
+
+<!-- BAD -->
+<img src="assets/images/logo.svg" alt="ELBET" />
+```

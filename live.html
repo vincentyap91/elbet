@@ -3,22 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NEXA · Live</title>
+    <title>ELBET · Live Casino</title>
     <script>
       try {
-        document.documentElement.dataset.theme = localStorage.getItem("nexa:theme") || "dark";
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
       } catch (e) {}
     </script>
     <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body>
+  <body data-layout="shell">
     <div data-include="header"></div>
     <div data-include="sidebar"></div>
-    <div data-include="nav"></div>
-    <main id="main" class="page" data-page="live">
-      <ui-container>
-        <ui-empty title="Live page shell" description="Page-specific content comes later. Shared chrome is already live."></ui-empty>
-      </ui-container>
+    <main id="main" class="page page--inner page--catalog page--live" data-page="live">
+      <div class="shell-main">
+        <div class="event-hero">
+          <h1 class="sr-only">Live Casino</h1>
+          <img class="event-hero__image" src="assets/images/live/hero.webp" alt="Live Casino. Win big, cash out fast." />
+        </div>
+        <header class="catalog-head">
+          <img class="catalog-head__icon" src="assets/images/icon-page/live-casino.png" alt="" />
+          <h2 class="catalog-head__title">Live Casino</h2>
+        </header>
+        <section class="catalog-section" aria-labelledby="live-providers-title">
+          <h2 class="home-section__title" id="live-providers-title">Game Providers</h2>
+          <div class="catalog-grid" data-catalog-providers></div>
+        </section>
+        <div data-include="transactions"></div>
+      </div>
     </main>
     <div data-include="footer"></div>
     <div data-include="chat"></div>

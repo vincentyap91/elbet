@@ -42,13 +42,6 @@
         return;
       }
 
-      const liveChat = event.target.closest("[data-action='live-chat']");
-      if (liveChat) {
-        event.preventDefault();
-        document.querySelector(".chat-dock")?.click();
-        return;
-      }
-
       const langBtn = event.target.closest("[data-lang]");
       if (langBtn) {
         selectLang(langBtn.dataset.lang, langBtn.dataset.region);

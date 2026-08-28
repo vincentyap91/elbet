@@ -3,26 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NEXA · Join</title>
+    <title>ELBET · Join</title>
     <script>
       try {
-        document.documentElement.dataset.theme = localStorage.getItem("nexa:theme") || "dark";
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
       } catch (e) {}
     </script>
     <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body>
-    <div data-include="header"></div>
-    <div data-include="sidebar"></div>
-    <div data-include="nav"></div>
-    <main id="main" class="page" data-page="register">
-      <ui-container size="sm">
-        <ui-empty title="Join page shell" description="Auth screens will be designed later."></ui-empty>
-      </ui-container>
+  <body data-layout="auth">
+    <main id="main" class="page page--auth" data-page="register">
+      <section class="auth-card auth-card--split" aria-labelledby="auth-title">
+        <div class="auth-card__form">
+          <div class="auth-card__head">
+            <h1 class="auth-card__title" id="auth-title">Sign up</h1>
+            <div class="auth-card__tools">
+              <div class="auth-card__steps" aria-hidden="true">
+                <span class="auth-card__step is-active" data-auth-dot="1"></span>
+                <span class="auth-card__step" data-auth-dot="2"></span>
+              </div>
+              <a class="auth-card__close" href="index.html" aria-label="Close">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="auth-card__brand">
+            <img src="assets/images/logo.png" alt="ELBET" />
+          </div>
+          <form class="auth-form" data-auth-form novalidate>
+            <div class="auth-step" data-auth-step="1">
+              <div class="auth-field">
+                <label class="sr-only" for="join-email">Email address</label>
+                <input id="join-email" name="email" type="email" autocomplete="email" placeholder="Email Address" />
+              </div>
+              <div class="auth-field">
+                <label class="sr-only" for="join-code">Verification code</label>
+                <input id="join-code" name="code" type="text" inputmode="numeric" placeholder="Verification Code" />
+                <button type="button" class="auth-field__action" data-auth-send>Send</button>
+              </div>
+              <p class="auth-hint">*The verification code may be in your inbox, spam, or junk box. Please check accordingly.</p>
+              <button type="submit" class="btn btn--primary btn--full auth-submit is-idle" data-auth-submit>Next</button>
+            </div>
+            <div class="auth-step" data-auth-step="2" hidden>
+              <div class="auth-field">
+                <label class="sr-only" for="join-username">Username</label>
+                <input id="join-username" name="username" type="text" autocomplete="username" placeholder="Username" />
+              </div>
+              <div class="auth-field">
+                <label class="sr-only" for="join-password">Password</label>
+                <input id="join-password" name="password" type="password" autocomplete="new-password" placeholder="Password" />
+                <button type="button" class="auth-field__action" data-auth-reveal>Show</button>
+              </div>
+              <button type="submit" class="btn btn--primary btn--full auth-submit is-idle" data-auth-submit>Create account</button>
+            </div>
+          </form>
+          <p class="auth-foot">Already have an account? <a href="login.html">Login now</a></p>
+        </div>
+        <aside class="auth-card__media" aria-label="Brand ambassador">
+          <img class="auth-card__media-logo" src="assets/images/logo.png" alt="" />
+          <img class="auth-card__media-photo" src="assets/images/ambassador-chloe.png" alt="" />
+          <div class="auth-card__media-copy">
+            <p class="auth-card__media-tag">Play Here, Win Here</p>
+            <p>Chloe Lee</p>
+            <span>Brand Ambassador</span>
+          </div>
+        </aside>
+      </section>
     </main>
-    <div data-include="footer"></div>
-    <div data-include="chat"></div>
-    <div data-include="mobile-nav"></div>
     <div data-include="modal"></div>
     <div data-include="toast"></div>
     <script src="js/boot.js"></script>

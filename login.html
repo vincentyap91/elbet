@@ -3,26 +3,95 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NEXA · Log in</title>
+    <title>ELBET · Log in</title>
     <script>
       try {
-        document.documentElement.dataset.theme = localStorage.getItem("nexa:theme") || "dark";
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
       } catch (e) {}
     </script>
     <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body>
-    <div data-include="header"></div>
-    <div data-include="sidebar"></div>
-    <div data-include="nav"></div>
-    <main id="main" class="page" data-page="login">
-      <ui-container size="sm">
-        <ui-empty title="Log in page shell" description="Auth screens will be designed later."></ui-empty>
-      </ui-container>
+  <body data-layout="auth">
+    <main id="main" class="page page--auth" data-page="login">
+      <section class="auth-card" aria-labelledby="auth-title">
+        <div class="auth-card__head">
+          <h1 class="auth-card__title" id="auth-title">Login</h1>
+          <a class="auth-card__close" href="index.html" aria-label="Close">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </a>
+        </div>
+        <div class="auth-card__brand">
+          <img src="assets/images/logo.png" alt="ELBET" />
+        </div>
+        <div class="auth-methods" role="tablist" aria-label="Sign in method">
+          <button type="button" class="auth-method is-active" role="tab" aria-selected="true" data-auth-method="username">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 19c1.5-3 4-4.5 7-4.5S17.5 16 19 19"/></svg>
+            Username
+          </button>
+          <button type="button" class="auth-method" role="tab" aria-selected="false" data-auth-method="email">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 8l8 6 8-6"/></svg>
+            Email
+          </button>
+          <button type="button" class="auth-method" role="tab" aria-selected="false" data-auth-method="sms">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14v10H8l-3 3z"/></svg>
+            SMS
+          </button>
+          <button type="button" class="auth-method auth-method--wa" role="tab" aria-selected="false" data-auth-method="whatsapp">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 18.5l-1.2 3 3.2-1.1A8 8 0 1 0 6.5 18.5z"/></svg>
+            Whatsapp
+          </button>
+        </div>
+        <form class="auth-form" data-auth-form novalidate>
+          <div class="auth-pane" data-auth-pane="username">
+            <div class="auth-field">
+              <label class="sr-only" for="login-username">Username</label>
+              <input id="login-username" name="username" type="text" autocomplete="username" placeholder="Username" />
+            </div>
+            <div class="auth-field">
+              <label class="sr-only" for="login-password">Password</label>
+              <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Password" />
+              <button type="button" class="auth-field__action" data-auth-reveal>Show</button>
+            </div>
+          </div>
+          <div class="auth-pane" data-auth-pane="email" hidden>
+            <div class="auth-field">
+              <label class="sr-only" for="login-email">Email</label>
+              <input id="login-email" name="email" type="email" autocomplete="email" placeholder="Email" />
+            </div>
+            <div class="auth-field">
+              <label class="sr-only" for="login-email-password">Password</label>
+              <input id="login-email-password" name="emailPassword" type="password" autocomplete="current-password" placeholder="Password" />
+              <button type="button" class="auth-field__action" data-auth-reveal>Show</button>
+            </div>
+          </div>
+          <div class="auth-pane" data-auth-pane="sms" hidden>
+            <div class="auth-field">
+              <label class="sr-only" for="login-sms">Mobile number</label>
+              <input id="login-sms" name="sms" type="tel" autocomplete="tel" placeholder="Mobile number" />
+            </div>
+            <div class="auth-field">
+              <label class="sr-only" for="login-sms-code">Verification code</label>
+              <input id="login-sms-code" name="smsCode" type="text" inputmode="numeric" placeholder="Verification Code" />
+              <button type="button" class="auth-field__action" data-auth-send>Send</button>
+            </div>
+          </div>
+          <div class="auth-pane" data-auth-pane="whatsapp" hidden>
+            <div class="auth-field">
+              <label class="sr-only" for="login-wa">WhatsApp number</label>
+              <input id="login-wa" name="whatsapp" type="tel" autocomplete="tel" placeholder="WhatsApp number" />
+            </div>
+            <div class="auth-field">
+              <label class="sr-only" for="login-wa-code">Verification code</label>
+              <input id="login-wa-code" name="waCode" type="text" inputmode="numeric" placeholder="Verification Code" />
+              <button type="button" class="auth-field__action" data-auth-send>Send</button>
+            </div>
+          </div>
+          <a class="auth-link" href="forgot-password.html" data-auth-forgot>Forgot password?</a>
+          <button type="submit" class="btn btn--primary btn--full auth-submit is-idle" data-auth-submit>Sign in</button>
+        </form>
+        <p class="auth-foot">Do not have an account? <a href="register.html">Register now</a></p>
+      </section>
     </main>
-    <div data-include="footer"></div>
-    <div data-include="chat"></div>
-    <div data-include="mobile-nav"></div>
     <div data-include="modal"></div>
     <div data-include="toast"></div>
     <script src="js/boot.js"></script>

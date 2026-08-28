@@ -17,6 +17,13 @@
 @import url("../components/provider-card/provider-card.css");
 @import url("../components/transaction-table/transaction-table.css");
 @import url("pages/home.css");
+@import url("pages/auth.css");
+@import url("pages/inner.css");
+@import url("pages/number-game.css");
+@import url("pages/ranking-board.css");
+@import url("pages/prediction.css");
+@import url("pages/personal-achievement.css");
+@import url("pages/catalog.css");
 
 @import url("utilities.css");
 
@@ -36,6 +43,7 @@ ui-empty {
   display: block;
 }
 
+body.is-nav-open,
 body.is-modal-open {
   overflow: hidden;
 }

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ELBET · Personal Achievement</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body data-layout="shell">
+    <div data-include="header"></div>
+    <div data-include="sidebar"></div>
+    <main id="main" class="page page--inner page--achievement" data-page="personal-achievement">
+      <div class="shell-main">
+        <a class="event-hero" href="#pa-tiers">
+          <h1 class="sr-only">Personal Achievement</h1>
+          <img class="event-hero__image" src="assets/images/achievements/hero.webp" alt="Personal Achievement. Break your own record. Challenge Now." />
+        </a>
+
+        <div class="event-filters">
+          <div class="event-pills" role="tablist" aria-label="Timeframe">
+            <button type="button" class="event-pill is-active" role="tab" aria-selected="true" data-pa-range="weekly">
+              Weekly <span class="badge badge--live">Live</span>
+            </button>
+            <button type="button" class="event-pill" role="tab" aria-selected="false" data-pa-range="last">Last week</button>
+          </div>
+          <div class="event-pills" role="tablist" aria-label="Game type">
+            <button type="button" class="event-pill is-active" role="tab" aria-selected="true" data-pa-game="live">
+              Live Casino <span class="badge badge--live">Live</span>
+            </button>
+            <button type="button" class="event-pill" role="tab" aria-selected="false" data-pa-game="sport">Sportbook</button>
+            <button type="button" class="event-pill" role="tab" aria-selected="false" data-pa-game="esport">Esport</button>
+            <button type="button" class="event-pill" role="tab" aria-selected="false" data-pa-game="slots">Slot Games</button>
+          </div>
+        </div>
+
+        <div class="event-metrics">
+          <article class="event-metric">
+            <p class="event-metric__label">My current turnover for <span data-pa-game-label>Live Casino</span></p>
+            <p class="event-metric__value" data-pa-turnover>MYR 0</p>
+          </article>
+          <article class="event-metric">
+            <p class="event-metric__label">Amount Required for Next Bonus</p>
+            <p class="event-metric__value" data-pa-next>MYR 500,000</p>
+          </article>
+        </div>
+
+        <div class="pa-progress">
+          <img class="pa-progress__avatar" src="assets/images/achievements/avatar.png" alt="You" />
+          <div class="pa-progress__main">
+            <span class="pa-progress__label" id="pa-progress-label">Turnover Amount</span>
+            <div
+              class="pa-progress__track"
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+              aria-labelledby="pa-progress-label"
+              data-pa-track
+            >
+              <span class="pa-progress__fill" data-pa-fill></span>
+            </div>
+          </div>
+        </div>
+
+        <section class="pa-tiers" id="pa-tiers" data-pa-tiers aria-label="Bonus milestones"></section>
+
+        <div class="event-acc">
+          <button type="button" class="event-acc__trigger" aria-expanded="false" aria-controls="pa-acc-terms" data-acc-trigger>
+            Terms and Conditions
+            <span class="event-acc__chevron" aria-hidden="true"></span>
+          </button>
+          <div class="event-acc__panel" id="pa-acc-terms" hidden data-acc-panel>
+            <p>Personal Achievement runs every Monday 00:00:00 through Sunday 23:59:59 (GMT+8). All members are enrolled automatically.</p>
+            <p>Only real bets count toward turnover. Reach a threshold, then claim the bonus on this page within 7 days after the week ends. Unclaimed bonuses expire.</p>
+            <p>Each game type (Live Casino, Sportbook, Esport, Slot Games) has its own ladder. Bonuses require 1x turnover before withdrawal.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div data-include="footer"></div>
+    <div data-include="chat"></div>
+    <div data-include="mobile-nav"></div>
+    <div data-include="modal"></div>
+    <div data-include="toast"></div>
+    <script src="js/boot.js"></script>
+  </body>
+</html>

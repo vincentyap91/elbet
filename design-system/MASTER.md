@@ -1,4 +1,4 @@
-# NEXA design system
+# ELBET design system
 
 Visual identity lock: [`PROJECT_DESIGN.md`](../PROJECT_DESIGN.md) (Precision Lobby). Homepage **structure** lock: [`LAYOUT_LOCK.md`](../LAYOUT_LOCK.md). This folder stays the CSS source of truth. If art direction and a token disagree, update the token to match the lock — do not special-case a page.
 
@@ -17,7 +17,7 @@ Eclbet is a **UX / layout reference** for the locked lobby skeleton. If a cloned
 
 ## Identity
 
-**NEXA** — a dark, precise betting product. Gold is the go-color, not a wash.
+**ELBET** — a dark, precise betting product. Gold is the go-color, not a wash.
 
 - Field is warm charcoal, not navy-blue chrome.
 - **Primary** is gold: deposits, Join, active nav, selected states.
@@ -79,6 +79,7 @@ Betting values must always use tabular numbers so columns do not jump.
 
 - Control padding: `--space-2` / `--space-4`
 - Card inner: `--space-card` (`--space-4`)
+- Section heading → first content: `--shell-title-gap` (`--space-4`, 16px). Use this for every page section title. Do not invent a local margin.
 - Section rhythm: `--space-section` (grows at tablet and desktop)
 
 ---
@@ -143,7 +144,7 @@ Visual CSS lives in [components.css](components.css). HTML/JS still live under `
 
 **Tabs** — Same underline language as desktop nav.
 
-**Inputs** — Surface fill, border, primary focus ring. Errors recolor border and hint only.
+**Inputs** — Surface fill, border, primary focus ring. Errors recolor border and hint only. When an input has a trailing button on the right, wrap both in `.control-inline` (`.control-inline--sm` / `--lg` for size). Input and button share `--control-inline-height`; never mix `--tap-min` with `--control-height-sm` on the same row.
 
 **Dropdowns** — Surface trigger, elevated menu, `--shadow-md`.
 

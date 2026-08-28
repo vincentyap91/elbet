@@ -5,7 +5,7 @@
 
 .tx-section__more {
   position: absolute;
-  top: 2.5rem;
+  top: calc(1.5rem + var(--shell-title-gap));
   right: 0;
   font-size: var(--text-sm);
   font-weight: var(--weight-bold);
@@ -35,8 +35,16 @@
   font-weight: var(--weight-medium);
 }
 
-.tx-table td {
-  border-top: var(--border-width) solid var(--color-border);
+.tx-table tbody tr:nth-child(odd) {
+  background: var(--color-surface);
+}
+
+.tx-table tbody tr:nth-child(even) {
+  background: var(--color-surface-elevated);
+}
+
+.tx-table tbody tr:hover {
+  background: var(--color-surface-hover);
 }
 
 .tx-table__name {
@@ -45,9 +53,20 @@
 
 .tx-table-wrap {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 @media (max-width: 1023px) {
+  .tx-table {
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .tx-table th,
+  .tx-table td {
+    white-space: nowrap;
+  }
+
   .tx-section__more {
     position: static;
     display: inline-block;
@@ -58,21 +77,31 @@
 ui-tabs.tabs--pills .tabs__list {
   border-bottom: 0;
   gap: var(--shell-tab-gap);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--shell-title-gap);
 }
 
 ui-tabs.tabs--pills .tabs__tab {
   min-height: var(--shell-tab-height);
   padding: var(--shell-tab-pad-y) var(--shell-tab-pad-x);
-  border-radius: var(--shell-radius);
-  border: var(--border-width) solid color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+  border-radius: var(--radius-md);
+  border: var(--border-width) solid var(--color-border);
   background: var(--color-surface);
+  color: var(--color-text-secondary);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+ui-tabs.tabs--pills .tabs__tab:hover {
+  background: var(--color-surface-hover);
   color: var(--color-text-primary);
-  border-bottom: var(--border-width) solid color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
 }
 
 ui-tabs.tabs--pills .tabs__tab.is-active {
   background: var(--color-primary);
   color: var(--color-on-primary);
   border-color: var(--color-primary);
+}
+
+ui-tabs.tabs--pills .tabs__tab.is-active:hover {
+  background: var(--color-primary-hover);
+  color: var(--color-on-primary);
 }

@@ -1,0 +1,366 @@
+.ng-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 20.5rem;
+  gap: var(--event-cluster-gap);
+  align-items: start;
+}
+
+.ng-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--event-cluster-gap);
+  align-items: start;
+}
+
+.ng-meta__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  color: var(--color-text-secondary);
+}
+
+.ng-meta__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  object-fit: contain;
+}
+
+.ng-meta__value {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-numeric);
+  font-size: var(--text-lg);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-numeric);
+  line-height: var(--leading-tight);
+}
+
+.ng-meta__label {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.ng-jackpot {
+  position: relative;
+  margin-bottom: var(--event-cluster-gap);
+  padding: var(--space-6) var(--space-5);
+  text-align: center;
+}
+
+.ng-jackpot__label {
+  margin: 0 0 var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--text-md);
+}
+
+.ng-jackpot__amount {
+  margin: 0;
+  color: var(--color-primary);
+  font-family: var(--font-numeric);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
+}
+
+.ng-jackpot__local {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.ng-jackpot__info {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  padding: 0;
+  color: var(--color-text-muted);
+  border-radius: var(--radius-sm);
+}
+
+.ng-jackpot__info:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+@media (hover: hover) {
+  .ng-jackpot__info:hover {
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+  }
+}
+
+.ng-jackpot__info img {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.ng-nets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--event-cluster-gap);
+}
+
+.ng-net {
+  padding: var(--space-card);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  transition: border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .ng-net:hover {
+    background: var(--color-surface-hover);
+  }
+}
+
+.ng-net__amount {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-numeric);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: var(--tracking-numeric);
+  color: var(--color-text-primary);
+}
+
+.ng-net__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.ng-net__icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.ng-spin {
+  padding: var(--space-card);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+}
+
+.ng-spin__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.ng-spin__modes {
+  margin-bottom: 0;
+}
+
+.ng-spin__tutorial {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-height-sm);
+  color: var(--color-primary);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-sm);
+}
+
+.ng-spin__tutorial:hover {
+  color: var(--color-primary-hover);
+}
+
+.ng-spin__tutorial:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.ng-spin__tutorial img {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+}
+
+.ng-spin__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.ng-spin__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-left: auto;
+}
+
+.ng-spin__index {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  min-width: 1.25rem;
+}
+
+.ng-spin__field {
+  flex: 0 0 6.5rem;
+  width: 6.5rem;
+  padding: 0 var(--space-3);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-numeric);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.ng-spin__field:focus {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-color: var(--color-primary);
+}
+
+.ng-spin__row .icon-btn img {
+  width: 1rem;
+  height: 1rem;
+}
+
+.ng-spin__submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ng-spin__foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.ng-side {
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  overflow: hidden;
+}
+
+.ng-side__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-4) 0;
+  margin-bottom: var(--shell-title-gap);
+}
+
+.ng-side__title {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+}
+
+.ng-side__title .badge {
+  flex-shrink: 0;
+}
+
+.ng-side__head .btn {
+  flex-shrink: 0;
+}
+
+.ng-side .event-table-wrap {
+  border: 0;
+  border-radius: 0;
+}
+
+.ng-side .tx-table {
+  min-height: 0;
+  border-radius: 0;
+}
+
+.ng-side .tx-table th,
+.ng-side .tx-table td {
+  padding: 0 var(--space-4);
+  font-size: var(--text-xs);
+}
+
+.ng-side .event-num {
+  text-align: right;
+}
+
+.ng-history {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.ng-history__card {
+  padding: var(--space-card);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+}
+
+.ng-history__date {
+  margin: 0 0 var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+}
+
+.ng-history__prizes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.ng-history__prizes .ng-net {
+  padding: var(--space-3);
+  background: var(--color-bg);
+}
+
+@media (max-width: 1023px) {
+  .ng-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ng-meta,
+  .ng-nets {
+    grid-template-columns: 1fr;
+  }
+
+  .ng-spin__actions {
+    width: 100%;
+  }
+
+  .ng-jackpot__amount {
+    font-size: var(--text-2xl);
+  }
+
+  .ng-history__prizes {
+    grid-template-columns: 1fr;
+  }
+}

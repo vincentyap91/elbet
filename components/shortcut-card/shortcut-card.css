@@ -6,55 +6,98 @@
 }
 
 .shortcut-card {
-  position: relative;
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
   min-height: var(--shell-shortcut-height);
   overflow: hidden;
-  padding: 0 0.75rem;
+  padding: 0 var(--space-3) 0 var(--space-4);
   border-radius: var(--shell-radius);
   background: var(--color-surface);
   color: var(--color-text-primary);
 }
 
-.shortcut-card__art {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  pointer-events: none;
-}
-
-.shortcut-card::after {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 58%;
-  background: linear-gradient(90deg, var(--color-surface) 0%, transparent 100%);
-  pointer-events: none;
-}
-
 .shortcut-card__title {
-  position: relative;
-  z-index: 1;
   flex: 1 1 auto;
+  min-width: 0;
   font-size: var(--text-sm);
   font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  white-space: nowrap;
+}
+
+.shortcut-card__title--stacked {
+  white-space: normal;
+}
+
+.shortcut-card__art {
+  flex: 0 0 auto;
+  order: 2;
+  width: 4rem;
+  height: 4rem;
+  margin-inline-end: calc(var(--space-1) * -1);
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
 }
 
 .shortcut-card__action {
-  position: relative;
-  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex: 0 0 auto;
-  min-height: 1.75rem;
+  order: 3;
+  box-sizing: border-box;
+  min-height: 2rem;
+  height: 2rem;
   padding: 0 var(--space-3);
-  border-radius: var(--shell-radius);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-md);
   background: var(--color-primary);
   color: var(--color-on-primary);
+  font-family: var(--font-body);
   font-size: var(--text-xs);
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-none);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.shortcut-card:hover .shortcut-card__action {
+  background: var(--color-primary-hover);
+  color: var(--color-on-primary);
+}
+
+.shortcut-card:active .shortcut-card__action {
+  transform: scale(0.98);
+}
+
+@media (max-width: 1023px) {
+  .shortcut-card {
+    gap: var(--space-3);
+    padding: 0 var(--space-4);
+  }
+
+  .shortcut-card__art {
+    order: 1;
+    width: var(--shell-shortcut-height);
+    height: var(--shell-shortcut-height);
+    margin-inline-end: 0;
+  }
+
+  .shortcut-card__title,
+  .shortcut-card__title--stacked {
+    order: 2;
+    white-space: nowrap;
+  }
+
+  .shortcut-card__action {
+    order: 3;
+  }
 }
 
 @media (min-width: 1024px) {

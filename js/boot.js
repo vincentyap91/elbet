@@ -40,7 +40,16 @@
 
   const page = document.querySelector("[data-page]")?.dataset.page || "";
   if (page === "home" || page === "index") files.push("js/pages/home.js");
+  if (page === "login" || page === "register" || page === "forgot") files.push("js/pages/auth.js");
   if (page === "playground") files.push("js/pages/playground.js");
+  if (page === "number-game") files.push("js/data/number-game.js", "js/pages/number-game.js");
+  if (page === "ranking-board") files.push("js/data/ranking-board.js", "js/pages/ranking-board.js");
+  if (page === "prediction") files.push("js/data/prediction.js", "js/pages/prediction.js");
+  if (page === "personal-achievement") files.push("js/data/achievements.js", "js/pages/personal-achievement.js");
+  if (page === "esports" || page === "sports" || page === "live" || page === "slots" || page === "fast-game") {
+    files.push("js/data/catalog.js", "js/pages/catalog.js");
+  }
+  if (page === "4d") files.push("js/pages/lottery.js");
 
   function loadNext(index) {
     if (index >= files.length) return;

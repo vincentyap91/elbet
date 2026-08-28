@@ -1,0 +1,32 @@
+.rb-board .tx-table {
+  min-height: 0;
+}
+
+.rb-board .tx-table .event-num {
+  text-align: right;
+}
+
+.rb-board .tx-table th:nth-child(4),
+.rb-board .tx-table th:nth-child(5),
+.rb-board .tx-table td:nth-child(4),
+.rb-board .tx-table td:nth-child(5) {
+  text-align: right;
+}
+
+.rb-board .tx-table td:nth-child(2) {
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rb-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--event-block-gap);
+}
+
+.rb-intro .event-acc {
+  margin-bottom: 0;
+}

@@ -1,0 +1,46 @@
+(function (Nexa) {
+  Nexa.NUMBER_GAME = {
+    iteration: 698,
+    grandUsd: 250000,
+    grandLocal: 997500,
+    localCurrency: "MYR",
+    drawHour: 23,
+    drawMinute: 30,
+    ticketsLeft: 1,
+    nets: [
+      { id: "eth", label: "ETH", amount: 2000, address: "ETH Address on 28/08/2026", icon: "assets/images/number-game/eth.png", cls: "eth" },
+      { id: "trc", label: "TRC20", amount: 2000, address: "TRC20 Address on 28/08/2026", icon: "assets/images/number-game/trc20.png", cls: "trc" },
+      { id: "bep", label: "BEP20", amount: 2000, address: "BEP20 Address on 28/08/2026", icon: "assets/images/number-game/bep20.png", cls: "bep" },
+    ],
+    latest: [
+      { nick: "xianiaw", region: "MY", predicted: "1212" },
+      { nick: "kelvin7974", region: "MY", predicted: "1277" },
+      { nick: "kelvin7974", region: "MY", predicted: "6265" },
+      { nick: "kelvin7974", region: "MY", predicted: "7056" },
+      { nick: "kelvin7974", region: "MY", predicted: "8162" },
+      { nick: "kelvin7974", region: "MY", predicted: "2965" },
+      { nick: "kelvin7974", region: "MY", predicted: "6512" },
+      { nick: "kelvin7974", region: "MY", predicted: "4974" },
+      { nick: "kelvin7974", region: "MY", predicted: "5801" },
+      { nick: "kelvin7974", region: "MY", predicted: "3430" },
+      { nick: "kelvin7974", region: "MY", predicted: "7014" },
+      { nick: "kelvin7974", region: "MY", predicted: "0385" },
+      { nick: "kelvin7974", region: "MY", predicted: "4929" },
+      { nick: "iTher99", region: "MY", predicted: "3614" },
+      { nick: "iTher99", region: "MY", predicted: "4675" },
+      { nick: "iTher99", region: "MY", predicted: "0034" },
+      { nick: "iTher99", region: "MY", predicted: "9922" },
+      { nick: "iTher99", region: "MY", predicted: "0336" },
+      { nick: "catimelb21", region: "MY", predicted: "6726" },
+      { nick: "catimelb21", region: "MY", predicted: "6940" },
+    ],
+    history: [
+      { date: "27/08/2026", eth: "4821", trc: "1903", bep: "7740" },
+      { date: "26/08/2026", eth: "0558", trc: "3312", bep: "9184" },
+      { date: "25/08/2026", eth: "7609", trc: "2447", bep: "1036" },
+    ],
+    rules:
+      "Predict a 4-digit number for the daily draw at 23:30 (GMT+8). Matching ETH, TRC20, or BEP20 wins that network mini jackpot. Matching all three wins the Grand Jackpot. If nobody hits the grand prize, the pool carries forward. Each ticket uses 1 Available Ticket.",
+    tutorialUrl: "https://www.youtube.com/embed/JoNilBoABI8",
+  };
+})(window.Nexa = window.Nexa || {});

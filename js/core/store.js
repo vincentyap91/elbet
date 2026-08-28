@@ -1,5 +1,5 @@
 (function (Nexa) {
-  const KEY = "nexa:store";
+  const KEY = "elbet:store";
 
   const state = {
     theme: "dark",

@@ -8,8 +8,9 @@ alwaysApply: true
 Read [`LAYOUT_LOCK.md`](LAYOUT_LOCK.md). While its status is **ON**:
 
 - Do not change homepage block order, header/sidebar/main geometry, or chrome relationships.
-- Do not replace the shell with the older NEXA lobby (in-play rail, match rows, casino grid first).
-- Content, assets, and NEXA branding may change. Structure may not.
-- **Color is NEXA tokens only.** Dark primary is gold via `--color-primary`. Do not paste operator greys. See [`.cursor/rules/theme-color.mdc`](theme-color.mdc).
+- Do not replace the shell with the older ELBET lobby (in-play rail, match rows, casino grid first).
+- Content and other assets may change. Structure may not.
+- Never change, replace, overwrite, or delete [`assets/images/logo.png`](assets/images/logo.png). See [`.cursor/rules/logo-lock.mdc`](logo-lock.mdc).
+- **Color is ELBET tokens only.** Dark primary is gold via `--color-primary`. Do not paste operator greys. See [`.cursor/rules/theme-color.mdc`](theme-color.mdc).
 
-Canonical tree: header + overlay sidebar + 1300px centered main (hero → shortcuts → providers → transactions → sponsors|ambassador → app → footer) + chat dock.
+Canonical tree: header + overlay sidebar + 1300px centered main (hero → shortcuts → providers → transactions → sponsors|ambassador → recent payout → app → footer) + chat dock.

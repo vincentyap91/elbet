@@ -3,22 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NEXA · Sports</title>
+    <title>ELBET · Sports</title>
     <script>
       try {
-        document.documentElement.dataset.theme = localStorage.getItem("nexa:theme") || "dark";
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
       } catch (e) {}
     </script>
     <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body>
+  <body data-layout="shell">
     <div data-include="header"></div>
     <div data-include="sidebar"></div>
-    <div data-include="nav"></div>
-    <main id="main" class="page" data-page="sports">
-      <ui-container>
-        <ui-empty title="Sports page shell" description="Page-specific content comes later. Shared chrome is already live."></ui-empty>
-      </ui-container>
+    <main id="main" class="page page--inner page--catalog page--sports" data-page="sports">
+      <div class="shell-main">
+        <div class="event-hero">
+          <h1 class="sr-only">Sports</h1>
+          <img class="event-hero__image" src="assets/images/sports/hero.webp" alt="Sports. Football, basketball and more." />
+        </div>
+        <header class="catalog-head">
+          <img class="catalog-head__icon" src="assets/images/icon-page/sports.png" alt="" />
+          <h2 class="catalog-head__title">Sports</h2>
+        </header>
+        <section class="catalog-section" aria-labelledby="sports-providers-title">
+          <h2 class="home-section__title" id="sports-providers-title">Game Providers</h2>
+          <div class="catalog-grid" data-catalog-providers></div>
+        </section>
+        <div data-include="transactions"></div>
+      </div>
     </main>
     <div data-include="footer"></div>
     <div data-include="chat"></div>

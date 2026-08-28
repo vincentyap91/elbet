@@ -8,6 +8,9 @@
     if (!root) return;
     root.hidden = true;
     document.body.classList.remove("is-modal-open");
+    root.classList.remove("modal--alert");
+    const dialog = Nexa.qs("[data-ref='dialog']", root);
+    if (dialog) dialog.classList.remove("modal__dialog--sm", "modal__dialog--lg", "modal__dialog--alert");
     Nexa.emit("app:modal:closed");
   }
 
@@ -19,10 +22,25 @@
     const body = Nexa.qs("[data-ref='body']", root);
     const footer = Nexa.qs("[data-ref='footer']", root);
 
-    Nexa.setText(Nexa.qs("[data-ref='title']", root), detail.title || "");
-    dialog.classList.remove("modal__dialog--sm", "modal__dialog--lg");
+    dialog.classList.remove("modal__dialog--sm", "modal__dialog--lg", "modal__dialog--alert");
+    root.classList.remove("modal--alert");
+    dialog.setAttribute("aria-labelledby", "modal-title");
+    dialog.removeAttribute("aria-label");
     if (detail.size === "sm" || detail.size === "lg") {
       dialog.classList.add(`modal__dialog--${detail.size}`);
+    }
+    if (detail.variant === "alert") {
+      root.classList.add("modal--alert");
+      dialog.classList.add("modal__dialog--alert");
+      if (detail.size !== "lg") dialog.classList.add("modal__dialog--sm");
+    }
+
+    const titleEl = Nexa.qs("[data-ref='title']", root);
+    Nexa.setText(titleEl, detail.title || "");
+    if (titleEl) titleEl.hidden = !detail.title;
+    if (!detail.title) {
+      dialog.removeAttribute("aria-labelledby");
+      dialog.setAttribute("aria-label", detail.label || "Alert");
     }
 
     body.replaceChildren();

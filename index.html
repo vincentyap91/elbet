@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NEXA · Lobby</title>
+    <title>ELBET · Lobby</title>
     <script>
       try {
-        document.documentElement.dataset.theme = localStorage.getItem("nexa:theme") || "dark";
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
       } catch (e) {}
     </script>
     <link rel="stylesheet" href="css/main.css" />
@@ -17,54 +17,99 @@
     <main id="main" class="page page--home" data-page="home">
       <div class="shell-main">
         <ui-hero>
-          <img class="hero__image" src="assets/images/banners/hero-banner.jpg" alt="" />
-          <img class="hero__image" src="assets/images/banners/02-jw-v2.jpg" alt="" />
-          <img class="hero__image" src="assets/images/banners/03-xclusive.jpg" alt="" />
-          <img class="hero__image" src="assets/images/banners/04-jw-general.jpg" alt="" />
-          <img class="hero__image" src="assets/images/banners/05-deposit-crypto.jpg" alt="" />
-          <img class="hero__image" src="assets/images/banners/06-crypto-withdrawal.jpg" alt="" />
-          <img class="hero__image" src="assets/images/banners/07-desktop-en.jpg" alt="" />
-          <img class="hero__image" src="assets/images/banners/08-football.png" alt="" />
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/images/banners/mobile/01-mobile.jpg" />
+            <img class="hero__image" src="assets/images/banners/hero-banner.jpg" alt="" width="1300" height="320" />
+          </picture>
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/images/banners/mobile/05-deposit-crypto.jpg" />
+            <img class="hero__image" src="assets/images/banners/05-deposit-crypto.jpg" alt="" width="1300" height="320" />
+          </picture>
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/images/banners/mobile/06-crypto-withdrawal.jpg" />
+            <img class="hero__image" src="assets/images/banners/06-crypto-withdrawal.jpg" alt="" width="1300" height="320" />
+          </picture>
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/images/banners/mobile/07-mobile-en.jpg" />
+            <img class="hero__image" src="assets/images/banners/07-desktop-en.jpg" alt="" width="1300" height="320" />
+          </picture>
         </ui-hero>
 
+        <nav class="home-cats" aria-label="Games">
+          <a class="home-cats__card" href="esports.html">
+            <img class="home-cats__icon" src="assets/images/menu/icon-esports.svg" alt="" />
+            <span class="home-cats__label">Esports</span>
+          </a>
+          <a class="home-cats__card" href="sports.html">
+            <img class="home-cats__icon" src="assets/images/menu/icon-sports.svg" alt="" />
+            <span class="home-cats__label">Sports</span>
+          </a>
+          <a class="home-cats__card" href="live.html">
+            <img class="home-cats__icon" src="assets/images/menu/icon-live-casino.svg" alt="" />
+            <span class="home-cats__label">Live Casino</span>
+          </a>
+          <a class="home-cats__card" href="slots.html">
+            <img class="home-cats__icon" src="assets/images/menu/icon-slots.svg" alt="" />
+            <span class="home-cats__label">Slots</span>
+          </a>
+          <a class="home-cats__card" href="4d.html">
+            <img class="home-cats__icon" src="assets/images/menu/icon-lottery-4d.svg" alt="" />
+            <span class="home-cats__label">4D Lottery</span>
+          </a>
+          <a class="home-cats__card" href="account.html">
+            <img class="home-cats__icon" src="assets/images/menu/icon-vip.svg" alt="" />
+            <span class="home-cats__label">VIP</span>
+          </a>
+          <a class="home-cats__card" href="promotions.html">
+            <img class="home-cats__icon" src="assets/images/menu/icon-quest.svg" alt="" />
+            <span class="home-cats__label">Quest</span>
+          </a>
+          <a class="home-cats__card" href="#sponsors">
+            <img class="home-cats__icon" src="assets/images/menu/icon-sponsor.svg" alt="" />
+            <span class="home-cats__label">Sponsor</span>
+          </a>
+        </nav>
+
         <section class="shortcut-row" aria-label="Shortcuts">
-          <a class="shortcut-card" href="casino.html">
-            <img class="shortcut-card__art" src="assets/images/shortcuts/number-game.gif" alt="" />
+          <a class="shortcut-card" href="number-game.html">
             <span class="shortcut-card__title">Number Game</span>
+            <img class="shortcut-card__art" src="assets/images/shortcuts/number-game.gif" alt="" />
             <span class="shortcut-card__action">Play Now</span>
           </a>
-          <a class="shortcut-card shortcut-card--2" href="promotions.html">
-            <img class="shortcut-card__art" src="assets/images/shortcuts/ranking-board.gif" alt="" />
+          <a class="shortcut-card shortcut-card--2" href="ranking-board.html">
             <span class="shortcut-card__title">Ranking Board</span>
+            <img class="shortcut-card__art" src="assets/images/shortcuts/ranking-board.gif" alt="" />
             <span class="shortcut-card__action">Play Now</span>
           </a>
-          <a class="shortcut-card shortcut-card--3" href="sports.html">
-            <img class="shortcut-card__art" src="assets/images/shortcuts/prediction.gif" alt="" />
+          <a class="shortcut-card shortcut-card--3" href="prediction.html">
             <span class="shortcut-card__title">Prediction</span>
+            <img class="shortcut-card__art" src="assets/images/shortcuts/prediction.gif" alt="" />
             <span class="shortcut-card__action">Play Now</span>
           </a>
-          <a class="shortcut-card shortcut-card--4" href="account.html">
+          <a class="shortcut-card shortcut-card--4" href="personal-achievement.html">
+            <span class="shortcut-card__title shortcut-card__title--stacked">Personal<br />Achievement</span>
             <img class="shortcut-card__art" src="assets/images/shortcuts/personal-achievement.gif" alt="" />
-            <span class="shortcut-card__title">Personal Achievement</span>
             <span class="shortcut-card__action">Play Now</span>
           </a>
         </section>
 
         <section class="provider-section" aria-labelledby="providers-title">
           <h2 class="home-section__title" id="providers-title">Providers</h2>
-          <div class="provider-rail">
-            <a class="provider-card" href="live.html"><img src="assets/images/providers/ebet.jpg" alt="EBET" /></a>
-            <a class="provider-card" href="live.html"><img src="assets/images/providers/evo.jpg" alt="Evolution" /></a>
-            <a class="provider-card" href="live.html"><img src="assets/images/providers/gp.jpg" alt="GP" /></a>
-            <a class="provider-card" href="live.html"><img src="assets/images/providers/hg.jpg" alt="HG" /></a>
-            <a class="provider-card" href="live.html"><img src="assets/images/providers/pp.jpg" alt="Pragmatic Play" /></a>
-            <a class="provider-card" href="live.html"><img src="assets/images/providers/pt.jpg" alt="Playtech" /></a>
-            <a class="provider-card" href="live.html"><img src="assets/images/providers/sg.jpg" alt="SA Gaming" /></a>
-            <a class="provider-card" href="live.html"><img src="assets/images/providers/ag.jpg" alt="Asia Gaming" /></a>
-            <a class="provider-card" href="live.html"><img src="assets/images/providers/allbet.jpg" alt="Allbet" /></a>
-            <a class="provider-card" href="live.html"><img src="assets/images/providers/dg.jpg" alt="Dream Gaming" /></a>
-            <a class="provider-card" href="casino.html"><img src="assets/images/providers/spade.jpg" alt="Spade" /></a>
-            <a class="provider-card" href="casino.html"><img src="assets/images/providers/cq9.jpg" alt="CQ9" /></a>
+          <div class="provider-rail" data-provider-marquee>
+            <div class="provider-rail__track" data-provider-track>
+              <a class="provider-card" href="live.html"><img src="assets/images/providers/ebet.jpg" alt="EBET" /></a>
+              <a class="provider-card" href="live.html"><img src="assets/images/providers/evo.jpg" alt="Evolution" /></a>
+              <a class="provider-card" href="live.html"><img src="assets/images/providers/gp.jpg" alt="GP" /></a>
+              <a class="provider-card" href="live.html"><img src="assets/images/providers/hg.jpg" alt="HG" /></a>
+              <a class="provider-card" href="live.html"><img src="assets/images/providers/pp.jpg" alt="Pragmatic Play" /></a>
+              <a class="provider-card" href="live.html"><img src="assets/images/providers/pt.jpg" alt="Playtech" /></a>
+              <a class="provider-card" href="live.html"><img src="assets/images/providers/sg.jpg" alt="SA Gaming" /></a>
+              <a class="provider-card" href="live.html"><img src="assets/images/providers/ag.jpg" alt="Asia Gaming" /></a>
+              <a class="provider-card" href="live.html"><img src="assets/images/providers/allbet.jpg" alt="Allbet" /></a>
+              <a class="provider-card" href="live.html"><img src="assets/images/providers/dg.jpg" alt="Dream Gaming" /></a>
+              <a class="provider-card" href="casino.html"><img src="assets/images/providers/spade.jpg" alt="Spade" /></a>
+              <a class="provider-card" href="casino.html"><img src="assets/images/providers/cq9.jpg" alt="CQ9" /></a>
+            </div>
           </div>
         </section>
 
@@ -131,19 +176,48 @@
           </ui-tabs>
         </section>
 
-        <section class="trust-row" aria-label="Partners">
-          <div>
-            <h2 class="home-section__title">Partners</h2>
-            <img class="trust-media" src="assets/images/sponsor-anj.png" alt="ANJ" />
+        <section class="trust-row" id="sponsors" aria-label="Sponsors and brand ambassador">
+          <div class="trust-sponsor">
+            <h2 class="home-section__title">Sponsors</h2>
+            <a class="trust-video" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+              <img src="assets/images/youtube.jpg" alt="2026 official MV 玩在很安全, starring Chloe Lee" />
+            </a>
           </div>
           <div class="trust-profile">
             <div class="trust-profile__copy">
-              <h2 class="home-section__title">Ambassador</h2>
-              <p>Jacky</p>
-              <p>Official brand ambassador.</p>
-              <p>0 followers</p>
+              <h2 class="home-section__title">Brand Ambassador</h2>
+              <p class="trust-profile__name">Chloe Lee</p>
+              <p class="trust-profile__bio">Chloe Lee (李雪怡) is a radiant star, singer, and actress known for her elegance and magnetic stage presence. Heralded as a 'Cultural Icon' for her influence in pan-Asian entertainment, she embodies the sophistication and excitement of ELBET.</p>
+              <p class="trust-profile__followers">1.2M Followers</p>
+              <a class="trust-profile__social" href="https://www.instagram.com/eclbet.official/" target="_blank" rel="noopener noreferrer" aria-label="Chloe Lee on Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none" />
+                </svg>
+              </a>
             </div>
-            <img class="trust-profile__photo" src="assets/images/ambassador-jacky.png" alt="Jacky" />
+            <img class="trust-profile__photo" src="assets/images/ambassador-chloe.png" alt="Chloe Lee" />
+          </div>
+        </section>
+
+        <section class="recent-payout-section recent-payout-panel" aria-label="Recent payout" data-recent-payout>
+          <header class="recent-payout-header">
+            <svg class="recent-payout-header__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M18 2H6v7a6 6 0 0 0 5 5.92V18H8v2h8v-2h-3v-3.08A6 6 0 0 0 18 9V2Z" />
+              <path d="M6 4H4.5A2.5 2.5 0 0 0 4.5 9H6" />
+              <path d="M18 4h1.5A2.5 2.5 0 0 1 19.5 9H18" />
+              <path d="M8 22h8" />
+            </svg>
+            <h2 class="recent-payout-header__title">
+              <span class="recent-payout-header__title-recent">RECENT</span>
+              <span class="recent-payout-header__title-payout">PAYOUT</span>
+            </h2>
+          </header>
+          <div class="recent-payout-carousel-wrap">
+            <div class="recent-payout-carousel-viewport" data-payout-viewport role="region" aria-label="Recent payout games">
+              <div class="recent-payout-carousel-track" data-payout-track></div>
+            </div>
           </div>
         </section>
 

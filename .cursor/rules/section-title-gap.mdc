@@ -1,0 +1,24 @@
+---
+description: Section titles use one token for the gap to content. Do not invent local title margins.
+alwaysApply: true
+---
+
+# Section title gap
+
+The space from a section heading to its first content is **`--shell-title-gap`** (`--space-4`, 16px) in [`design-system/tokens.css`](design-system/tokens.css).
+
+Applies to lobby headings (`Providers`, `Recent bets`, `Sponsors`, `Brand Ambassador`, `RECENT PAYOUT`), `.section__head`, footer column titles, and any new page section.
+
+```css
+/* BAD — one-off gap */
+.recent-payout-header { margin-bottom: var(--space-3); }
+.trust-sponsor .home-section__title { margin-bottom: 0; }
+
+/* GOOD */
+.home-section__title,
+.recent-payout-header { margin-bottom: var(--shell-title-gap); }
+```
+
+Do not zero a title margin and rely on a parent `gap` — that makes Sponsors/Ambassador drift from Providers. If the parent already has `gap`, subtract it: `margin-bottom: calc(var(--shell-title-gap) - var(--space-N))`.
+
+To change the rhythm everywhere, edit **`--shell-title-gap` only**. Inner stacks (name → bio → followers) stay `--space-3`. Section-to-section remains `--shell-section-gap`.

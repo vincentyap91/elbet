@@ -1,4 +1,4 @@
-/* NEXA design tokens — source of truth.
+/* ELBET design tokens — source of truth.
    Raw values live here. Themes only override semantic color tokens.
    Identity: charcoal field + gold primary + copper heat. */
 
@@ -73,13 +73,18 @@
   --shell-banner-height: 20rem;
   --shell-banner-top: 1.8125rem;
   --shell-banner-bottom: 1.25rem;
+  --shell-banner-ratio-mobile: 1 / 1;
   --shell-shortcut-height: 4.375rem;
   --shell-shortcut-gap: 0.625rem;
   --shell-provider-width: 9.875rem;
   --shell-provider-height: 3rem;
   --shell-provider-gap: 0.9375rem;
   --shell-section-gap: 3.75rem;
+  --shell-title-gap: var(--space-4); /* section heading → first content */
   --shell-block-gap: 4.0625rem;
+  --event-filter-gap: var(--space-3);
+  --event-cluster-gap: var(--space-5);
+  --event-block-gap: var(--space-6);
   --shell-radius: 0.9375rem;
   --shell-tab-height: 2.25rem;
   --shell-tab-pad-y: 0.625rem;
@@ -136,6 +141,8 @@
   --z-sidebar: 105;
   --z-mobile-nav: 110;
   --z-chat: 115;
+  --z-drawer-overlay: 118;
+  --z-drawer: 120;
   --z-dropdown: 200;
   --z-modal: 300;
   --z-toast: 400;
@@ -177,7 +184,7 @@
   --color-on-warning: #1a1404;
   --color-error: #ff5a7a;
   --color-on-error: #2a0810;
-  --color-live: #ff3d6e;
+  --color-live: #0b9d74;
   --color-on-live: #ffffff;
   --color-live-soft: color-mix(in srgb, var(--color-live) 18%, transparent);
 
@@ -223,7 +230,7 @@
   --color-on-warning: #1a1404;
   --color-error: #d6455d;
   --color-on-error: #ffffff;
-  --color-live: #e11d48;
+  --color-live: #0b9d74;
   --color-on-live: #ffffff;
   --color-live-soft: color-mix(in srgb, var(--color-live) 14%, transparent);
 

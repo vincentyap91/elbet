@@ -1,4 +1,4 @@
-# NEXA
+# ELBET
 
 Pure HTML, CSS, and JavaScript betting-site foundation. No React, Vue, Angular, Next, Nuxt, Tailwind, or Bootstrap.
 

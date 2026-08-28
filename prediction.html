@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ELBET · Prediction</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body data-layout="shell">
+    <div data-include="header"></div>
+    <div data-include="sidebar"></div>
+    <main id="main" class="page page--inner page--prediction" data-page="prediction">
+      <div class="shell-main">
+        <section class="event-hero">
+          <h1 class="sr-only">Prediction</h1>
+          <img class="event-hero__image" src="assets/images/prediction/hero.webp" alt="Prediction. Come and grab the grand jackpot now." />
+        </section>
+
+        <div class="event-pills" role="tablist" aria-label="Event status">
+          <button type="button" class="event-pill is-active" role="tab" aria-selected="true" data-pd-status="all">All</button>
+          <button type="button" class="event-pill" role="tab" aria-selected="false" data-pd-status="active-upcoming">Active &amp; Upcoming</button>
+          <button type="button" class="event-pill" role="tab" aria-selected="false" data-pd-status="active">Active</button>
+          <button type="button" class="event-pill" role="tab" aria-selected="false" data-pd-status="upcoming">Upcoming</button>
+          <button type="button" class="event-pill" role="tab" aria-selected="false" data-pd-status="ended">Ended</button>
+        </div>
+
+        <div class="pd-grid" data-pd-grid></div>
+        <div class="event-empty" data-pd-empty hidden role="status">
+          <h2 class="event-empty__title">No events in this filter</h2>
+          <p class="event-empty__desc">Try All or Ended to see past prediction contests.</p>
+        </div>
+      </div>
+    </main>
+    <div data-include="footer"></div>
+    <div data-include="chat"></div>
+    <div data-include="mobile-nav"></div>
+    <div data-include="modal"></div>
+    <div data-include="toast"></div>
+    <script src="js/boot.js"></script>
+  </body>
+</html>

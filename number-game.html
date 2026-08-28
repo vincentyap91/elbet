@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ELBET · Number Game</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body data-layout="shell">
+    <div data-include="header"></div>
+    <div data-include="sidebar"></div>
+    <main id="main" class="page page--inner page--number-game" data-page="number-game">
+      <div class="shell-main">
+        <a class="event-hero" href="#ng-play">
+          <h1 class="sr-only">Number Game</h1>
+          <img class="event-hero__image" src="assets/images/number-game/hero.webp" alt="Daily Event. Number Game. Grand jackpot USD 250,000. Start Playing." />
+        </a>
+
+        <div class="event-pills" role="tablist" aria-label="Number Game views">
+          <button type="button" class="event-pill is-active" id="ng-tab-current" role="tab" aria-selected="true" aria-controls="ng-panel-current" data-event-tab="current">
+            Current <span class="badge badge--live">Live</span>
+          </button>
+          <button type="button" class="event-pill" id="ng-tab-past" role="tab" aria-selected="false" aria-controls="ng-panel-past" data-event-tab="past">Past</button>
+          <button type="button" class="event-pill" id="ng-tab-record" role="tab" aria-selected="false" aria-controls="ng-panel-record" data-event-tab="record">My Record</button>
+          <button type="button" class="event-pill" id="ng-tab-all" role="tab" aria-selected="false" aria-controls="ng-panel-all" data-event-tab="all">
+            All prediction
+          </button>
+        </div>
+
+        <div class="event-panel" id="ng-panel-current" role="tabpanel" aria-labelledby="ng-tab-current" data-event-panel="current">
+          <div class="ng-layout">
+            <div>
+              <div class="ng-meta">
+                <div class="ng-meta__item">
+                  <img class="ng-meta__icon" src="assets/images/number-game/icon-timer.svg" alt="" />
+                  <div>
+                    <p class="ng-meta__value" data-ng-countdown>00 d : 00 h : 00 m : 00 s</p>
+                    <p class="ng-meta__label">Time remaining</p>
+                  </div>
+                </div>
+                <div class="ng-meta__item">
+                  <img class="ng-meta__icon" src="assets/images/number-game/icon-calendar.png" alt="" />
+                  <div>
+                    <p class="ng-meta__value">Everyday 23:30PM</p>
+                    <p class="ng-meta__label">Drawing date</p>
+                  </div>
+                </div>
+                <div class="ng-meta__item">
+                  <img class="ng-meta__icon" src="assets/images/number-game/icon-game.svg" alt="" />
+                  <div>
+                    <p class="ng-meta__value" data-ng-iteration>698th</p>
+                    <p class="ng-meta__label">No of Game</p>
+                  </div>
+                </div>
+              </div>
+
+              <article class="ng-jackpot event-featured">
+                <button type="button" class="ng-jackpot__info" data-ng-jackpot-info aria-label="Jackpot rules">
+                  <img src="assets/images/number-game/icon-info.svg" alt="" />
+                </button>
+                <p class="ng-jackpot__label">Grand Jackpot:</p>
+                <p class="ng-jackpot__amount" data-ng-grand>USD 250,000</p>
+                <p class="ng-jackpot__local" data-ng-local>Local Currency: MYR 997,500</p>
+              </article>
+
+              <div class="ng-nets" data-ng-nets></div>
+
+              <section class="ng-spin" id="ng-play" aria-labelledby="ng-spin-title">
+                <h2 class="sr-only" id="ng-spin-title">Submit a ticket</h2>
+                <div class="ng-spin__head">
+                  <div class="event-pills ng-spin__modes" role="tablist" aria-label="Entry mode">
+                    <button type="button" class="event-pill is-active" role="tab" aria-selected="true" data-ng-mode="manual">Manual</button>
+                    <button type="button" class="event-pill" role="tab" aria-selected="false" data-ng-mode="auto">Auto</button>
+                  </div>
+                  <button type="button" class="ng-spin__tutorial" data-ng-tutorial>
+                    <img src="assets/images/number-game/icon-bulb.svg" alt="" />
+                    Video Tutorial
+                  </button>
+                </div>
+                <div data-ng-console></div>
+                <div class="ng-spin__submit">
+                  <button type="button" class="btn btn--primary" data-ng-submit>Submit Now</button>
+                  <div class="ng-spin__foot">
+                    <span>Available Ticket: <strong data-ng-tickets-left>1</strong></span>
+                    <button type="button" class="event-link" data-ng-rules>Rules</button>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <aside class="ng-side" aria-labelledby="ng-latest-title">
+              <div class="ng-side__head">
+                <h2 class="ng-side__title" id="ng-latest-title">Latest Prediction <span class="badge badge--live">Live</span></h2>
+                <button type="button" class="btn btn--ghost btn--sm" data-event-tab="all">View More</button>
+              </div>
+              <div class="event-table-wrap">
+                <table class="tx-table">
+                  <caption class="sr-only">Latest Number Game predictions</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Nickname</th>
+                      <th scope="col">Region</th>
+                      <th scope="col">Predicted</th>
+                    </tr>
+                  </thead>
+                  <tbody data-ng-latest></tbody>
+                </table>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <div class="event-panel" id="ng-panel-past" role="tabpanel" aria-labelledby="ng-tab-past" data-event-panel="past" hidden>
+          <div class="ng-history" data-ng-history></div>
+        </div>
+
+        <div class="event-panel" id="ng-panel-record" role="tabpanel" aria-labelledby="ng-tab-record" data-event-panel="record" hidden>
+          <div class="event-empty" data-ng-record role="status">
+            <h2 class="event-empty__title">Sign in to see your record</h2>
+            <p class="event-empty__desc">Ticket history is stored on your account.</p>
+            <a class="btn btn--primary" href="login.html">Log in</a>
+          </div>
+        </div>
+
+        <div class="event-panel" id="ng-panel-all" role="tabpanel" aria-labelledby="ng-tab-all" data-event-panel="all" hidden>
+          <div class="event-table-wrap">
+            <table class="tx-table">
+              <caption class="sr-only">All Number Game predictions</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Nickname</th>
+                  <th scope="col">Region</th>
+                  <th scope="col">Predicted</th>
+                </tr>
+              </thead>
+              <tbody data-ng-all></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div data-include="footer"></div>
+    <div data-include="chat"></div>
+    <div data-include="mobile-nav"></div>
+    <div data-include="modal"></div>
+    <div data-include="toast"></div>
+    <script src="js/boot.js"></script>
+  </body>
+</html>

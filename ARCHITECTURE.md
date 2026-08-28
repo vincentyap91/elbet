@@ -1,4 +1,4 @@
-# NEXA architecture
+# ELBET architecture
 
 Pure HTML, CSS, and JavaScript. No React, Vue, Angular, Next, Nuxt, Tailwind, or Bootstrap.
 
@@ -141,7 +141,7 @@ After you edit a component `.html` file:
 - Change `--color-accent` in tokens → all accents change
 - Change `data-theme` → no component files need edits
 
-If a fragment looks stale, close the tab or clear sessionStorage (`nexa:include:*`).
+If a fragment looks stale, close the tab or clear sessionStorage (`elbet:include:*`).
 
 ## Responsive
 

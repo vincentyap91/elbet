@@ -1,5 +1,5 @@
 (function (Nexa) {
-  const KEY = "nexa:theme";
+  const KEY = "elbet:theme";
 
   Nexa.getTheme = function getTheme() {
     return document.documentElement.dataset.theme || "dark";

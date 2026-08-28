@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ELBET · Esports</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body data-layout="shell">
+    <div data-include="header"></div>
+    <div data-include="sidebar"></div>
+    <main id="main" class="page page--inner page--catalog page--esports" data-page="esports">
+      <div class="shell-main">
+        <div class="event-hero">
+          <h1 class="sr-only">Esports</h1>
+          <img class="event-hero__image" src="assets/images/esports/hero.webp" alt="Esports. Bet on Dota, CS and more." />
+        </div>
+        <header class="catalog-head">
+          <img class="catalog-head__icon" src="assets/images/icon-page/esports.png" alt="" />
+          <h2 class="catalog-head__title">Esports</h2>
+        </header>
+        <section class="catalog-section" aria-labelledby="esports-providers-title">
+          <h2 class="home-section__title" id="esports-providers-title">Game Providers</h2>
+          <div class="catalog-grid" data-catalog-providers></div>
+        </section>
+        <div data-include="transactions"></div>
+      </div>
+    </main>
+    <div data-include="footer"></div>
+    <div data-include="chat"></div>
+    <div data-include="mobile-nav"></div>
+    <div data-include="modal"></div>
+    <div data-include="toast"></div>
+    <script src="js/boot.js"></script>
+  </body>
+</html>

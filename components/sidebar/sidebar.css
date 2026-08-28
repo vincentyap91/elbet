@@ -62,6 +62,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 2rem;
+    height: 2rem;
     padding: 0;
     border: 0;
     background: transparent;
@@ -71,11 +73,9 @@
 
   .sidebar-burger-menu {
     display: block;
-    width: 23px;
-    height: 14px;
-    background-color: currentColor;
-    mask: url("../../assets/images/icons/burger-menu.svg") center / contain no-repeat;
-    -webkit-mask: url("../../assets/images/icons/burger-menu.svg") center / contain no-repeat;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
     transition: transform 0.55s;
   }
 

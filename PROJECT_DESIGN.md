@@ -1,6 +1,6 @@
 # PROJECT_DESIGN.md
 
-Visual identity lock for NEXA. This file is the art direction.
+Visual identity lock for ELBET. This file is the art direction.
 
 - [`design-system/MASTER.md`](design-system/MASTER.md) is the token/CSS source of truth.
 - [`ARCHITECTURE.md`](ARCHITECTURE.md) is the UX/component architecture.
@@ -8,13 +8,13 @@ Visual identity lock for NEXA. This file is the art direction.
 
 If this lock and a token disagree, change the token to match this file. Do not special-case a page.
 
-**Structure vs look:** the lobby **skeleton** is implemented and locked (ECLBET-inspired IA). This file still governs **visual identity**. Colors always come from NEXA tokens, even when a chrome piece is cloned from ECLBET. Do not use this document to reorder homepage blocks while `LAYOUT_LOCK.md` is ON.
+**Structure vs look:** the lobby **skeleton** is implemented and locked (ECLBET-inspired IA). This file still governs **visual identity**. Colors always come from ELBET tokens, even when a chrome piece is cloned from ECLBET. Do not use this document to reorder homepage blocks while `LAYOUT_LOCK.md` is ON.
 
 ---
 
 ## Design read
 
-**Reading this as: a dual-product sportsbook + casino lobby for people who already know how a betting site works, with a premium dense product language (calm chrome, gold go-color, loud live data), leaning toward native CSS + the existing NEXA token system. Not a marketing landing page. Not a mint flood.**
+**Reading this as: a dual-product sportsbook + casino lobby for people who already know how a betting site works, with a premium dense product language (calm chrome, gold go-color, loud live data), leaning toward native CSS + the existing ELBET token system. Not a marketing landing page. Not a mint flood.**
 
 Taste Skill dials (product UI, not the landing-page baseline of 8 / 6 / 4):
 
@@ -32,7 +32,7 @@ Quiet constraints: money, age, and trust. Contrast, tap size, and one primary CT
 
 ## Brand thesis
 
-**NEXA Precision Lobby** — a betting desk, not a carnival.
+**ELBET Precision Lobby** — a betting desk, not a carnival.
 
 High energy comes from **live content** (odds ticks, tables, in-play). The chrome stays still so the data can be loud.
 
@@ -46,7 +46,7 @@ Metaphor: **broadcast control room + private members desk.** Tight type, hairlin
 
 Three looks we refuse, using the **same tokens we already have**:
 
-| Look | Tell | NEXA instead |
+| Look | Tell | ELBET instead |
 | --- | --- | --- |
 | Eclbet / SE aggregator | Gold-black, red Join, celebrity strip, Function mega-menu, sponsor wall as first screen | Charcoal field, gold go-color, locked ECLBET skeleton |
 | Crypto-casino mint flood | Mint on header, hero, buttons, and card glows | Gold only on proceed + selected + focus. Surfaces stay charcoal |
@@ -76,7 +76,7 @@ From the Eclbet UX analysis, keep the **habits**, not the look:
 
 - No Function mega-dump as a cloned menu, no Transfer in primary nav
 - Money tools live in Account
-- **Homepage block order is not the older NEXA lobby recipe.** While [`LAYOUT_LOCK.md`](LAYOUT_LOCK.md) is ON, the page is: banner → shortcuts → providers → transactions → sponsors | ambassador → app → footer. In-play rails and casino grids are later surfaces, not a reason to reshuffle this page.
+- **Homepage block order is not the older ELBET lobby recipe.** While [`LAYOUT_LOCK.md`](LAYOUT_LOCK.md) is ON, the page is: banner → shortcuts → providers → transactions → sponsors | ambassador → app → footer. In-play rails and casino grids are later surfaces, not a reason to reshuffle this page.
 
 ### Original 30% (the visual signature)
 
@@ -105,7 +105,7 @@ Each row is a decision, not a mood board.
 | Numeric | Tabular lining figures on odds, balance, stake. Intended: IBM Plex Mono or Geist Mono **for numbers only**. This is the “you are in a book” tell. |
 | Labels | `.type-label` uppercase is for **Live / Jackpot / New** chips only. Max one small-caps label per three sections. |
 | CJK | PingFang SC / Noto Sans SC remain fallback. Do not mix a display serif into headlines. |
-| Logo | Compact mark + NEXA. Tracking **0.04em** (not `--tracking-wide` 0.08em luxury slogan). |
+| Logo | Compact mark + ELBET. Tracking **0.04em** (not `--tracking-wide` 0.08em luxury slogan). |
 
 Emphasis inside a headline: italic or bold of the **same** family. Never a random serif word.
 

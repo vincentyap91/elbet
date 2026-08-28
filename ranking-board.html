@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ELBET · Ranking Board</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body data-layout="shell">
+    <div data-include="header"></div>
+    <div data-include="sidebar"></div>
+    <main id="main" class="page page--inner page--ranking" data-page="ranking-board">
+      <div class="shell-main">
+        <a class="event-hero" href="#rb-board">
+          <h1 class="sr-only">Ranking Board</h1>
+          <img class="event-hero__image" src="assets/images/ranking/hero.webp" alt="Ranking Board. Come and challenge now." />
+        </a>
+
+        <div class="event-filters">
+          <div class="event-pills" role="tablist" aria-label="Board type">
+            <button type="button" class="event-pill is-active" role="tab" aria-selected="true" data-rb-board="ranking">Ranking Board</button>
+            <button type="button" class="event-pill" role="tab" aria-selected="false" data-rb-board="winners">Top winners</button>
+          </div>
+          <div class="event-pills" role="tablist" aria-label="Time range">
+            <button type="button" class="event-pill is-active" role="tab" aria-selected="true" data-rb-range="daily">
+              Daily <span class="badge badge--live">Live</span>
+            </button>
+            <button type="button" class="event-pill" role="tab" aria-selected="false" data-rb-range="yesterday">Yesterday</button>
+            <button type="button" class="event-pill" role="tab" aria-selected="false" data-rb-range="last2">Last 2 days</button>
+          </div>
+          <div class="event-pills" role="tablist" aria-label="Game type">
+            <button type="button" class="event-pill is-active" role="tab" aria-selected="true" data-rb-game="live">Live Casino</button>
+            <button type="button" class="event-pill" role="tab" aria-selected="false" data-rb-game="sport">Sportbook</button>
+            <button type="button" class="event-pill" role="tab" aria-selected="false" data-rb-game="esport">Esport</button>
+            <button type="button" class="event-pill" role="tab" aria-selected="false" data-rb-game="slots">Slot Games</button>
+          </div>
+        </div>
+
+        <div class="event-metrics">
+          <article class="event-metric">
+            <p class="event-metric__label">My daily ranking</p>
+            <p class="event-metric__value" data-rb-mine>-</p>
+          </article>
+          <article class="event-metric">
+            <p class="event-metric__label">Turnover Amount</p>
+            <p class="event-metric__value" data-rb-turnover>USD 0</p>
+            <p class="event-metric__hint" data-rb-place></p>
+          </article>
+        </div>
+
+        <section class="rb-board" id="rb-board" aria-labelledby="rb-table-title">
+          <h2 class="sr-only" id="rb-table-title">Leaderboard</h2>
+          <div class="event-table-wrap" data-rb-table>
+            <table class="tx-table">
+              <caption class="sr-only">Leaderboard standings</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Place</th>
+                  <th scope="col">Nickname</th>
+                  <th scope="col">Region</th>
+                  <th scope="col">Winning amount (USD)</th>
+                  <th scope="col">Prize (USD)</th>
+                </tr>
+              </thead>
+              <tbody data-rb-rows></tbody>
+            </table>
+          </div>
+          <div class="event-empty" data-rb-empty hidden role="status">
+            <h2 class="event-empty__title">No rankings for this filter</h2>
+            <p class="event-empty__desc">Try another time range or game type.</p>
+          </div>
+          <p class="event-updated" data-rb-updated></p>
+        </section>
+
+        <div class="rb-intro">
+          <div class="event-acc">
+            <button type="button" class="event-acc__trigger" aria-expanded="false" aria-controls="rb-acc-intro" data-acc-trigger>
+              Introduction
+              <span class="event-acc__chevron" aria-hidden="true"></span>
+            </button>
+            <div class="event-acc__panel" id="rb-acc-intro" hidden data-acc-panel>
+              <p>All members are enrolled in the ranking event. The top 10 players in each category (Live Casino, Sportbook, Esport, or Slot Games) receive credit prizes based on daily winning amounts from 00:00:00 to 23:59:59 (GMT+8).</p>
+              <p>Prizes are credited the next day before 13:00:00 (GMT+8) and require 1x turnover.</p>
+            </div>
+          </div>
+          <div class="event-acc">
+            <button type="button" class="event-acc__trigger" aria-expanded="false" aria-controls="rb-acc-terms" data-acc-trigger>
+              Terms and Conditions
+              <span class="event-acc__chevron" aria-hidden="true"></span>
+            </button>
+            <div class="event-acc__panel" id="rb-acc-terms" hidden data-acc-panel>
+              <ul>
+                <li>The Daily Ranking Leaderboard ends at 23:59:59 (GMT+8).</li>
+                <li>After it ends, winners are calculated and prizes are credited the next day before 13:00:00 (GMT+8).</li>
+                <li>Only real bets count. Voided, cancelled, or bonus-only wagers are excluded.</li>
+                <li>ELBET may withhold prizes in cases of collusion or abuse.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div data-include="footer"></div>
+    <div data-include="chat"></div>
+    <div data-include="mobile-nav"></div>
+    <div data-include="modal"></div>
+    <div data-include="toast"></div>
+    <script src="js/boot.js"></script>
+  </body>
+</html>

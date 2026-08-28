@@ -23,6 +23,7 @@ BODY  data-layout="shell"
 │   ├── GAME PROVIDERS      horizontal scroll
 │   ├── BETTING TRANSACTION  tabs + view more + table
 │   ├── SPONSORS | AMBASSADOR  one row, two columns
+│   ├── RECENT PAYOUT          full-width rail
 │   ├── MOBILE APP
 │   └── FOOTER              inside the 1300px column
 └── CHAT DOCK       fixed bottom-right
@@ -37,22 +38,22 @@ Header inner row matches the same 1300px axis as main. Sidebar sits in the lefto
 - Header position (fixed top, full width) or inner hierarchy (brand → 3 dropdowns | utilities)
 - Sidebar position (fixed left overlay) or its relationship to main (overlay, not content offset)
 - Main content alignment (centered 1300px column)
-- Order and placement of: hero, shortcuts, providers, transactions, sponsors/ambassador, mobile app
-- Sponsors and ambassador as **one row** (media left, profile right)
+- Order and placement of: hero, shortcuts, providers, transactions, sponsors/ambassador, recent payout, mobile app
+- Sponsors and ambassador as **one row** (video left, profile right); Recent Payout as the next full-width rail
 - Footer as two bands (5 link columns, then brand/social) **inside** the main column — not a full-bleed bar under the sidebar
 - Chat dock as a fixed bottom-right strip
 - Hero prev/next arrows
 - Provider row as a horizontal rail (not a wrapping logo grid)
 - Transaction tabs + View more + table
 
-Do **not** restore the old NEXA lobby order (in-play rail → match list → casino grid → uneven promos).
+Do **not** restore the old ELBET lobby order (in-play rail → match list → casino grid → uneven promos).
 
 ---
 
 ## Allowed while lock is ON
 
-- NEXA name, placeholder copy, placeholder fills
-- Token colors, type, and surfaces **without** moving boxes. When cloning ECLBET layout or copy, still paint with NEXA tokens — never the live site’s gold/grey hex.
+- ELBET name, placeholder copy, placeholder fills
+- Token colors, type, and surfaces **without** moving boxes. When cloning ECLBET layout or copy, still paint with ELBET tokens — never the live site’s gold/grey hex.
 - Wiring real data into the same slots
 - Bugfixes that keep the same geometry
 
@@ -71,9 +72,11 @@ Do **not** restore the old NEXA lobby order (in-play rail → match list → cas
 | Shortcut cards | 4 × height `--shell-shortcut-height` 70px, gap `--shell-shortcut-gap` 10px |
 | Provider tiles | `--shell-provider-width` × `--shell-provider-height` |
 | Section gaps | `--shell-section-gap` 60px; shortcuts use `--shell-block-gap` |
+| Section title → content | `--shell-title-gap` 16px |
 | Table | `--shell-table-height`; row `--shell-row-height` |
 | Trust row gap | `--shell-trust-gap` 70px |
-| Sponsor media | `--shell-trust-media-width` × `--shell-trust-media-height` |
+| Sponsor video | `--shell-trust-media-width` left column; ambassador on the right |
+| Payout rail | full 1300px main width, below the trust row |
 | App promo | `--shell-app-height`; left copy `--shell-app-left` |
 | Chat | `--shell-chat-width` × `--shell-chat-height` |
 | Shared radius | `--shell-radius` 15px |
