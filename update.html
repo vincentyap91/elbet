@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ELBET · Update</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body data-layout="shell">
+    <div data-include="header"></div>
+    <div data-include="sidebar"></div>
+    <main id="main" class="page page--inner page--content page--update" data-page="update">
+      <div class="shell-main">
+        <div class="event-hero" data-update-hero>
+          <p class="sr-only">Updates</p>
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/images/update/hero-mobile.webp" />
+            <img class="event-hero__image" src="assets/images/update/hero.webp" alt="Updates. Stay Ahead with the Latest News & Insights." />
+          </picture>
+        </div>
+
+        <div class="content-back">
+          <a class="content-back__link" href="updates.html">
+            <span class="content-back__chevron icon-btn icon-btn--sm icon-btn--ghost" data-icon="prev" aria-hidden="true"></span>
+            <img class="content-back__route-icon" src="assets/images/icon-page/update.png" alt="" />
+            Update
+          </a>
+        </div>
+
+        <article class="content-article">
+          <p class="content-article__date" data-update-date></p>
+          <h1 class="content-article__title">
+            <span class="content-article__symbol" aria-hidden="true">📢</span>
+            <span data-update-title></span>
+          </h1>
+          <p class="content-article__effective" data-update-effective-wrap>
+            <span class="content-article__symbol" aria-hidden="true">📅</span>
+            <span data-update-effective></span>
+          </p>
+          <div class="content-article__body" data-update-body></div>
+          <section class="update-comparison" data-update-comparison>
+            <h2 class="update-comparison__title" data-update-table-title></h2>
+            <div class="content-table-wrap" data-update-table></div>
+          </section>
+          <section class="content-article__action" data-update-action>
+            <h2 data-update-action-title></h2>
+            <p data-update-action-body></p>
+          </section>
+          <div class="content-article__closing" data-update-closing></div>
+        </article>
+      </div>
+    </main>
+    <div data-include="footer"></div>
+    <div data-include="chat"></div>
+    <div data-include="mobile-nav"></div>
+    <div data-include="modal"></div>
+    <div data-include="toast"></div>
+    <script src="js/boot.js"></script>
+  </body>
+</html>

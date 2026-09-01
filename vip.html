@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ELBET · VIP</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body data-layout="shell" data-require-auth>
+    <div data-include="header"></div>
+    <div data-include="sidebar"></div>
+    <main id="main" class="page page--inner page--vip" data-page="vip">
+      <div class="shell-main">
+        <header class="vip-head">
+          <img src="assets/images/icons/vip.svg" alt="" />
+          <h1 class="vip-head__title">VIP</h1>
+        </header>
+
+        <h2 class="vip-section-title">Current Status</h2>
+        <section class="vip-status" aria-label="Current VIP status">
+          <article class="vip-status__card vip-status__card--tier">
+            <img class="vip-trophy" data-vip-trophy src="assets/images/vip/Bronze.png" alt="" width="434" height="434" />
+            <p class="vip-status__k vip-status__k--desktop">VIP Tier</p>
+            <p class="vip-status__v vip-status__v--desktop" data-vip-tier>Bronze</p>
+            <div class="vip-status__rows">
+              <div class="vip-status__row">
+                <p class="vip-status__k">Current Membership:</p>
+                <p class="vip-status__v" data-vip-tier>Bronze</p>
+              </div>
+              <div class="vip-status__row">
+                <p class="vip-status__k">Current Deposit:</p>
+                <p class="vip-status__v" data-vip-deposit>MYR 60,810.00</p>
+              </div>
+              <div class="vip-status__row">
+                <p class="vip-status__k">Amount Required for Next Tier Upgrade:</p>
+                <p class="vip-status__v" data-vip-required>MYR 339,190.00</p>
+              </div>
+            </div>
+          </article>
+          <article class="vip-status__card vip-status__card--progress vip-status__card--desk">
+            <div class="vip-status__metrics">
+              <div class="vip-status__metric">
+                <p class="vip-status__k">Current Deposit</p>
+                <p class="vip-status__v" data-vip-deposit>MYR 60,810.00</p>
+              </div>
+              <div class="vip-status__metric vip-status__metric--required">
+                <p class="vip-status__k">Amount Required for Next Tier Upgrade</p>
+                <p class="vip-status__v" data-vip-required>MYR 339,190.00</p>
+              </div>
+            </div>
+            <div class="vip-status__progress">
+              <div class="vip-status__progress-head">
+                <span>Progress to next tier</span>
+                <strong data-vip-status-progress>15.2%</strong>
+              </div>
+              <div
+                class="vip-status__progress-track"
+                data-vip-status-track
+                role="progressbar"
+                aria-label="Progress to next VIP tier"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="15"
+              >
+                <span class="vip-status__progress-fill" data-vip-status-fill></span>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="vip-rail" aria-label="VIP tier progress">
+          <div class="vip-rail__track-wrap">
+            <img class="vip-rail__avatar" src="assets/images/achievements/spiderman-avatar.svg" alt="Spiderman profile" data-vip-avatar />
+            <div
+              class="vip-rail__track"
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="15"
+              aria-label="VIP upgrade progress"
+              data-vip-track
+            >
+              <span class="vip-rail__fill" data-vip-fill></span>
+            </div>
+          </div>
+          <div class="vip-rail__labels" data-vip-labels></div>
+        </section>
+
+        <h2 class="vip-section-title">VIP Privileges</h2>
+        <div class="vip-matrix-wrap">
+          <table class="vip-matrix" data-vip-matrix></table>
+        </div>
+        <div class="vip-cards" data-vip-cards aria-label="VIP privileges by tier"></div>
+
+        <div class="event-acc vip-more">
+          <button type="button" class="event-acc__trigger" aria-expanded="false" aria-controls="vip-acc-more" data-acc-trigger>
+            More Info
+            <span class="event-acc__chevron" aria-hidden="true"></span>
+          </button>
+          <div class="event-acc__panel" id="vip-acc-more" hidden data-acc-panel>
+            <p>VIP tiers are based on cumulative deposits.</p>
+            <p>Rebate rates apply to eligible real-money turnover by product.</p>
+            <p>Birthday and upgrade bonuses require a verified account and may need 1x turnover before withdrawal.</p>
+            <p>Withdrawal frequency and amount limits reset daily (GMT+8).</p>
+            <p>ELBET may adjust VIP privileges with prior notice.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div data-include="footer"></div>
+    <div data-include="chat"></div>
+    <div data-include="mobile-nav"></div>
+    <div data-include="modal"></div>
+    <div data-include="toast"></div>
+    <script src="js/boot.js"></script>
+  </body>
+</html>

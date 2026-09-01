@@ -28,39 +28,108 @@
         </ui-dropdown>
         <ui-dropdown label="Function" data-variant="mega">
           <div class="dropdown__group" data-label="Money">
-            <a href="account.html"><img src="assets/images/icons/voucher.svg" alt="" /><span>Voucher</span></a>
-            <a href="account.html"><img src="assets/images/icons/deposit.svg" alt="" /><span>Deposit</span></a>
-            <a href="account.html"><img src="assets/images/icons/withdrawal.svg" alt="" /><span>Withdrawal</span></a>
-            <a href="account.html"><img src="assets/images/icons/transfer.svg" alt="" /><span>Transfer</span></a>
-            <a href="account.html"><img src="assets/images/icons/history.svg" alt="" /><span>History</span></a>
+            <button type="button" data-action="voucher"><img src="assets/images/icons/voucher.svg" alt="" /><span>Voucher</span></button>
+            <a href="account.html?view=deposit" data-auth-required><img src="assets/images/icons/deposit.svg" alt="" /><span>Deposit</span></a>
+            <a href="account.html?view=withdrawal" data-auth-required><img src="assets/images/icons/withdrawal.svg" alt="" /><span>Withdrawal</span></a>
+            <a href="account.html?view=transfer" data-auth-required><img src="assets/images/icons/transfer.svg" alt="" /><span>Transfer</span></a>
+            <a href="account.html?view=history" data-auth-required><img src="assets/images/icons/history.svg" alt="" /><span>History</span></a>
           </div>
           <div class="dropdown__group" data-label="Account">
-            <a href="account.html"><img src="assets/images/icons/ticket-center.svg" alt="" /><span>Ticket Center</span></a>
-            <a href="account.html"><img src="assets/images/icons/transaction.svg" alt="" /><span>Transaction</span></a>
-            <a href="account.html"><img src="assets/images/icons/inbox.svg" alt="" /><span>Inbox</span></a>
-            <a href="promotions.html"><img src="assets/images/icons/rebates.svg" alt="" /><span>Rebates</span></a>
-            <a href="promotions.html"><img src="assets/images/icons/vip.svg" alt="" /><span>VIP</span></a>
+            <a href="ticket-center.html"><img src="assets/images/icons/ticket-center.svg" alt="" /><span>Ticket Center</span></a>
+            <a href="pending.html"><img src="assets/images/icons/transaction.svg" alt="" /><span>Transaction</span></a>
+            <a href="inbox.html"><img src="assets/images/icons/inbox.svg" alt="" /><span>Inbox</span></a>
+            <a href="rebates.html"><img src="assets/images/icons/rebates.svg" alt="" /><span>Rebates</span></a>
+            <a href="vip.html"><img src="assets/images/icons/vip.svg" alt="" /><span>VIP</span></a>
           </div>
           <div class="dropdown__group" data-label="More">
             <a href="promotions.html" data-nav="promotions"><img src="assets/images/icons/promotion.svg" alt="" /><span>Promotion</span></a>
-            <a href="promotions.html"><img src="assets/images/icons/update.svg" alt="" /><span>Update</span></a>
-            <button type="button" data-action="live-chat"><img src="assets/images/icons/live-chat.svg" alt="" /><span>Live Chat</span></button>
+            <a href="updates.html" data-nav="updates"><img src="assets/images/icons/update.svg" alt="" /><span>Update</span></a>
+            <a href="contact.html" data-nav="contact"><img src="assets/images/icons/live-chat.svg" alt="" /><span>Live Chat</span></a>
             <a href="index.html#sponsors"><img src="assets/images/icons/sponsor.svg" alt="" /><span>Sponsor</span></a>
           </div>
         </ui-dropdown>
       </div>
     </div>
     <div class="site-header__actions">
-      <a class="site-header__account icon-btn" href="login.html" aria-label="Account"></a>
+      <a class="site-header__account icon-btn" data-auth="out" href="login.html" aria-label="Account"></a>
       <ui-icon-button class="site-header__chat has-unread" name="chat" label="ChitChat" data-action="chat-open"></ui-icon-button>
-      <a class="site-header__quest" href="promotions.html"><img src="assets/images/icons/quest.svg" alt="" />Tasks</a>
-      <ui-button variant="ghost" href="login.html">Log in</ui-button>
-      <ui-button variant="primary" href="register.html">Join</ui-button>
+      <a class="site-header__quest site-header__quest--live" href="promotions.html">
+        <img src="assets/images/icons/quest.svg" alt="" />
+        Quest
+        <span class="header-live">Live</span>
+      </a>
+      <ui-button variant="ghost" data-auth="out" href="login.html">Log in</ui-button>
+      <ui-button variant="primary" data-auth="out" href="register.html">Join</ui-button>
+      <div class="site-header__user" data-auth="in">
+        <button type="button" class="site-header__user-toggle" data-action="account-toggle" aria-expanded="false" aria-controls="account-menu" aria-haspopup="menu">
+          <img class="site-header__avatar" src="assets/images/achievements/spiderman-avatar.svg" alt="Spiderman profile" />
+          <span class="site-header__username" data-auth-name>Player</span>
+          <span class="site-header__user-caret" data-icon="chevron" aria-hidden="true"></span>
+        </button>
+        <div class="account-menu" id="account-menu" data-account-menu hidden role="menu" aria-label="Account">
+          <div class="account-menu__hello">
+            <p class="account-menu__hi">Hi, <span data-auth-name>Player</span></p>
+            <p class="account-menu__id" data-auth-user></p>
+          </div>
+          <div class="account-menu__wallet">
+            <a href="account.html?view=deposit" role="menuitem">
+              <img src="assets/images/icons/deposit.svg" alt="" />
+              <span>Deposit</span>
+            </a>
+            <a href="account.html?view=withdrawal" role="menuitem">
+              <img src="assets/images/icons/withdrawal.svg" alt="" />
+              <span>Withdrawal</span>
+            </a>
+            <a href="account.html?view=transfer" role="menuitem">
+              <img src="assets/images/icons/transfer.svg" alt="" />
+              <span>My Wallet</span>
+            </a>
+          </div>
+          <div class="account-menu__links">
+            <a href="account.html?view=profile" role="menuitem">
+              <img class="account-menu__glyph" src="assets/images/icons/account.svg" alt="" />
+              <span>Profile</span>
+            </a>
+            <a href="pending.html" role="menuitem">
+              <img class="account-menu__glyph" src="assets/images/icons/transaction.svg" alt="" />
+              <span>Pending Transaction</span>
+            </a>
+            <a href="account.html?view=history" role="menuitem">
+              <img class="account-menu__glyph" src="assets/images/icons/history.svg" alt="" />
+              <span>History</span>
+            </a>
+            <button type="button" data-action="logout" role="menuitem">
+              <span class="account-menu__glyph" data-icon="logout" aria-hidden="true"></span>
+              <span>Logout</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <a class="site-header__tool icon-btn" data-auth="in" href="pending.html" aria-label="Pending Transactions" data-icon="chat"></a>
+      <a class="site-header__tool icon-btn" data-auth="in" href="inbox.html" aria-label="Inbox" data-icon="mail"></a>
     </div>
   </div>
   <div class="site-drawer-overlay" data-drawer-overlay data-action="nav-close"></div>
   <aside class="site-drawer" id="site-drawer" data-drawer aria-hidden="true" inert aria-label="Menu">
     <div class="site-drawer__body">
+      <div class="site-drawer__session" data-auth="in">
+        <a class="site-drawer__user" href="account.html?view=profile">
+          <img class="site-drawer__avatar" src="assets/images/achievements/spiderman-avatar.svg" alt="Spiderman profile" />
+          <span class="site-drawer__user-copy">
+            <span class="site-drawer__hi">Hi, <span data-auth-name>Player</span></span>
+            <span class="site-drawer__vip">
+              <span class="site-drawer__trophy" data-icon="trophy" aria-hidden="true"></span>
+              <span data-auth-vip>Bronze</span>
+              <span class="site-drawer__vip-caret" data-icon="chevron" aria-hidden="true"></span>
+            </span>
+          </span>
+        </a>
+        <a class="site-drawer__quest" href="promotions.html">
+          <img src="assets/images/icons/quest.svg" alt="" />
+          <span>Quest</span>
+          <span class="header-live">Live</span>
+        </a>
+      </div>
       <details class="site-drawer__group">
         <summary class="site-drawer__summary">
           <span class="site-drawer__summary-label">
@@ -102,19 +171,19 @@
           <img class="site-drawer__chevron" src="assets/images/icons/arrow-down.svg" alt="" />
         </summary>
         <div class="site-drawer__links">
-          <a href="account.html" class="site-drawer__link"><img src="assets/images/icons/voucher.svg" alt="" /><span>Voucher</span></a>
-          <a href="account.html" class="site-drawer__link"><img src="assets/images/icons/deposit.svg" alt="" /><span>Deposit</span></a>
-          <a href="account.html" class="site-drawer__link"><img src="assets/images/icons/withdrawal.svg" alt="" /><span>Withdrawal</span></a>
-          <a href="account.html" class="site-drawer__link"><img src="assets/images/icons/transfer.svg" alt="" /><span>Transfer</span></a>
-          <a href="account.html" class="site-drawer__link" data-nav="account"><img src="assets/images/icons/wallet.svg" alt="" /><span>Wallet</span></a>
-          <a href="account.html" class="site-drawer__link"><img src="assets/images/icons/history.svg" alt="" /><span>History</span></a>
-          <a href="account.html" class="site-drawer__link"><img src="assets/images/icons/ticket-center.svg" alt="" /><span>Ticket Center</span></a>
-          <a href="account.html" class="site-drawer__link"><img src="assets/images/icons/transaction.svg" alt="" /><span>Transaction</span></a>
-          <a href="account.html" class="site-drawer__link"><img src="assets/images/icons/inbox.svg" alt="" /><span>Inbox</span></a>
-          <a href="promotions.html" class="site-drawer__link"><img src="assets/images/icons/rebates.svg" alt="" /><span>Rebates</span></a>
-          <a href="promotions.html" class="site-drawer__link"><img src="assets/images/icons/vip.svg" alt="" /><span>VIP</span></a>
-          <a href="promotions.html" class="site-drawer__link"><img src="assets/images/icons/promotion.svg" alt="" /><span>Promotion</span></a>
-          <a href="promotions.html" class="site-drawer__link"><img src="assets/images/icons/update.svg" alt="" /><span>Update</span></a>
+          <button type="button" class="site-drawer__link" data-action="voucher"><img src="assets/images/icons/voucher.svg" alt="" /><span>Voucher</span></button>
+          <a href="account.html?view=deposit" class="site-drawer__link" data-auth-required><img src="assets/images/icons/deposit.svg" alt="" /><span>Deposit</span></a>
+          <a href="account.html?view=withdrawal" class="site-drawer__link" data-auth-required><img src="assets/images/icons/withdrawal.svg" alt="" /><span>Withdrawal</span></a>
+          <a href="account.html?view=transfer" class="site-drawer__link" data-auth-required><img src="assets/images/icons/transfer.svg" alt="" /><span>Transfer</span></a>
+          <a href="account.html?view=wallet" class="site-drawer__link site-drawer__link--wallet" data-auth-required><img src="assets/images/icons/wallet.svg" alt="" /><span>Wallet</span></a>
+          <a href="account.html?view=history" class="site-drawer__link" data-auth-required><img src="assets/images/icons/history.svg" alt="" /><span>History</span></a>
+          <a href="ticket-center.html" class="site-drawer__link"><img src="assets/images/icons/ticket-center.svg" alt="" /><span>Ticket Center</span></a>
+          <a href="pending.html" class="site-drawer__link"><img src="assets/images/icons/transaction.svg" alt="" /><span>Transaction</span></a>
+          <a href="inbox.html" class="site-drawer__link"><img src="assets/images/icons/inbox.svg" alt="" /><span>Inbox</span></a>
+          <a href="rebates.html" class="site-drawer__link"><img src="assets/images/icons/rebates.svg" alt="" /><span>Rebates</span></a>
+          <a href="vip.html" class="site-drawer__link"><img src="assets/images/icons/vip.svg" alt="" /><span>VIP</span></a>
+          <a href="promotions.html" class="site-drawer__link" data-nav="promotions"><img src="assets/images/icons/promotion.svg" alt="" /><span>Promotion</span></a>
+          <a href="updates.html" class="site-drawer__link" data-nav="updates"><img src="assets/images/icons/update.svg" alt="" /><span>Update</span></a>
           <button type="button" class="site-drawer__link" data-action="live-chat"><img src="assets/images/icons/live-chat.svg" alt="" /><span>Live Chat</span></button>
           <a href="index.html#sponsors" class="site-drawer__link"><img src="assets/images/icons/sponsor.svg" alt="" /><span>Sponsor</span></a>
         </div>
@@ -178,7 +247,7 @@
       <section class="site-drawer__section">
         <h2 class="site-drawer__title">Others</h2>
         <div class="site-drawer__links site-drawer__links--flush">
-          <a href="account.html" class="site-drawer__link"><img src="assets/images/menu/icon-contact.svg" alt="" /><span>Contact</span></a>
+          <a href="contact.html" class="site-drawer__link" data-nav="contact"><img src="assets/images/menu/icon-contact.svg" alt="" /><span>Contact</span></a>
           <a href="responsible-gaming.html" class="site-drawer__link"><img src="assets/images/menu/icon-faq.svg" alt="" /><span>FAQ</span></a>
         </div>
       </section>

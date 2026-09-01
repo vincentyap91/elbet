@@ -125,7 +125,16 @@
     form.addEventListener("submit", function (event) {
       event.preventDefault();
       if (!filled(form)) return;
-      showLoginError();
+      const pane = root.querySelector("[data-auth-pane]:not([hidden])") || form;
+      const identity = pane.querySelector("input");
+      const name = identity && identity.value.trim();
+      if (!name) {
+        showLoginError();
+        return;
+      }
+      Nexa.login({ username: name, displayName: name, vipTier: "Bronze", balance: 16.06 });
+      var next = new URLSearchParams(window.location.search).get("next");
+      window.location.href = typeof Nexa.safeNext === "function" ? Nexa.safeNext(next) : next || "index.html";
     });
     syncSubmit(form);
   }

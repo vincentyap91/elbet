@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ELBET · Promotions</title>
+    <title>ELBET · Promotion</title>
     <script>
       try {
         document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
@@ -11,14 +11,18 @@
     </script>
     <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body>
+  <body data-layout="shell">
     <div data-include="header"></div>
     <div data-include="sidebar"></div>
-    <div data-include="nav"></div>
-    <main id="main" class="page" data-page="promotions">
-      <ui-container>
-        <ui-empty title="Promotions page shell" description="Page-specific content comes later. Shared chrome is already live."></ui-empty>
-      </ui-container>
+    <main id="main" class="page page--inner page--content page--promotions" data-page="promotions">
+      <div class="shell-main">
+        <header class="catalog-head">
+          <img class="catalog-head__icon" src="assets/images/icon-page/promotion.png" alt="" />
+          <h1 class="catalog-head__title">Promotion</h1>
+        </header>
+        <div class="event-pills content-pills" data-promo-pills role="tablist" aria-label="Promotion categories"></div>
+        <div class="promo-grid" data-promo-grid></div>
+      </div>
     </main>
     <div data-include="footer"></div>
     <div data-include="chat"></div>

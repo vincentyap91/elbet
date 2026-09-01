@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ELBET · Ticket Center</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body data-layout="shell" data-require-auth>
+    <div data-include="header"></div>
+    <div data-include="sidebar"></div>
+    <main id="main" class="page page--inner page--ticket-center" data-page="ticket-center">
+      <div class="shell-main">
+        <section class="event-hero" aria-label="Ticket Centre">
+          <h1 class="sr-only">Ticket Centre</h1>
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/images/ticket-center/hero-mobile.webp" />
+            <img class="event-hero__image" src="assets/images/ticket-center/hero.webp" alt="Ticket Centre. Experience the Art of Winning." />
+          </picture>
+        </section>
+
+        <section class="tc-status" aria-labelledby="tc-available-label">
+          <div class="tc-status__badge" aria-hidden="true">
+            <img src="assets/images/icons/ticket-center.svg" alt="" />
+          </div>
+          <p class="tc-status__count" data-tc-count>13 / 200</p>
+          <p class="tc-status__label" id="tc-available-label">Available Tickets</p>
+          <p class="tc-status__earn">Every MYR500 Deposit = 1 Free Ticket</p>
+
+          <div class="tc-progress">
+            <div class="tc-progress__head">
+              <span>Progress to Next Ticket</span>
+              <span data-tc-progress-label>0/500</span>
+            </div>
+            <div
+              class="tc-progress__track"
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+              aria-label="Progress to next ticket"
+              data-tc-track
+            >
+              <span class="tc-progress__fill" data-tc-fill></span>
+              <span class="tc-progress__pct" data-tc-progress-pct>0%</span>
+            </div>
+            <p class="tc-status__hint" data-tc-remain>Deposit MYR500 more to unlock your next FREE ticket!</p>
+          </div>
+
+          <p class="tc-status__notice">
+            <strong>Important Notice:</strong> Maximum holding limit is 200 tickets per account. Additional deposits after reaching the cap will not generate extra tickets.
+          </p>
+        </section>
+
+        <div class="tc-actions">
+          <a class="tc-action tc-action--deposit" href="account.html?view=deposit">
+            <span class="tc-action__main">
+              <img src="assets/images/icons/ticket-center.svg" alt="" />
+              <span class="tc-action__copy">
+                <span class="tc-action__title">Wants to get more ticket? Deposit Now</span>
+              </span>
+            </span>
+            <svg class="tc-action__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <button type="button" class="tc-action tc-action--rules" data-tc-rules>
+            <span class="tc-action__title">Rules &amp; Regulations</span>
+          </button>
+          <a class="tc-action tc-action--use" href="number-game.html">
+            <span class="tc-action__main">
+              <span class="tc-action__copy">
+                <span class="tc-action__title">Use Tickets Now</span>
+                <span class="tc-action__sub">Proceed to Event Page</span>
+              </span>
+            </span>
+            <svg class="tc-action__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <section class="tc-history" aria-labelledby="tc-history-title">
+          <h2 class="tc-history__title" id="tc-history-title">Ticket History</h2>
+          <div class="event-pills" role="tablist" aria-label="Ticket history filter">
+            <button type="button" class="event-pill is-active" role="tab" aria-selected="true" data-tc-filter="all">All</button>
+            <button type="button" class="event-pill" role="tab" aria-selected="false" data-tc-filter="received">Received</button>
+            <button type="button" class="event-pill" role="tab" aria-selected="false" data-tc-filter="used">Used</button>
+          </div>
+          <div class="tc-table-wrap">
+            <table class="tc-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Type</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody data-tc-rows></tbody>
+            </table>
+          </div>
+          <nav class="tc-pager" data-tc-pager aria-label="Ticket history pages"></nav>
+        </section>
+      </div>
+    </main>
+    <div data-include="footer"></div>
+    <div data-include="chat"></div>
+    <div data-include="mobile-nav"></div>
+    <div data-include="modal"></div>
+    <div data-include="toast"></div>
+    <script src="js/boot.js"></script>
+  </body>
+</html>

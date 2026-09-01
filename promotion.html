@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ELBET · Promotion Detail</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body data-layout="shell">
+    <div data-include="header"></div>
+    <div data-include="sidebar"></div>
+    <main id="main" class="page page--inner page--content page--promotion" data-page="promotion">
+      <div class="shell-main">
+        <div class="content-back">
+          <a class="content-back__link" href="promotions.html">
+            <span class="content-back__chevron icon-btn icon-btn--sm icon-btn--ghost" data-icon="prev" aria-hidden="true"></span>
+            <img class="content-back__route-icon" src="assets/images/icon-page/update.png" alt="" />
+            All Promotions
+          </a>
+        </div>
+
+        <section class="promo-detail__stage" aria-label="Promotion banner">
+          <div class="promo-detail__frame">
+            <div class="promo-detail__track" data-promo-track></div>
+          </div>
+          <button type="button" class="promo-detail__arrow promo-detail__arrow--prev" data-promo-prev aria-label="Previous image">
+            <img src="assets/images/icons/banner-arrow-left.png" alt="" />
+          </button>
+          <button type="button" class="promo-detail__arrow promo-detail__arrow--next" data-promo-next aria-label="Next image">
+            <img src="assets/images/icons/banner-arrow-right.png" alt="" />
+          </button>
+        </section>
+
+        <div class="promo-detail__body">
+          <h1 class="promo-detail__title" data-promo-title></h1>
+          <ol class="promo-detail__terms" data-promo-terms-before></ol>
+          <div class="content-table-wrap" data-promo-table></div>
+          <div class="promo-detail__example" data-promo-example></div>
+          <ol class="promo-detail__terms promo-detail__terms--continued" data-promo-terms-after></ol>
+        </div>
+      </div>
+    </main>
+    <div data-include="footer"></div>
+    <div data-include="chat"></div>
+    <div data-include="mobile-nav"></div>
+    <div data-include="modal"></div>
+    <div data-include="toast"></div>
+    <script src="js/boot.js"></script>
+  </body>
+</html>

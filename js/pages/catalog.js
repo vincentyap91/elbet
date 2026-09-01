@@ -1,9 +1,23 @@
 (function (Nexa) {
   const BROWSE_PAGES = { slots: true, "fast-game": true };
   const PROVIDER_PAGES = { esports: true, sports: true, live: true };
+  const MOBILE_VENDOR_INLINE = 6;
 
   function imgSrc(item) {
     return item.image || item.fallback || "";
+  }
+
+  function vendorProviders(config) {
+    return config.providers.filter(function (p) {
+      return p.id !== "all" && p.image;
+    });
+  }
+
+  function pillProviders(config) {
+    const marked = config.providers.filter(function (p) {
+      return p.pill;
+    });
+    return marked.length ? marked : config.providers;
   }
 
   function renderProviderCard(item) {
@@ -61,6 +75,23 @@
     );
   }
 
+  function renderVendorTile(p, isActive) {
+    const inner = p.image
+      ? '<img src="' + p.image + '" alt="' + p.label + '" />'
+      : '<span class="catalog-vendor-tile__label">' + p.label + "</span>";
+    return (
+      '<button type="button" class="catalog-vendor-tile' +
+      (isActive ? " is-active" : "") +
+      '" data-catalog-provider="' +
+      p.id +
+      '" role="tab" aria-selected="' +
+      (isActive ? "true" : "false") +
+      '">' +
+      inner +
+      "</button>"
+    );
+  }
+
   function renderProviders(root, pageKey) {
     const grid = Nexa.qs("[data-catalog-providers]", root);
     const config = Nexa.CATALOG[pageKey];
@@ -68,31 +99,126 @@
     grid.innerHTML = config.providers.map(renderProviderCard).join("");
   }
 
+  function setProviderActive(roots, providerId) {
+    roots.forEach(function (root) {
+      if (!root) return;
+      Nexa.qsa("[data-catalog-provider]", root).forEach(function (el) {
+        const on = el.getAttribute("data-catalog-provider") === providerId;
+        el.classList.toggle("is-active", on);
+        if (el.getAttribute("role") === "tab") {
+          el.setAttribute("aria-selected", on ? "true" : "false");
+        }
+      });
+    });
+  }
+
+  function renderLogoChip(p, isActive) {
+    const active = isActive ? " is-active" : "";
+    const selected = isActive ? "true" : "false";
+    if (p.hot) {
+      return (
+        '<button type="button" class="catalog-logo-chip catalog-logo-chip--hot' +
+        active +
+        '" data-catalog-provider="' +
+        p.id +
+        '" role="tab" aria-selected="' +
+        selected +
+        '">' +
+        '<img src="assets/images/slots/hotgames.png" alt="HOT GAMES" />' +
+        '<span class="catalog-logo-chip__badge">Popular</span>' +
+        '<span class="catalog-logo-chip__fire" aria-hidden="true">🔥</span>' +
+        "</button>"
+      );
+    }
+    return (
+      '<button type="button" class="catalog-logo-chip' +
+      active +
+      '" data-catalog-provider="' +
+      p.id +
+      '" role="tab" aria-selected="' +
+      selected +
+      '" aria-label="' +
+      p.label +
+      '">' +
+      '<img src="' +
+      p.image +
+      '" alt="' +
+      p.label +
+      '" />' +
+      "</button>"
+    );
+  }
+
   function renderBrowse(root, pageKey) {
     const config = Nexa.CATALOG[pageKey];
     if (!config) return;
 
     const pills = Nexa.qs("[data-catalog-pills]", root);
+    const chips = Nexa.qs("[data-catalog-chips]", root);
+    const vendors = Nexa.qs("[data-catalog-vendors]", root);
+    const viewAllBtn = Nexa.qs("[data-catalog-view-all]", root);
     const gamesEl = Nexa.qs("[data-catalog-games]", root);
+    const types = Nexa.qs("[data-catalog-types]", root);
     const search = Nexa.qs("[data-catalog-search]", root);
-    if (!pills || !gamesEl) return;
+    if (!gamesEl) return;
 
+    const vendorsList = vendorProviders(config);
+    const pillList = pillProviders(config);
     let activeProvider = "all";
     let query = "";
+    let vendorsExpanded = false;
 
-    pills.innerHTML = config.providers
-      .map(function (p, i) {
-        return (
-          '<button type="button" class="event-pill' +
-          (i === 0 ? " is-active" : "") +
-          '" data-catalog-provider="' +
-          p.id +
-          '">' +
-          p.label +
-          "</button>"
-        );
-      })
-      .join("");
+    if (pills) {
+      pills.innerHTML = pillList
+        .map(function (p, i) {
+          return (
+            '<button type="button" class="event-pill' +
+            (i === 0 ? " is-active" : "") +
+            '" data-catalog-provider="' +
+            p.id +
+            '">' +
+            p.label +
+            "</button>"
+          );
+        })
+        .join("");
+    }
+
+    if (chips) {
+      const chipItems = [{ id: "all", label: "HOT GAMES", hot: true }].concat(vendorsList);
+      chips.innerHTML = chipItems
+        .map(function (p) {
+          return renderLogoChip(p, activeProvider === p.id);
+        })
+        .join("");
+    }
+
+    function paintVendorGrid() {
+      if (!vendors) return;
+      const list = vendorsExpanded ? vendorsList : vendorsList.slice(0, MOBILE_VENDOR_INLINE);
+      vendors.innerHTML = list
+        .map(function (p) {
+          return renderVendorTile(p, activeProvider === p.id);
+        })
+        .join("");
+    }
+
+    function updateViewAll() {
+      if (!viewAllBtn) return;
+      if (vendorsList.length > MOBILE_VENDOR_INLINE) {
+        viewAllBtn.hidden = false;
+        viewAllBtn.textContent = vendorsExpanded ? "View Less Vendors" : "View All Vendors";
+        viewAllBtn.setAttribute("aria-expanded", vendorsExpanded ? "true" : "false");
+      } else {
+        viewAllBtn.hidden = true;
+      }
+    }
+
+    function toggleVendorGrid() {
+      vendorsExpanded = !vendorsExpanded;
+      paintVendorGrid();
+      updateViewAll();
+    }
 
     function filteredGames() {
       return config.games.filter(function (game) {
@@ -112,15 +238,53 @@
       gamesEl.innerHTML = list.map(renderGameCard).join("");
     }
 
-    pills.addEventListener("click", function (event) {
-      const btn = event.target.closest("[data-catalog-provider]");
-      if (!btn) return;
-      activeProvider = btn.getAttribute("data-catalog-provider");
-      Nexa.qsa("[data-catalog-provider]", pills).forEach(function (pill) {
-        pill.classList.toggle("is-active", pill === btn);
-      });
+    function selectProvider(providerId) {
+      activeProvider = providerId;
+      setProviderActive([pills, chips, vendors], providerId);
       paintGames();
-    });
+    }
+
+    if (pills) {
+      pills.addEventListener("click", function (event) {
+        const btn = event.target.closest("[data-catalog-provider]");
+        if (!btn) return;
+        selectProvider(btn.getAttribute("data-catalog-provider"));
+      });
+    }
+
+    if (chips) {
+      chips.addEventListener("click", function (event) {
+        const btn = event.target.closest("[data-catalog-provider]");
+        if (!btn) return;
+        selectProvider(btn.getAttribute("data-catalog-provider"));
+      });
+    }
+
+    if (vendors) {
+      paintVendorGrid();
+      updateViewAll();
+      vendors.addEventListener("click", function (event) {
+        const btn = event.target.closest("[data-catalog-provider]");
+        if (!btn) return;
+        selectProvider(btn.getAttribute("data-catalog-provider"));
+      });
+    }
+
+    if (viewAllBtn) {
+      viewAllBtn.addEventListener("click", toggleVendorGrid);
+    }
+
+    if (types) {
+      types.addEventListener("click", function (event) {
+        const btn = event.target.closest("[data-catalog-type]");
+        if (!btn) return;
+        Nexa.qsa("[data-catalog-type]", types).forEach(function (el) {
+          const on = el === btn;
+          el.classList.toggle("is-active", on);
+          el.setAttribute("aria-selected", on ? "true" : "false");
+        });
+      });
+    }
 
     if (search) {
       search.addEventListener("input", function () {

@@ -11,11 +11,15 @@
     <span class="mobile-nav__glyph mobile-nav__glyph--live"></span>
     Live Chat
   </button>
-  <a href="account.html" data-nav="account">
+  <a href="account.html?view=wallet" data-nav="account" data-auth-required>
     <span class="mobile-nav__glyph mobile-nav__glyph--wallet"></span>
     Wallet
   </a>
-  <a href="login.html" data-nav="login">
+  <a href="login.html" data-nav="login" data-auth="out">
+    <span class="mobile-nav__glyph mobile-nav__glyph--profile"></span>
+    Profile
+  </a>
+  <a href="account.html?view=profile" data-nav="profile" data-auth="in">
     <span class="mobile-nav__glyph mobile-nav__glyph--profile"></span>
     Profile
   </a>

@@ -72,6 +72,7 @@
   --shell-main-width: 81.25rem;
   --shell-banner-height: 20rem;
   --shell-banner-top: 1.8125rem;
+  --shell-content-top: var(--shell-banner-top); /* header → first page content */
   --shell-banner-bottom: 1.25rem;
   --shell-banner-ratio-mobile: 1 / 1;
   --shell-shortcut-height: 4.375rem;

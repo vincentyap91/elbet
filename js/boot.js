@@ -41,6 +41,11 @@
   const page = document.querySelector("[data-page]")?.dataset.page || "";
   if (page === "home" || page === "index") files.push("js/pages/home.js");
   if (page === "login" || page === "register" || page === "forgot") files.push("js/pages/auth.js");
+  if (page === "inbox") files.push("js/data/account.js", "js/pages/money-shell.js", "js/pages/inbox.js");
+  if (page === "pending") files.push("js/data/account.js", "js/pages/money-shell.js");
+  if (page === "rebates") files.push("js/data/account.js", "js/pages/money-shell.js", "js/pages/rebates.js");
+  if (page === "ticket-center") files.push("js/data/account.js", "js/data/ticket-center.js", "js/pages/ticket-center.js");
+  if (page === "vip") files.push("js/data/vip.js", "js/pages/vip.js");
   if (page === "playground") files.push("js/pages/playground.js");
   if (page === "number-game") files.push("js/data/number-game.js", "js/pages/number-game.js");
   if (page === "ranking-board") files.push("js/data/ranking-board.js", "js/pages/ranking-board.js");
@@ -50,11 +55,26 @@
     files.push("js/data/catalog.js", "js/pages/catalog.js");
   }
   if (page === "4d") files.push("js/pages/lottery.js");
+  if (page === "account") files.push("js/data/account.js", "js/pages/account.js");
+  if (page === "promotions") files.push("js/data/promotions.js", "js/pages/promotions.js");
+  if (page === "promotion") files.push("js/data/promotions.js", "js/pages/promotion.js");
+  if (page === "updates") files.push("js/data/updates.js", "js/pages/updates.js");
+  if (page === "update") files.push("js/data/updates.js", "js/pages/update.js");
+
+  function needBust(file) {
+    return (
+      file.indexOf("store.js") >= 0 ||
+      file.indexOf("app.js") >= 0 ||
+      file.indexOf("icons.js") >= 0 ||
+      file.indexOf("data/account.js") >= 0 ||
+      file.indexOf("pages/account.js") >= 0
+    );
+  }
 
   function loadNext(index) {
     if (index >= files.length) return;
     const next = document.createElement("script");
-    next.src = Nexa.root + files[index];
+    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=auth3" : "");
     next.onload = function () {
       loadNext(index + 1);
     };

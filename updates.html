@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ELBET · Updates</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body data-layout="shell">
+    <div data-include="header"></div>
+    <div data-include="sidebar"></div>
+    <main id="main" class="page page--inner page--content page--updates" data-page="updates">
+      <div class="shell-main">
+        <div class="event-hero" data-update-hero>
+          <h1 class="sr-only">Updates</h1>
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/images/update/hero-mobile.webp" />
+            <img class="event-hero__image" src="assets/images/update/hero.webp" alt="Updates. Stay Ahead with the Latest News & Insights." />
+          </picture>
+        </div>
+
+        <header class="catalog-head">
+          <img class="catalog-head__icon" src="assets/images/icon-page/update.png" alt="" />
+          <h2 class="catalog-head__title">Update</h2>
+        </header>
+
+        <div class="content-update-list" data-update-list></div>
+      </div>
+    </main>
+    <div data-include="footer"></div>
+    <div data-include="chat"></div>
+    <div data-include="mobile-nav"></div>
+    <div data-include="modal"></div>
+    <div data-include="toast"></div>
+    <script src="js/boot.js"></script>
+  </body>
+</html>

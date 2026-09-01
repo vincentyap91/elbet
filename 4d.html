@@ -18,7 +18,10 @@
       <div class="shell-main">
         <div class="event-hero">
           <h1 class="sr-only">4D Lottery</h1>
-          <img class="event-hero__image" src="assets/images/4d/hero.webp" alt="4D Lottery. Pick your lucky number and win big." />
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/images/4d/lottery-4d.webp" />
+            <img class="event-hero__image" src="assets/images/4d/hero.webp" alt="4D Lottery. Pick your lucky number and win big." />
+          </picture>
         </div>
         <header class="catalog-head">
           <img class="catalog-head__icon" src="assets/images/icon-page/lottery-4d.png" alt="" />
@@ -30,23 +33,43 @@
             <h2 class="home-section__title" id="lottery-payout-title">Payout</h2>
             <ui-button variant="primary" href="register.html">Bet Now</ui-button>
           </div>
+          <div class="lottery-payout__intro">
+            <div class="lottery-payout__copy">
+              <h3 class="lottery-payout__copy-title">Prize money for Big Forecast</h3>
+              <p>For this Forecast, as shown in the table below, with every $1 bet, the 1st Prize pays $2,500. 2nd Prize $1,000. 3rd Prize $500. Special Prize $200 and Consolation Prize $60.</p>
+            </div>
+            <div class="lottery-payout__copy">
+              <h3 class="lottery-payout__copy-title">Prize money for Small Forecast</h3>
+              <p>For this Forecast, as shown in the table below, with every $1 bet, the 1st Prize pays $3,500, 2nd Prize $2,000. 3rd Prize $1,000.</p>
+            </div>
+          </div>
           <div class="lottery-payout__grid">
             <table class="lottery-table">
-              <caption>Big Forecast</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Big Forecast</th>
+                  <th scope="col">Prize Amount</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><th>1st Prize</th><td>$2,500</td></tr>
-                <tr><th>2nd Prize</th><td>$1,000</td></tr>
-                <tr><th>3rd Prize</th><td>$500</td></tr>
-                <tr><th>Special</th><td>$200</td></tr>
-                <tr><th>Consolation</th><td>$60</td></tr>
+                <tr><td>1st Prize</td><td>$ 2,500.00</td></tr>
+                <tr><td>2nd Prize</td><td>$ 1,000.00</td></tr>
+                <tr><td>3rd Prize</td><td>$ 500.00</td></tr>
+                <tr><td>Special</td><td>$ 200.00</td></tr>
+                <tr><td>Consolation</td><td>$ 60.00</td></tr>
               </tbody>
             </table>
             <table class="lottery-table">
-              <caption>Small Forecast</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Small Forecast</th>
+                  <th scope="col">Prize Amount</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><th>1st Prize</th><td>$3,500</td></tr>
-                <tr><th>2nd Prize</th><td>$2,000</td></tr>
-                <tr><th>3rd Prize</th><td>$1,000</td></tr>
+                <tr><td>1st Prize</td><td>$ 3,500.00</td></tr>
+                <tr><td>2nd Prize</td><td>$ 2,000.00</td></tr>
+                <tr><td>3rd Prize</td><td>$ 1,000.00</td></tr>
               </tbody>
             </table>
           </div>
@@ -54,104 +77,161 @@
 
         <section class="lottery-results" aria-labelledby="lottery-results-title">
           <h2 class="home-section__title" id="lottery-results-title">4D Result</h2>
+          <div class="lottery-operator-tabs event-pills" role="tablist" aria-label="4D operators" data-lottery-tabs></div>
           <div class="lottery-results__grid">
-            <article class="lottery-result">
+            <article class="lottery-result lottery-result--magnum is-active" data-lottery-id="magnum">
               <header class="lottery-result__head">
-                <img src="assets/images/4d/logo-magnum.png" alt="" onerror="this.hidden=true" />
-                <h3 class="lottery-result__name">Magnum - 4D</h3>
+                <img src="assets/images/4d/logo-magnum.png" alt="" />
+                <div class="lottery-result__head-text">
+                  <h3 class="lottery-result__name">Magnum - 4D</h3>
+                  <p class="lottery-result__date">2026-08-30</p>
+                </div>
               </header>
-              <p class="lottery-result__date">27/08/2026</p>
               <div class="lottery-result__prizes">
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">1st</p><p class="lottery-result__prize-value">4821</p></div>
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">2nd</p><p class="lottery-result__prize-value">1903</p></div>
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">3rd</p><p class="lottery-result__prize-value">7740</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">1st Prize</p><p class="lottery-result__prize-value">4079</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">2nd Prize</p><p class="lottery-result__prize-value">4288</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">3rd Prize</p><p class="lottery-result__prize-value">0046</p></div>
               </div>
-              <div class="lottery-result__nums"><p class="lottery-result__nums-title">Special</p><div class="lottery-result__nums-grid"><span class="lottery-result__num">0558</span><span class="lottery-result__num">3312</span><span class="lottery-result__num">9184</span><span class="lottery-result__num">7609</span><span class="lottery-result__num">2447</span><span class="lottery-result__num">1036</span><span class="lottery-result__num">6210</span><span class="lottery-result__num">8891</span><span class="lottery-result__num">4522</span><span class="lottery-result__num">3017</span></div></div>
-              <div class="lottery-result__nums"><p class="lottery-result__nums-title">Consolation</p><div class="lottery-result__nums-grid"><span class="lottery-result__num">1120</span><span class="lottery-result__num">3344</span><span class="lottery-result__num">5566</span><span class="lottery-result__num">7788</span><span class="lottery-result__num">9901</span><span class="lottery-result__num">2233</span><span class="lottery-result__num">4455</span><span class="lottery-result__num">6677</span><span class="lottery-result__num">8899</span><span class="lottery-result__num">0012</span></div></div>
+              <div class="lottery-result__nums">
+                <p class="lottery-result__nums-title">Special</p>
+                <div class="lottery-result__nums-grid"><span class="lottery-result__num">3006</span><span class="lottery-result__num">3545</span><span class="lottery-result__num">4054</span><span class="lottery-result__num">4537</span><span class="lottery-result__num">5047</span><span class="lottery-result__num">6273</span><span class="lottery-result__num">6823</span><span class="lottery-result__num">8272</span><span class="lottery-result__num">9373</span><span class="lottery-result__num">9388</span></div>
+              </div>
+              <div class="lottery-result__nums">
+                <p class="lottery-result__nums-title">Consolation</p>
+                <div class="lottery-result__nums-grid"><span class="lottery-result__num">0881</span><span class="lottery-result__num">4568</span><span class="lottery-result__num">4679</span><span class="lottery-result__num">4795</span><span class="lottery-result__num">5805</span><span class="lottery-result__num">6666</span><span class="lottery-result__num">7185</span><span class="lottery-result__num">7571</span><span class="lottery-result__num">8125</span><span class="lottery-result__num">8997</span></div>
+              </div>
             </article>
-            <article class="lottery-result">
+            <article class="lottery-result lottery-result--toto" data-lottery-id="toto">
               <header class="lottery-result__head">
-                <img src="assets/images/4d/logo-toto.png" alt="" onerror="this.hidden=true" />
-                <h3 class="lottery-result__name">Sports Toto</h3>
+                <img src="assets/images/4d/logo-toto.png" alt="" />
+                <div class="lottery-result__head-text">
+                  <h3 class="lottery-result__name">Sports Toto</h3>
+                  <p class="lottery-result__date">2026-08-30</p>
+                </div>
               </header>
-              <p class="lottery-result__date">27/08/2026</p>
               <div class="lottery-result__prizes">
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">1st</p><p class="lottery-result__prize-value">6218</p></div>
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">2nd</p><p class="lottery-result__prize-value">9044</p></div>
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">3rd</p><p class="lottery-result__prize-value">1572</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">1st Prize</p><p class="lottery-result__prize-value">2009</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">2nd Prize</p><p class="lottery-result__prize-value">1164</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">3rd Prize</p><p class="lottery-result__prize-value">9330</p></div>
               </div>
-              <div class="lottery-result__nums"><p class="lottery-result__nums-title">Special</p><div class="lottery-result__nums-grid"><span class="lottery-result__num">4012</span><span class="lottery-result__num">8233</span><span class="lottery-result__num">6671</span><span class="lottery-result__num">9920</span><span class="lottery-result__num">1145</span><span class="lottery-result__num">3388</span><span class="lottery-result__num">5502</span><span class="lottery-result__num">7719</span><span class="lottery-result__num">8834</span><span class="lottery-result__num">2290</span></div></div>
-              <div class="lottery-result__nums"><p class="lottery-result__nums-title">Consolation</p><div class="lottery-result__nums-grid"><span class="lottery-result__num">1023</span><span class="lottery-result__num">3045</span><span class="lottery-result__num">5067</span><span class="lottery-result__num">7089</span><span class="lottery-result__num">9012</span><span class="lottery-result__num">1234</span><span class="lottery-result__num">3456</span><span class="lottery-result__num">5678</span><span class="lottery-result__num">7890</span><span class="lottery-result__num">0123</span></div></div>
+              <div class="lottery-result__nums">
+                <p class="lottery-result__nums-title">Special</p>
+                <div class="lottery-result__nums-grid"><span class="lottery-result__num">0010</span><span class="lottery-result__num">0438</span><span class="lottery-result__num">0979</span><span class="lottery-result__num">5394</span><span class="lottery-result__num">5706</span><span class="lottery-result__num">7042</span><span class="lottery-result__num">7227</span><span class="lottery-result__num">7375</span><span class="lottery-result__num">7520</span><span class="lottery-result__num">9229</span></div>
+              </div>
+              <div class="lottery-result__nums">
+                <p class="lottery-result__nums-title">Consolation</p>
+                <div class="lottery-result__nums-grid"><span class="lottery-result__num">0621</span><span class="lottery-result__num">3343</span><span class="lottery-result__num">3456</span><span class="lottery-result__num">4926</span><span class="lottery-result__num">5272</span><span class="lottery-result__num">7365</span><span class="lottery-result__num">7802</span><span class="lottery-result__num">8277</span><span class="lottery-result__num">9258</span><span class="lottery-result__num">9776</span></div>
+              </div>
             </article>
-            <article class="lottery-result">
+            <article class="lottery-result lottery-result--damacai" data-lottery-id="damacai">
               <header class="lottery-result__head">
-                <img src="assets/images/4d/logo-damacai.png" alt="" onerror="this.hidden=true" />
-                <h3 class="lottery-result__name">Damacai 1+3D</h3>
+                <img src="assets/images/4d/logo-damacai.png" alt="" />
+                <div class="lottery-result__head-text">
+                  <h3 class="lottery-result__name">Damacai 1+3D</h3>
+                  <p class="lottery-result__date">2026-08-30</p>
+                </div>
               </header>
-              <p class="lottery-result__date">27/08/2026</p>
               <div class="lottery-result__prizes">
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">1st</p><p class="lottery-result__prize-value">3389</p></div>
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">2nd</p><p class="lottery-result__prize-value">7721</p></div>
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">3rd</p><p class="lottery-result__prize-value">0045</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">1st Prize</p><p class="lottery-result__prize-value">7342</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">2nd Prize</p><p class="lottery-result__prize-value">1432</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">3rd Prize</p><p class="lottery-result__prize-value">5587</p></div>
               </div>
-              <div class="lottery-result__nums"><p class="lottery-result__nums-title">Special</p><div class="lottery-result__nums-grid"><span class="lottery-result__num">8812</span><span class="lottery-result__num">2234</span><span class="lottery-result__num">6655</span><span class="lottery-result__num">4477</span><span class="lottery-result__num">1199</span><span class="lottery-result__num">5533</span><span class="lottery-result__num">9977</span><span class="lottery-result__num">2211</span><span class="lottery-result__num">6644</span><span class="lottery-result__num">8866</span></div></div>
-              <div class="lottery-result__nums"><p class="lottery-result__nums-title">Consolation</p><div class="lottery-result__nums-grid"><span class="lottery-result__num">2109</span><span class="lottery-result__num">4321</span><span class="lottery-result__num">6543</span><span class="lottery-result__num">8765</span><span class="lottery-result__num">0987</span><span class="lottery-result__num">1357</span><span class="lottery-result__num">2468</span><span class="lottery-result__num">3579</span><span class="lottery-result__num">4680</span><span class="lottery-result__num">5791</span></div></div>
+              <div class="lottery-result__nums">
+                <p class="lottery-result__nums-title">Special</p>
+                <div class="lottery-result__nums-grid"><span class="lottery-result__num">0251</span><span class="lottery-result__num">1427</span><span class="lottery-result__num">4358</span><span class="lottery-result__num">4546</span><span class="lottery-result__num">4958</span><span class="lottery-result__num">5130</span><span class="lottery-result__num">5201</span><span class="lottery-result__num">7757</span><span class="lottery-result__num">8457</span><span class="lottery-result__num">9244</span></div>
+              </div>
+              <div class="lottery-result__nums">
+                <p class="lottery-result__nums-title">Consolation</p>
+                <div class="lottery-result__nums-grid"><span class="lottery-result__num">3119</span><span class="lottery-result__num">3243</span><span class="lottery-result__num">4589</span><span class="lottery-result__num">6819</span><span class="lottery-result__num">7472</span><span class="lottery-result__num">7784</span><span class="lottery-result__num">7960</span><span class="lottery-result__num">9142</span><span class="lottery-result__num">9779</span><span class="lottery-result__num">9937</span></div>
+              </div>
             </article>
-            <article class="lottery-result">
+            <article class="lottery-result lottery-result--singapore" data-lottery-id="singapore">
               <header class="lottery-result__head">
-                <img src="assets/images/4d/logo-singapore.png" alt="" onerror="this.hidden=true" />
-                <h3 class="lottery-result__name">Singapore 4D</h3>
+                <img src="assets/images/4d/logo-singapore.png" alt="" />
+                <div class="lottery-result__head-text">
+                  <h3 class="lottery-result__name">Singapore 4D</h3>
+                  <p class="lottery-result__date">2026-08-30</p>
+                </div>
               </header>
-              <p class="lottery-result__date">27/08/2026</p>
               <div class="lottery-result__prizes">
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">1st</p><p class="lottery-result__prize-value">9012</p></div>
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">2nd</p><p class="lottery-result__prize-value">3456</p></div>
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">3rd</p><p class="lottery-result__prize-value">7890</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">1st Prize</p><p class="lottery-result__prize-value">9238</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">2nd Prize</p><p class="lottery-result__prize-value">8594</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">3rd Prize</p><p class="lottery-result__prize-value">0379</p></div>
               </div>
-              <div class="lottery-result__nums"><p class="lottery-result__nums-title">Special</p><div class="lottery-result__nums-grid"><span class="lottery-result__num">1122</span><span class="lottery-result__num">3344</span><span class="lottery-result__num">5566</span><span class="lottery-result__num">7788</span><span class="lottery-result__num">9900</span><span class="lottery-result__num">2211</span><span class="lottery-result__num">4433</span><span class="lottery-result__num">6655</span><span class="lottery-result__num">8877</span><span class="lottery-result__num">0099</span></div></div>
-              <div class="lottery-result__nums"><p class="lottery-result__nums-title">Consolation</p><div class="lottery-result__nums-grid"><span class="lottery-result__num">1010</span><span class="lottery-result__num">2020</span><span class="lottery-result__num">3030</span><span class="lottery-result__num">4040</span><span class="lottery-result__num">5050</span><span class="lottery-result__num">6060</span><span class="lottery-result__num">7070</span><span class="lottery-result__num">8080</span><span class="lottery-result__num">9090</span><span class="lottery-result__num">0001</span></div></div>
+              <div class="lottery-result__nums">
+                <p class="lottery-result__nums-title">Special</p>
+                <div class="lottery-result__nums-grid"><span class="lottery-result__num">1482</span><span class="lottery-result__num">1739</span><span class="lottery-result__num">2854</span><span class="lottery-result__num">3412</span><span class="lottery-result__num">4808</span><span class="lottery-result__num">6214</span><span class="lottery-result__num">6622</span><span class="lottery-result__num">7241</span><span class="lottery-result__num">7627</span><span class="lottery-result__num">8578</span></div>
+              </div>
+              <div class="lottery-result__nums">
+                <p class="lottery-result__nums-title">Consolation</p>
+                <div class="lottery-result__nums-grid"><span class="lottery-result__num">0608</span><span class="lottery-result__num">0733</span><span class="lottery-result__num">2203</span><span class="lottery-result__num">4510</span><span class="lottery-result__num">4656</span><span class="lottery-result__num">5505</span><span class="lottery-result__num">6756</span><span class="lottery-result__num">8849</span><span class="lottery-result__num">9628</span><span class="lottery-result__num">9868</span></div>
+              </div>
             </article>
-            <article class="lottery-result">
+            <article class="lottery-result lottery-result--sabah" data-lottery-id="sabah">
               <header class="lottery-result__head">
-                <img src="assets/images/4d/logo-sabah.png" alt="" onerror="this.hidden=true" />
-                <h3 class="lottery-result__name">Sabah 88</h3>
+                <img src="assets/images/4d/logo-sabah.png" alt="" />
+                <div class="lottery-result__head-text">
+                  <h3 class="lottery-result__name">Sabah 88</h3>
+                  <p class="lottery-result__date">2026-08-30</p>
+                </div>
               </header>
-              <p class="lottery-result__date">27/08/2026</p>
               <div class="lottery-result__prizes">
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">1st</p><p class="lottery-result__prize-value">5521</p></div>
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">2nd</p><p class="lottery-result__prize-value">8834</p></div>
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">3rd</p><p class="lottery-result__prize-value">1177</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">1st Prize</p><p class="lottery-result__prize-value">2036</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">2nd Prize</p><p class="lottery-result__prize-value">9764</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">3rd Prize</p><p class="lottery-result__prize-value">6941</p></div>
               </div>
-              <div class="lottery-result__nums"><p class="lottery-result__nums-title">Special</p><div class="lottery-result__nums-grid"><span class="lottery-result__num">2244</span><span class="lottery-result__num">4466</span><span class="lottery-result__num">6688</span><span class="lottery-result__num">8800</span><span class="lottery-result__num">0022</span><span class="lottery-result__num">2244</span><span class="lottery-result__num">4466</span><span class="lottery-result__num">6688</span><span class="lottery-result__num">8800</span><span class="lottery-result__num">0022</span></div></div>
-              <div class="lottery-result__nums"><p class="lottery-result__nums-title">Consolation</p><div class="lottery-result__nums-grid"><span class="lottery-result__num">1515</span><span class="lottery-result__num">2525</span><span class="lottery-result__num">3535</span><span class="lottery-result__num">4545</span><span class="lottery-result__num">5555</span><span class="lottery-result__num">6565</span><span class="lottery-result__num">7575</span><span class="lottery-result__num">8585</span><span class="lottery-result__num">9595</span><span class="lottery-result__num">0505</span></div></div>
+              <div class="lottery-result__nums">
+                <p class="lottery-result__nums-title">Special</p>
+                <div class="lottery-result__nums-grid"><span class="lottery-result__num">0795</span><span class="lottery-result__num">1559</span><span class="lottery-result__num">2748</span><span class="lottery-result__num">6276</span><span class="lottery-result__num">6401</span><span class="lottery-result__num">6803</span><span class="lottery-result__num">7303</span><span class="lottery-result__num">7872</span><span class="lottery-result__num">8122</span><span class="lottery-result__num">8955</span></div>
+              </div>
+              <div class="lottery-result__nums">
+                <p class="lottery-result__nums-title">Consolation</p>
+                <div class="lottery-result__nums-grid"><span class="lottery-result__num">0037</span><span class="lottery-result__num">1344</span><span class="lottery-result__num">2081</span><span class="lottery-result__num">4220</span><span class="lottery-result__num">5296</span><span class="lottery-result__num">7166</span><span class="lottery-result__num">7786</span><span class="lottery-result__num">8886</span><span class="lottery-result__num">9615</span><span class="lottery-result__num">9899</span></div>
+              </div>
             </article>
-            <article class="lottery-result">
+            <article class="lottery-result lottery-result--stc" data-lottery-id="sandakan">
               <header class="lottery-result__head">
-                <img src="assets/images/4d/logo-sandakan.png" alt="" onerror="this.hidden=true" />
-                <h3 class="lottery-result__name">4STC 4D</h3>
+                <img src="assets/images/4d/logo-sandakan.png" alt="" />
+                <div class="lottery-result__head-text">
+                  <h3 class="lottery-result__name">4STC 4D</h3>
+                  <p class="lottery-result__date">2026-08-30</p>
+                </div>
               </header>
-              <p class="lottery-result__date">27/08/2026</p>
               <div class="lottery-result__prizes">
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">1st</p><p class="lottery-result__prize-value">4401</p></div>
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">2nd</p><p class="lottery-result__prize-value">7722</p></div>
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">3rd</p><p class="lottery-result__prize-value">9933</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">1st Prize</p><p class="lottery-result__prize-value">6072</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">2nd Prize</p><p class="lottery-result__prize-value">2558</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">3rd Prize</p><p class="lottery-result__prize-value">8554</p></div>
               </div>
-              <div class="lottery-result__nums"><p class="lottery-result__nums-title">Special</p><div class="lottery-result__nums-grid"><span class="lottery-result__num">1100</span><span class="lottery-result__num">2211</span><span class="lottery-result__num">3322</span><span class="lottery-result__num">4433</span><span class="lottery-result__num">5544</span><span class="lottery-result__num">6655</span><span class="lottery-result__num">7766</span><span class="lottery-result__num">8877</span><span class="lottery-result__num">9988</span><span class="lottery-result__num">0099</span></div></div>
-              <div class="lottery-result__nums"><p class="lottery-result__nums-title">Consolation</p><div class="lottery-result__nums-grid"><span class="lottery-result__num">1212</span><span class="lottery-result__num">2323</span><span class="lottery-result__num">3434</span><span class="lottery-result__num">4545</span><span class="lottery-result__num">5656</span><span class="lottery-result__num">6767</span><span class="lottery-result__num">7878</span><span class="lottery-result__num">8989</span><span class="lottery-result__num">9090</span><span class="lottery-result__num">0101</span></div></div>
+              <div class="lottery-result__nums">
+                <p class="lottery-result__nums-title">Special</p>
+                <div class="lottery-result__nums-grid"><span class="lottery-result__num">3275</span><span class="lottery-result__num">3915</span><span class="lottery-result__num">4485</span><span class="lottery-result__num">4640</span><span class="lottery-result__num">5582</span><span class="lottery-result__num">6726</span><span class="lottery-result__num">7005</span><span class="lottery-result__num">7752</span><span class="lottery-result__num">8814</span><span class="lottery-result__num">9521</span></div>
+              </div>
+              <div class="lottery-result__nums">
+                <p class="lottery-result__nums-title">Consolation</p>
+                <div class="lottery-result__nums-grid"><span class="lottery-result__num">1453</span><span class="lottery-result__num">3028</span><span class="lottery-result__num">4924</span><span class="lottery-result__num">5352</span><span class="lottery-result__num">5519</span><span class="lottery-result__num">6484</span><span class="lottery-result__num">7250</span><span class="lottery-result__num">7283</span><span class="lottery-result__num">8208</span><span class="lottery-result__num">8416</span></div>
+              </div>
             </article>
-            <article class="lottery-result">
+            <article class="lottery-result lottery-result--cashsweep" data-lottery-id="cashsweep">
               <header class="lottery-result__head">
-                <img src="assets/images/4d/logo-cashsweep.png" alt="" onerror="this.hidden=true" />
-                <h3 class="lottery-result__name">Cash Sweep</h3>
+                <img src="assets/images/4d/logo-cashsweep.png" alt="" />
+                <div class="lottery-result__head-text">
+                  <h3 class="lottery-result__name">Cash Sweep</h3>
+                  <p class="lottery-result__date">2026-08-30</p>
+                </div>
               </header>
-              <p class="lottery-result__date">27/08/2026</p>
               <div class="lottery-result__prizes">
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">1st</p><p class="lottery-result__prize-value">6678</p></div>
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">2nd</p><p class="lottery-result__prize-value">8890</p></div>
-                <div class="lottery-result__prize"><p class="lottery-result__prize-label">3rd</p><p class="lottery-result__prize-value">1123</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">1st Prize</p><p class="lottery-result__prize-value">5793</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">2nd Prize</p><p class="lottery-result__prize-value">6536</p></div>
+                <div class="lottery-result__prize"><p class="lottery-result__prize-label">3rd Prize</p><p class="lottery-result__prize-value">3004</p></div>
               </div>
-              <div class="lottery-result__nums"><p class="lottery-result__nums-title">Special</p><div class="lottery-result__nums-grid"><span class="lottery-result__num">4455</span><span class="lottery-result__num">6677</span><span class="lottery-result__num">8899</span><span class="lottery-result__num">0011</span><span class="lottery-result__num">2233</span><span class="lottery-result__num">4455</span><span class="lottery-result__num">6677</span><span class="lottery-result__num">8899</span><span class="lottery-result__num">0011</span><span class="lottery-result__num">2233</span></div></div>
-              <div class="lottery-result__nums"><p class="lottery-result__nums-title">Consolation</p><div class="lottery-result__nums-grid"><span class="lottery-result__num">1414</span><span class="lottery-result__num">2424</span><span class="lottery-result__num">3434</span><span class="lottery-result__num">4444</span><span class="lottery-result__num">5454</span><span class="lottery-result__num">6464</span><span class="lottery-result__num">7474</span><span class="lottery-result__num">8484</span><span class="lottery-result__num">9494</span><span class="lottery-result__num">0404</span></div></div>
+              <div class="lottery-result__nums">
+                <p class="lottery-result__nums-title">Special</p>
+                <div class="lottery-result__nums-grid"><span class="lottery-result__num">0180</span><span class="lottery-result__num">0647</span><span class="lottery-result__num">0937</span><span class="lottery-result__num">1679</span><span class="lottery-result__num">2957</span><span class="lottery-result__num">3705</span><span class="lottery-result__num">6114</span><span class="lottery-result__num">7066</span><span class="lottery-result__num">9344</span><span class="lottery-result__num">9699</span></div>
+              </div>
+              <div class="lottery-result__nums">
+                <p class="lottery-result__nums-title">Consolation</p>
+                <div class="lottery-result__nums-grid"><span class="lottery-result__num">0165</span><span class="lottery-result__num">0801</span><span class="lottery-result__num">1089</span><span class="lottery-result__num">1981</span><span class="lottery-result__num">2366</span><span class="lottery-result__num">5447</span><span class="lottery-result__num">5575</span><span class="lottery-result__num">5973</span><span class="lottery-result__num">6425</span><span class="lottery-result__num">8505</span></div>
+              </div>
             </article>
           </div>
         </section>
@@ -171,6 +251,8 @@
             <p>Members must be 18+ and located in a permitted region. This front-end demo does not process real wagers.</p>
           </div>
         </div>
+
+        <div data-include="transactions"></div>
       </div>
     </main>
     <div data-include="footer"></div>

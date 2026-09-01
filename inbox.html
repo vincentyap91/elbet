@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ELBET · Inbox</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body data-layout="shell" data-require-auth>
+    <div data-include="header"></div>
+    <div data-include="sidebar"></div>
+    <main id="main" class="page page--inner page--account page--money" data-page="inbox">
+      <div class="shell-main money-page">
+        <div data-include="account-hero"></div>
+
+        <header class="money-mobile">
+          <div class="money-mobile__head">
+            <div>
+              <p class="money-mobile__label">Total Balance</p>
+              <p class="money-mobile__balance">
+                <span data-money-currency>MYR</span><span data-money-balance>0.00</span>
+              </p>
+            </div>
+            <a class="btn btn--primary btn--sm" href="account.html?view=deposit">Deposit</a>
+          </div>
+        </header>
+
+        <div class="money-body">
+          <nav class="money-nav" aria-label="Account">
+            <a href="account.html?view=deposit"><img src="assets/images/icons/deposit.svg" alt="" /> Deposit</a>
+            <a href="account.html?view=withdrawal"><img src="assets/images/icons/withdrawal.svg" alt="" /> Withdrawal</a>
+            <a href="account.html?view=transfer"><img src="assets/images/icons/transfer.svg" alt="" /> My Wallet</a>
+            <a href="account.html?view=history"><img src="assets/images/icons/history.svg" alt="" /> History</a>
+            <a href="pending.html"><img src="assets/images/icons/transaction.svg" alt="" /> Pending Transaction</a>
+            <p class="money-nav__label">Account</p>
+            <a class="is-active" href="inbox.html" aria-current="page"><img src="assets/images/icons/inbox.svg" alt="" /> Inbox</a>
+            <a href="account.html?view=profile"><img src="assets/images/icons/account.svg" alt="" /> Profile</a>
+            <a href="account.html?view=banking"><img src="assets/images/icons/withdrawal.svg" alt="" /> Banking Details</a>
+            <a href="rebates.html"><img src="assets/images/icons/rebates.svg" alt="" /> Rebates</a>
+          </nav>
+
+          <div class="money-main">
+            <div class="money-card">
+              <h1 class="money-card__title"><img src="assets/images/icons/inbox.svg" alt="" /> Inbox</h1>
+              <div class="inbox-toolbar">
+                <div class="event-pills" role="tablist" aria-label="Inbox folders">
+                  <button type="button" class="event-pill is-active" role="tab" aria-selected="true" data-inbox-tab="important">Important</button>
+                  <button type="button" class="event-pill" role="tab" aria-selected="false" data-inbox-tab="others">Others</button>
+                </div>
+                <button type="button" class="inbox-read" data-inbox-read>Mark As Read</button>
+              </div>
+              <div class="mail-table-wrap">
+                <table class="mail-table">
+                  <thead>
+                    <tr>
+                      <th class="mail-table__check"><input type="checkbox" aria-label="Select all" /></th>
+                      <th>Date/Time</th>
+                      <th>Subject</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-inbox-panel="important">
+                      <td class="mail-table__empty" colspan="3">No data available in table</td>
+                    </tr>
+                    <tr data-inbox-panel="others" hidden>
+                      <td class="mail-table__empty" colspan="3">No data available in table</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div data-include="footer"></div>
+    <div data-include="chat"></div>
+    <div data-include="mobile-nav"></div>
+    <div data-include="modal"></div>
+    <div data-include="toast"></div>
+    <script src="js/boot.js"></script>
+  </body>
+</html>

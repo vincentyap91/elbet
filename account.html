@@ -9,22 +9,479 @@
         document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
       } catch (e) {}
     </script>
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/main.css?v=auth3" />
+    <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
   </head>
-  <body>
+  <body data-layout="shell" data-require-auth>
     <div data-include="header"></div>
     <div data-include="sidebar"></div>
-    <div data-include="nav"></div>
-    <main id="main" class="page" data-page="account">
-      <ui-container>
-        <ui-empty title="Account page shell" description="Page-specific content comes later. Shared chrome is already live."></ui-empty>
-      </ui-container>
+    <main id="main" class="page page--inner page--account page--money" data-page="account">
+      <div class="shell-main money-page">
+        <div data-include="account-hero"></div>
+
+        <header class="money-mobile">
+          <div class="money-mobile__head">
+            <div>
+              <p class="money-mobile__label">Total Balance</p>
+              <p class="money-mobile__balance">
+                <span data-money-currency>MYR</span><span data-money-balance>0.00</span>
+                <button type="button" class="money-icon-btn" data-money-refresh aria-label="Refresh balance">
+                  <span data-icon="refresh"></span>
+                </button>
+              </p>
+            </div>
+            <button type="button" class="btn btn--primary btn--sm" data-money-transfer-all>Transfer All</button>
+          </div>
+          <nav class="money-tabs" aria-label="Money" data-money-tabs>
+            <a href="account.html?view=wallet" data-money-tab="wallet">Wallet</a>
+            <a href="account.html?view=deposit" data-money-tab="deposit">Deposit</a>
+            <a href="account.html?view=withdrawal" data-money-tab="withdrawal">Withdrawal</a>
+            <a href="account.html?view=transfer" data-money-tab="transfer">My Wallet</a>
+          </nav>
+        </header>
+
+        <header class="profile-mobile" data-profile-mobile>
+          <nav class="profile-mobile__tabs" aria-label="Account sections">
+            <a href="account.html?view=profile" class="is-active" data-profile-tab="info">My Account Info</a>
+            <a href="rebates.html" data-profile-tab="rebates">Rebates</a>
+          </nav>
+          <p class="profile-mobile__hi">Hi, <span data-auth-name>Player</span></p>
+          <div class="profile-mobile__ident">
+            <div class="profile-mobile__avatar-wrap">
+              <img class="profile-mobile__avatar" src="assets/images/achievements/spiderman-avatar.svg" alt="Spiderman profile" />
+              <button type="button" class="profile-mobile__edit" data-profile-edit aria-label="Edit avatar">
+                <span data-icon="edit" aria-hidden="true"></span>
+              </button>
+            </div>
+            <a class="profile-mobile__vip" href="vip.html">
+              <span class="profile-mobile__trophy" aria-hidden="true"></span>
+              <span data-auth-vip>Bronze</span>
+              <span aria-hidden="true">›</span>
+            </a>
+          </div>
+          <div class="profile-mobile__balance">
+            <span data-money-currency>MYR</span><span data-money-balance>0.00</span>
+            <button type="button" class="money-icon-btn" data-money-refresh aria-label="Refresh balance">
+              <span data-icon="refresh"></span>
+            </button>
+            <button type="button" class="money-icon-btn" data-profile-help aria-label="Help">
+              <span data-icon="help" aria-hidden="true"></span>
+            </button>
+            <a class="profile-mobile__plus" href="account.html?view=deposit" aria-label="Deposit">+</a>
+          </div>
+          <div class="profile-mobile__verified">
+            <span class="money-verified"><span data-icon="mail" aria-hidden="true"></span> Verified</span>
+            <span class="money-verified"><span data-icon="phone" aria-hidden="true"></span> Verified</span>
+          </div>
+        </header>
+
+        <div class="money-body">
+          <nav class="money-nav" aria-label="Account">
+            <a href="account.html?view=deposit" data-money-nav="deposit"><img src="assets/images/icons/deposit.svg" alt="" /> Deposit</a>
+            <a href="account.html?view=withdrawal" data-money-nav="withdrawal"><img src="assets/images/icons/withdrawal.svg" alt="" /> Withdrawal</a>
+            <a href="account.html?view=transfer" data-money-nav="transfer"><img src="assets/images/icons/transfer.svg" alt="" /> My Wallet</a>
+            <a href="account.html?view=history" data-money-nav="history"><img src="assets/images/icons/history.svg" alt="" /> History</a>
+            <a href="pending.html"><img src="assets/images/icons/transaction.svg" alt="" /> Pending Transaction</a>
+            <p class="money-nav__label">Account</p>
+            <a href="inbox.html"><img src="assets/images/icons/inbox.svg" alt="" /> Inbox</a>
+            <a href="account.html?view=profile" data-money-nav="profile"><img src="assets/images/icons/account.svg" alt="" /> Profile</a>
+            <a href="account.html?view=banking" data-money-nav="banking"><img src="assets/images/icons/withdrawal.svg" alt="" /> Banking Details</a>
+            <a href="rebates.html"><img src="assets/images/icons/rebates.svg" alt="" /> Rebates</a>
+          </nav>
+
+          <div class="money-main">
+            <section class="money-panel" data-money-panel="deposit">
+              <div class="money-card">
+                <h1 class="money-card__title"><img src="assets/images/icons/deposit.svg" alt="" /> Deposit</h1>
+                <div class="money-block">
+                  <p class="money-label">Payment Options</p>
+                  <div class="money-methods" data-deposit-methods></div>
+                </div>
+                <div class="money-block">
+                  <p class="money-label" data-deposit-channel-label>Bank</p>
+                  <div class="money-banks" data-deposit-banks></div>
+                </div>
+
+                <div class="money-block" data-deposit-section="banking" hidden>
+                  <p class="money-label">Banking Details</p>
+                  <div class="money-copy-list">
+                    <div class="money-copy">
+                      <span class="field__label" id="deposit-acc-name-label">Bank Account Name</span>
+                      <div class="money-copy__row">
+                        <input class="field__control" type="text" readonly aria-labelledby="deposit-acc-name-label" data-deposit-account="name" />
+                        <button type="button" class="icon-btn icon-btn--ghost money-copy__btn" data-deposit-copy="name" aria-label="Copy bank account name"></button>
+                      </div>
+                    </div>
+                    <div class="money-copy">
+                      <span class="field__label" id="deposit-acc-number-label">Bank Account Number</span>
+                      <div class="money-copy__row">
+                        <input class="field__control" type="text" readonly aria-labelledby="deposit-acc-number-label" data-deposit-account="number" />
+                        <button type="button" class="icon-btn icon-btn--ghost money-copy__btn" data-deposit-copy="number" aria-label="Copy bank account number"></button>
+                      </div>
+                    </div>
+                    <div class="money-copy">
+                      <span class="field__label" id="deposit-acc-ref-label">Bank Reference</span>
+                      <div class="money-copy__row">
+                        <input class="field__control" type="text" readonly aria-labelledby="deposit-acc-ref-label" data-deposit-account="reference" />
+                        <button type="button" class="icon-btn icon-btn--ghost money-copy__btn" data-deposit-copy="reference" aria-label="Copy bank reference"></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="money-block" data-deposit-section="crypto" hidden>
+                  <p class="money-label">Banking Details</p>
+                  <div class="money-chains" data-deposit-networks role="group" aria-label="Network"></div>
+                  <div class="money-qr">
+                    <div class="money-qr__code" data-deposit-qr aria-hidden="true"></div>
+                    <p class="money-qr__hint">Scan to get the deposit address for the selected network.</p>
+                  </div>
+                  <div class="money-copy">
+                    <span class="field__label" id="deposit-rate-label">Exchange Rate</span>
+                    <div class="money-copy__row money-copy__row--plain">
+                      <input class="field__control" type="text" readonly aria-labelledby="deposit-rate-label" data-deposit-rate />
+                    </div>
+                  </div>
+                  <div class="money-copy">
+                    <span class="field__label" id="deposit-address-label">Address</span>
+                    <div class="money-copy__row">
+                      <input class="field__control" type="text" readonly aria-labelledby="deposit-address-label" data-deposit-address />
+                      <button type="button" class="icon-btn icon-btn--ghost money-copy__btn" data-deposit-copy="address" aria-label="Copy deposit address"></button>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="money-tutorial" data-deposit-section="tutorial" hidden>
+                  <span class="money-tutorial__icon" data-icon="play" aria-hidden="true"></span>
+                  <a data-deposit-tutorial href="#" target="_blank" rel="noopener noreferrer">Watch step-by-step tutorial</a>
+                </p>
+
+                <div class="money-block" data-deposit-section="amount" hidden>
+                  <p class="money-label">Deposit Details</p>
+                  <div class="money-amount-row">
+                    <label class="field" for="deposit-amount">
+                      <span class="field__label">Amount (MYR)</span>
+                      <input id="deposit-amount" class="field__control" type="number" inputmode="decimal" min="100" step="1" data-deposit-amount placeholder="Min. 100.00 / Max. 50,000.00" />
+                    </label>
+                    <div class="money-presets" data-deposit-presets></div>
+                  </div>
+                  <div class="money-receipt" data-deposit-section="receipt" hidden>
+                    <label class="field" for="deposit-receipt-at">
+                      <span class="field__label">Date &amp; Time on Receipt</span>
+                      <input id="deposit-receipt-at" class="field__control" type="datetime-local" data-deposit-receipt-at />
+                    </label>
+                    <div class="money-attachment">
+                      <label class="field" for="deposit-attachment">
+                        <span class="field__label">Attachment</span>
+                        <input id="deposit-attachment" class="field__control money-file" type="file" accept="image/*,.pdf" data-deposit-attachment />
+                      </label>
+                      <p class="money-note money-note--warn">
+                        *For ATM deposit, you must submit the ATM receipt with ELBET written by pen only to process your request
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="money-gateway" data-deposit-section="gateway" hidden>
+                  <label class="field" for="deposit-gateway">
+                    <span class="field__label">Payment Gateway Channel</span>
+                    <select id="deposit-gateway" class="field__control" data-deposit-gateway></select>
+                  </label>
+                  <p class="money-note money-note--warn">
+                    *Attention<br />
+                    Please select another channel if your <strong>deposit request is failed.</strong>
+                  </p>
+                </div>
+
+                <div class="money-promo" data-deposit-section="promo" hidden>
+                  <p class="money-promo__title">Promotion</p>
+                  <label class="money-check">
+                    <input type="checkbox" checked data-deposit-promo />
+                    <span class="money-check__icon" data-icon="coin" aria-hidden="true"></span>
+                    <span>Proceed without any of the promotions above. ( Rollover x 1 )<br /><strong>Kindly read the terms and condition before selecting.</strong></span>
+                  </label>
+                </div>
+
+                <button type="button" class="btn btn--primary btn--full money-submit" data-deposit-section="submit" data-deposit-submit hidden>Submit</button>
+              </div>
+            </section>
+
+            <section class="money-panel" data-money-panel="withdrawal" hidden>
+              <div class="money-card">
+                <h1 class="money-card__title"><img src="assets/images/icons/withdrawal.svg" alt="" /> Withdrawal</h1>
+                <div class="money-modes" data-withdraw-modes>
+                  <button type="button" class="money-mode is-active" data-withdraw-mode="bank">
+                    <span data-icon="bank" aria-hidden="true"></span> Bank
+                  </button>
+                  <button type="button" class="money-mode" data-withdraw-mode="crypto">
+                    <span data-icon="crypto" aria-hidden="true"></span> Crypto
+                    <span class="money-mode__badge">Extra 1%</span>
+                  </button>
+                </div>
+                <div class="money-field">
+                  <span class="field__label" id="withdraw-bank-label">Bank Name</span>
+                  <div class="control-inline">
+                    <select class="field__control" aria-labelledby="withdraw-bank-label" data-withdraw-bank></select>
+                    <button type="button" class="icon-btn icon-btn--ghost" data-withdraw-add aria-label="Add bank">+</button>
+                  </div>
+                  <div class="money-bank-minis" data-withdraw-banks></div>
+                </div>
+                <div class="money-field">
+                  <label class="field" for="withdraw-amount">
+                    <span class="field__label">Amount(MYR)</span>
+                    <input id="withdraw-amount" class="field__control" type="number" inputmode="decimal" min="200" data-withdraw-amount placeholder="Min 200.00 / Max 50,000.00" />
+                  </label>
+                </div>
+                <button type="button" class="btn btn--primary btn--full money-submit" data-withdraw-submit>Submit</button>
+                <div class="money-rollover" data-rollover></div>
+              </div>
+              <details class="money-reminder">
+                <summary>Friendly Reminder</summary>
+                <p data-money-reminder></p>
+              </details>
+            </section>
+
+            <section class="money-panel" data-money-panel="transfer" hidden>
+              <div class="money-transfer">
+                <div class="money-card">
+                  <h1 class="money-card__title"><img src="assets/images/icons/transfer.svg" alt="" /> Transfer</h1>
+                  <div class="money-field">
+                    <label class="field" for="transfer-from">
+                      <span class="field__label">From</span>
+                      <select id="transfer-from" class="field__control" data-transfer-from></select>
+                    </label>
+                  </div>
+                  <div class="money-field">
+                    <label class="field" for="transfer-to">
+                      <span class="field__label">To</span>
+                      <select id="transfer-to" class="field__control" data-transfer-to></select>
+                    </label>
+                  </div>
+                  <div class="money-field">
+                    <span class="field__label">Transfer Amount*(MYR)</span>
+                    <div class="money-amount">
+                      <input class="field__control" type="number" inputmode="decimal" data-transfer-amount placeholder="0.00" />
+                      <button type="button" class="money-amount__max" data-transfer-max>Max</button>
+                    </div>
+                    <p class="money-available">Available <span data-transfer-available>0.00</span></p>
+                  </div>
+                  <button type="button" class="btn btn--primary btn--full money-submit" data-transfer-submit>Submit</button>
+                </div>
+                <div class="money-wallet money-desk-wallet" data-wallet-root></div>
+              </div>
+            </section>
+
+            <section class="money-panel" data-money-panel="wallet" hidden>
+              <div class="money-wallet money-mobile-wallet" data-wallet-root></div>
+            </section>
+
+            <section class="money-panel" data-money-panel="history" hidden>
+              <div class="money-card">
+                <h1 class="money-card__title"><img src="assets/images/icons/history.svg" alt="" /> History</h1>
+                <div class="money-block">
+                  <p class="money-label">Searching History</p>
+                  <div class="money-filters">
+                    <label class="field">
+                      <span class="field__label">Type</span>
+                      <select class="field__control" data-history-type>
+                        <option>Deposit</option>
+                        <option>Withdrawal</option>
+                        <option>Transfer</option>
+                      </select>
+                    </label>
+                    <label class="field">
+                      <span class="field__label">Date Range</span>
+                      <input class="field__control" type="date" data-history-date />
+                    </label>
+                  </div>
+                  <div class="money-ranges" data-history-ranges>
+                    <button type="button" class="money-range is-active" data-history-range="0">Today</button>
+                    <button type="button" class="money-range" data-history-range="3">In 3 Days</button>
+                    <button type="button" class="money-range" data-history-range="7">In a Week</button>
+                    <button type="button" class="money-range" data-history-range="30">In a Month</button>
+                  </div>
+                </div>
+                <div class="money-table-wrap">
+                  <table class="money-table">
+                    <thead>
+                      <tr>
+                        <th>Deposit</th>
+                        <th>Amount</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Reason</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="money-table__empty" colspan="5">No data available in table</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="money-rollover" data-rollover></div>
+              </div>
+            </section>
+
+            <section class="money-panel" data-money-panel="profile" hidden>
+              <div class="money-card profile-card">
+                <h1 class="money-card__title profile-card__desk-title">My Account Info</h1>
+                <div class="profile-card__avatar profile-card__desk-only">
+                  <img src="assets/images/achievements/spiderman-avatar.svg" alt="Spiderman profile" />
+                </div>
+
+                <div class="profile-acc is-open" data-profile-acc="personal">
+                  <button type="button" class="profile-acc__trigger" aria-expanded="true" aria-controls="profile-personal" data-profile-acc-trigger>
+                    Personal Details
+                    <span class="event-acc__chevron" aria-hidden="true"></span>
+                  </button>
+                  <div class="profile-acc__panel" id="profile-personal" data-profile-acc-panel>
+                    <div class="money-field">
+                      <label class="field" for="profile-username">
+                        <span class="field__label">Username</span>
+                        <input id="profile-username" class="field__control" type="text" readonly data-profile-username />
+                      </label>
+                    </div>
+                    <div class="money-field">
+                      <label class="field" for="profile-fullname">
+                        <span class="field__label">Full Name</span>
+                        <input id="profile-fullname" class="field__control" type="text" data-profile-fullname />
+                      </label>
+                    </div>
+                    <div class="money-field">
+                      <label class="field" for="profile-email">
+                        <span class="field__label">Email</span>
+                        <span class="profile-field-verified">
+                          <input id="profile-email" class="field__control" type="text" readonly data-profile-email />
+                          <span class="profile-field-verified__mark" aria-label="Verified" data-icon="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                    <div class="money-field">
+                      <label class="field" for="profile-mobile">
+                        <span class="field__label">Mobile Number</span>
+                        <span class="profile-field-verified">
+                          <input id="profile-mobile" class="field__control" type="text" readonly data-profile-mobile />
+                          <span class="profile-field-verified__mark" aria-label="Verified" data-icon="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                    <div class="money-field">
+                      <label class="field" for="profile-nick">
+                        <span class="field__label">Nick Name</span>
+                        <input id="profile-nick" class="field__control" type="text" data-profile-nick />
+                      </label>
+                    </div>
+                    <div class="money-field">
+                      <span class="field__label" id="profile-dob-label">Date of Birth</span>
+                      <div class="control-inline">
+                        <input
+                          id="profile-dob"
+                          class="field__control"
+                          type="date"
+                          aria-labelledby="profile-dob-label"
+                          data-profile-dob
+                        />
+                        <button type="button" class="btn btn--primary" data-profile-dob-submit>Submit</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="profile-security profile-security--desk">
+                  <h2 class="profile-security__title">Security</h2>
+                  <button type="button" class="btn btn--primary" data-profile-password>Change Password</button>
+                  <a class="profile-security__forgot" href="forgot-password.html">Forgot password?</a>
+                </div>
+              </div>
+            </section>
+
+            <section class="money-panel" data-money-panel="banking" hidden>
+              <div class="money-card banking-card">
+                <h1 class="money-card__title profile-card__desk-title">Add Bank Account</h1>
+
+                <div class="profile-acc" data-profile-acc="banking">
+                  <button type="button" class="profile-acc__trigger" aria-expanded="false" aria-controls="profile-banking" data-profile-acc-trigger>
+                    Banking Details
+                    <span class="event-acc__chevron" aria-hidden="true"></span>
+                  </button>
+                  <div class="profile-acc__panel" id="profile-banking" hidden data-profile-acc-panel>
+                    <div class="banking-saved" data-banking-saved-mobile></div>
+                    <button type="button" class="btn btn--success btn--full banking-add-mobile" data-banking-add-toggle>
+                      Add Bank Account
+                    </button>
+
+                    <div class="banking-form" data-banking-form>
+                      <div class="money-modes" data-banking-modes>
+                        <button type="button" class="money-mode is-active" data-banking-mode="bank">Bank</button>
+                        <button type="button" class="money-mode" data-banking-mode="crypto">Crypto</button>
+                      </div>
+                      <div class="money-field">
+                        <label class="field" for="banking-name">
+                          <span class="field__label">Account Name</span>
+                          <input id="banking-name" class="field__control" type="text" readonly data-banking-name />
+                        </label>
+                      </div>
+                      <div class="money-field">
+                        <label class="field" for="banking-bank">
+                          <span class="field__label">New Bank</span>
+                          <select id="banking-bank" class="field__control" data-banking-bank></select>
+                        </label>
+                      </div>
+                      <div class="money-field">
+                        <label class="field" for="banking-number">
+                          <span class="field__label">Account Number</span>
+                          <input id="banking-number" class="field__control" type="text" inputmode="numeric" data-banking-number placeholder="Account Number" />
+                        </label>
+                      </div>
+                      <button type="button" class="btn btn--primary btn--full money-submit" data-banking-submit>Submit</button>
+                    </div>
+
+                    <div class="money-table-wrap banking-table-wrap">
+                      <table class="money-table banking-table">
+                        <thead>
+                          <tr>
+                            <th>Bank</th>
+                            <th>Account Number</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody data-banking-rows></tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div class="profile-acc profile-acc--security-mobile" data-profile-acc="security" hidden>
+              <button type="button" class="profile-acc__trigger" aria-expanded="false" aria-controls="profile-security" data-profile-acc-trigger>
+                Security
+                <span class="event-acc__chevron" aria-hidden="true"></span>
+              </button>
+              <div class="profile-acc__panel" id="profile-security" hidden data-profile-acc-panel>
+                <button type="button" class="btn btn--primary btn--full" data-profile-password>Change Password</button>
+                <a class="profile-security__forgot" href="forgot-password.html">Forgot password?</a>
+              </div>
+            </div>
+
+            <section class="money-panel" data-money-panel="rebates" hidden>
+              <div class="money-card">
+                <h1 class="money-card__title"><img src="assets/images/icons/rebates.svg" alt="" /> Rebates</h1>
+                <p class="money-placeholder">Rebate offers moved to the Rebates page.</p>
+                <a class="btn btn--primary" href="rebates.html">Open Rebates</a>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
     </main>
     <div data-include="footer"></div>
     <div data-include="chat"></div>
     <div data-include="mobile-nav"></div>
     <div data-include="modal"></div>
     <div data-include="toast"></div>
-    <script src="js/boot.js"></script>
+    <script src="js/boot.js?v=auth3"></script>
   </body>
 </html>

@@ -18,7 +18,10 @@
       <div class="shell-main">
         <div class="event-hero">
           <h1 class="sr-only">Slots</h1>
-          <img class="event-hero__image" src="assets/images/slots/hero.webp" alt="Slots. Spin and win on top providers." />
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/images/slots/slots.webp" />
+            <img class="event-hero__image" src="assets/images/slots/hero.webp" alt="Slots. Spin and win on top providers." />
+          </picture>
         </div>
         <header class="catalog-head">
           <img class="catalog-head__icon" src="assets/images/icon-page/slots.png" alt="" />
@@ -26,20 +29,21 @@
         </header>
         <section class="catalog-section catalog-browse" aria-labelledby="slots-browse-title">
           <h2 class="sr-only" id="slots-browse-title">Browse slots</h2>
-          <div class="catalog-browse__toolbar">
-            <div class="catalog-browse__filters">
-              <div class="catalog-browse__hot-label">
-                <img src="assets/images/slots/hotgames.png" alt="" width="24" height="24" />
-                <span>HOT GAMES</span>
-              </div>
-              <div class="event-pills catalog-browse__hot" role="tablist" aria-label="Hot games" data-catalog-pills></div>
+          <h2 class="home-section__title catalog-browse__games-title">Games</h2>
+          <div class="catalog-logo-chips" data-catalog-chips role="tablist" aria-label="Game vendors"></div>
+          <div class="catalog-browse__tools">
+            <div class="catalog-browse__types event-pills" role="tablist" aria-label="Game types" data-catalog-types>
+              <button type="button" class="event-pill is-active" data-catalog-type="all" role="tab" aria-selected="true">All</button>
             </div>
-            <label class="catalog-search">
+            <label class="catalog-search catalog-browse__tools-search">
               <img class="catalog-search__icon" src="assets/images/icons/icon-search.svg" alt="" width="16" height="16" />
               <span class="sr-only">Search games</span>
               <input type="search" data-catalog-search placeholder="Search" autocomplete="off" />
             </label>
           </div>
+          <div class="catalog-vendor-grid" id="catalog-vendors" data-catalog-vendors role="tablist" aria-label="Game vendors"></div>
+          <button type="button" class="btn btn--primary catalog-browse__view-all" data-catalog-view-all hidden aria-expanded="false" aria-controls="catalog-vendors">View All Vendors</button>
+          <h2 class="home-section__title catalog-browse__hot-title">Hot Games</h2>
           <div class="game-grid" data-catalog-games></div>
         </section>
         <div data-include="transactions"></div>

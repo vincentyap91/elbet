@@ -73,6 +73,11 @@
     display: inline-flex;
   }
 
+  html.is-logged-in .site-header__user {
+    display: flex;
+    align-items: center;
+  }
+
   .site-nav {
     display: block;
   }
@@ -148,7 +153,7 @@
 
   .site-header__inner {
     display: grid;
-    grid-template-columns: var(--tap-min) minmax(0, 1fr) var(--tap-min);
+    grid-template-columns: var(--tap-min) minmax(0, 1fr) auto;
     align-items: center;
     padding-inline: var(--space-2);
   }
@@ -176,8 +181,13 @@
 
   .site-header__chat,
   .site-header__quest,
+  .site-header__user,
   .site-header__actions ui-button {
     display: none;
+  }
+
+  html.is-logged-in .site-header__tool {
+    display: inline-flex;
   }
 
   .site-drawer-overlay {

@@ -91,15 +91,9 @@
     menu.addEventListener("click", (event) => {
       const item = event.target.closest("[role='menuitem']");
       if (!item) return;
-
-      if (item.dataset.action) {
-        closeAll();
-        return;
-      }
-
-      event.stopPropagation();
-      Nexa.emit("app:dropdown:select", { value: item.dataset.value || item.textContent.trim() });
       closeAll();
+      if (item.dataset.action) return;
+      Nexa.emit("app:dropdown:select", { value: item.dataset.value || item.textContent.trim() });
     });
 
     el.append(node);

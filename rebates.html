@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ELBET · Rebates</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body data-layout="shell" data-require-auth>
+    <div data-include="header"></div>
+    <div data-include="sidebar"></div>
+    <main id="main" class="page page--inner page--account page--money page--rebates" data-page="rebates">
+      <div class="shell-main money-page">
+        <div data-include="account-hero"></div>
+
+        <header class="profile-mobile" data-profile-mobile>
+          <nav class="profile-mobile__tabs" aria-label="Account sections">
+            <a href="account.html?view=profile" data-profile-tab="info">My Account Info</a>
+            <a class="is-active" href="rebates.html" data-profile-tab="rebates" aria-current="page">Rebates</a>
+          </nav>
+          <p class="profile-mobile__hi">Hi, <span data-auth-name>Player</span></p>
+          <div class="profile-mobile__ident">
+            <div class="profile-mobile__avatar-wrap">
+              <img class="profile-mobile__avatar" src="assets/images/achievements/spiderman-avatar.svg" alt="Spiderman profile" />
+              <button type="button" class="profile-mobile__edit" data-profile-edit aria-label="Edit avatar">
+                <span data-icon="edit" aria-hidden="true"></span>
+              </button>
+            </div>
+            <a class="profile-mobile__vip" href="vip.html">
+              <span class="profile-mobile__trophy" aria-hidden="true"></span>
+              <span data-auth-vip>Bronze</span>
+              <span aria-hidden="true">›</span>
+            </a>
+          </div>
+          <div class="profile-mobile__balance">
+            <span data-money-currency>MYR</span><span data-money-balance>0.00</span>
+            <button type="button" class="money-icon-btn" data-money-refresh aria-label="Refresh balance">
+              <span data-icon="refresh"></span>
+            </button>
+            <button type="button" class="money-icon-btn" data-profile-help aria-label="Help">
+              <span data-icon="help" aria-hidden="true"></span>
+            </button>
+            <a class="profile-mobile__plus" href="account.html?view=deposit" aria-label="Deposit">+</a>
+          </div>
+          <div class="profile-mobile__verified">
+            <span class="money-verified"><span data-icon="mail" aria-hidden="true"></span> Verified</span>
+            <span class="money-verified"><span data-icon="phone" aria-hidden="true"></span> Verified</span>
+          </div>
+        </header>
+
+        <div class="money-body">
+          <nav class="money-nav" aria-label="Account">
+            <a href="account.html?view=deposit"><img src="assets/images/icons/deposit.svg" alt="" /> Deposit</a>
+            <a href="account.html?view=withdrawal"><img src="assets/images/icons/withdrawal.svg" alt="" /> Withdrawal</a>
+            <a href="account.html?view=transfer"><img src="assets/images/icons/transfer.svg" alt="" /> My Wallet</a>
+            <a href="account.html?view=history"><img src="assets/images/icons/history.svg" alt="" /> History</a>
+            <a href="pending.html"><img src="assets/images/icons/transaction.svg" alt="" /> Pending Transaction</a>
+            <p class="money-nav__label">Account</p>
+            <a href="inbox.html"><img src="assets/images/icons/inbox.svg" alt="" /> Inbox</a>
+            <a href="account.html?view=profile"><img src="assets/images/icons/account.svg" alt="" /> Profile</a>
+            <a href="account.html?view=banking"><img src="assets/images/icons/withdrawal.svg" alt="" /> Banking Details</a>
+            <a class="is-active" href="rebates.html" aria-current="page"><img src="assets/images/icons/rebates.svg" alt="" /> Rebates</a>
+          </nav>
+
+          <div class="money-main">
+            <div class="money-card">
+              <h1 class="money-card__title"><img src="assets/images/icons/rebates.svg" alt="" /> Rebates</h1>
+
+              <div class="event-acc rebate-acc is-open">
+                <div class="rebate-acc__head">
+                  <button type="button" class="event-acc__trigger" aria-expanded="true" aria-controls="rebate-birthday" data-acc-trigger>
+                    Birthday Bonus
+                    <span class="event-acc__chevron" data-icon="chevron" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="btn btn--primary btn--sm rebate-acc__claim" disabled data-rebate-claim="birthday">Claim</button>
+                </div>
+                <div class="event-acc__panel" id="rebate-birthday" data-acc-panel>
+                  <ul class="rebate-checks">
+                    <li>Members are entitled to claim this bonus once per year.</li>
+                    <li>This promotion is only applicable to Bronze member and above.</li>
+                  </ul>
+                  <p>Member are able to claim birthday bonus before and after 15 days.</p>
+                  <p class="rebate-example">
+                    For Example, one of the member birthday is on 15th May, he/she able to claim it between 1st May to 30th May.
+                    (Before and After 15 days)
+                  </p>
+                  <p class="rebate-example rebate-note">*Please make sure you have filled in your birthday on My Account page.*</p>
+                </div>
+              </div>
+
+              <div class="event-acc rebate-acc">
+                <div class="rebate-acc__head">
+                  <button type="button" class="event-acc__trigger" aria-expanded="false" aria-controls="rebate-voucher" data-acc-trigger>
+                    Voucher (Promo Code)
+                    <span class="event-acc__chevron" data-icon="chevron" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="btn btn--primary btn--sm rebate-acc__claim" data-rebate-claim="voucher">Claim</button>
+                </div>
+                <div class="event-acc__panel" id="rebate-voucher" hidden data-acc-panel>
+                  <p>Enter a valid promo code to redeem your voucher credit.</p>
+                  <label class="field" for="rebate-code">
+                    <span class="field__label">Promo Code</span>
+                    <input id="rebate-code" class="field__control" type="text" placeholder="Enter promo code" data-rebate-code />
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div data-include="footer"></div>
+    <div data-include="chat"></div>
+    <div data-include="mobile-nav"></div>
+    <div data-include="modal"></div>
+    <div data-include="toast"></div>
+    <script src="js/boot.js"></script>
+  </body>
+</html>

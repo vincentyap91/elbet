@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Spider-themed superhero avatar</title>
+  <desc id="desc">A red and blue masked superhero with white eye lenses and a web pattern.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="32%" r="72%">
+      <stop offset="0" stop-color="#35363a"/>
+      <stop offset="1" stop-color="#151619"/>
+    </radialGradient>
+    <linearGradient id="mask" x1="28%" y1="8%" x2="72%" y2="95%">
+      <stop offset="0" stop-color="#f04b45"/>
+      <stop offset="0.55" stop-color="#c7262d"/>
+      <stop offset="1" stop-color="#851a27"/>
+    </linearGradient>
+    <linearGradient id="suit" x1="16%" y1="28%" x2="82%" y2="94%">
+      <stop offset="0" stop-color="#263b68"/>
+      <stop offset="1" stop-color="#101b36"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity=".45"/>
+    </filter>
+    <clipPath id="headClip">
+      <path d="M80 18c-27 0-44 19-44 48 0 26 14 49 44 63 30-14 44-37 44-63 0-29-17-48-44-48Z"/>
+    </clipPath>
+  </defs>
+  <rect width="160" height="160" rx="80" fill="url(#bg)"/>
+  <circle cx="80" cy="80" r="73" fill="none" stroke="#edc34a" stroke-opacity=".4" stroke-width="2"/>
+  <path d="M19 160c3-31 24-50 48-55h26c24 5 45 24 48 55Z" fill="url(#suit)"/>
+  <path d="M58 106h44l13 54H45Z" fill="url(#mask)"/>
+  <path d="M80 18c-27 0-44 19-44 48 0 26 14 49 44 63 30-14 44-37 44-63 0-29-17-48-44-48Z" fill="url(#mask)" filter="url(#shadow)"/>
+  <g clip-path="url(#headClip)" fill="none" stroke="#43131c" stroke-width="1.7" opacity=".9">
+    <path d="M80 12v121M80 59 27 26M80 59 133 26M80 59 24 77M80 59l56 18M80 59l-37 61M80 59l37 61"/>
+    <ellipse cx="80" cy="59" rx="18" ry="15"/>
+    <ellipse cx="80" cy="59" rx="34" ry="29"/>
+    <ellipse cx="80" cy="59" rx="51" ry="44"/>
+    <ellipse cx="80" cy="59" rx="68" ry="58"/>
+  </g>
+  <g filter="url(#shadow)">
+    <path d="M39 43c14 2 27 7 38 16-4 13-12 22-25 27-10-8-15-21-13-43Z" fill="#17181b"/>
+    <path d="M45 51c10 2 19 5 26 11-4 9-10 15-18 18-6-6-9-15-8-29Z" fill="#aeb4b6"/>
+    <path d="M48 54c8 2 14 4 20 9-4 7-9 11-15 13-4-5-6-12-5-22Z" fill="#f7f8f5"/>
+    <path d="M121 43c-14 2-27 7-38 16 4 13 12 22 25 27 10-8 15-21 13-43Z" fill="#17181b"/>
+    <path d="M115 51c-10 2-19 5-26 11 4 9 10 15 18 18 6-6 9-15 8-29Z" fill="#aeb4b6"/>
+    <path d="M112 54c-8 2-14 4-20 9 4 7 9 11 15 13 4-5 6-12 5-22Z" fill="#f7f8f5"/>
+  </g>
+  <g fill="#17181b" stroke="#17181b" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="80" cy="127" r="3.2" stroke="none"/>
+    <path d="M76.7 130c0 6.4 1.6 11 3.3 13.5 1.7-2.5 3.3-7.1 3.3-13.5-2.2.9-4.4.9-6.6 0Z" stroke="none"/>
+    <path d="m76.8 130-6.3-4.2-4.6-6.3M76.5 133.3l-7.3.9-5.5-4.6M77 137l-7.5 4.5-5.5.9M78 140.7l-5.5 7.3-4.6 1.8M83.2 130l6.3-4.2 4.6-6.3M83.5 133.3l7.3.9 5.5-4.6M83 137l7.5 4.5 5.5.9M82 140.7l5.5 7.3 4.6 1.8" fill="none" stroke-width="3"/>
+  </g>
+  <path d="M25 152c8-16 20-27 34-33M135 152c-8-16-20-27-34-33" fill="none" stroke="#edc34a" stroke-opacity=".65" stroke-width="2"/>
+</svg>
