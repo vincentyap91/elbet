@@ -28,6 +28,7 @@
         var file = location.pathname.split("/").pop() || "index.html";
         if (!AUTH_FILE.test(file)) file = "index.html";
         var params = new URLSearchParams(location.search);
+        params.delete("figma-capture");
         if (flag === "voucher") params.set("voucher", "1");
         var query = params.toString();
         return file + (query ? "?" + query : "") + (location.hash || "");
@@ -106,8 +107,12 @@
     ensureAuthApi();
 
     if (document.querySelector("[data-require-auth]") && !Nexa.get("isLoggedIn")) {
-      window.location.replace(Nexa.loginUrl(Nexa.currentNext()));
-      return;
+      if (typeof Nexa.isFigmaCapture === "function" && Nexa.isFigmaCapture()) {
+        Nexa.login({ username: "Player", displayName: "Player", vipTier: "Bronze", balance: 16.06 });
+      } else {
+        window.location.replace(Nexa.loginUrl(Nexa.currentNext()));
+        return;
+      }
     }
 
     try {

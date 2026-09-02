@@ -32,7 +32,7 @@
   function viewFromUrl() {
     var view = new URLSearchParams(location.search).get("view") || "deposit";
     if (view === "rebates") {
-      window.location.replace("rebates.html");
+      window.location.replace("rebates.html" + (location.hash || ""));
       return "deposit";
     }
     if (VIEWS.indexOf(view) === -1) view = "deposit";
@@ -232,6 +232,12 @@
     Nexa.qsa("[data-auth-vip]", root).forEach(function (el) {
       Nexa.setText(el, vip);
     });
+    if (typeof Nexa.vipTrophySrc === "function") {
+      var trophySrc = Nexa.vipTrophySrc(vip);
+      Nexa.qsa("[data-vip-trophy]", root).forEach(function (el) {
+        if (el.tagName === "IMG") el.src = trophySrc;
+      });
+    }
     Nexa.qsa("[data-money-currency]", root).forEach(function (el) {
       Nexa.setText(el, acc.currency || "MYR");
     });

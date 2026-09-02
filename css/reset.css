@@ -28,10 +28,13 @@ ol {
   list-style: none;
 }
 
-img,
-svg {
+img {
   display: block;
   max-width: 100%;
+}
+
+svg {
+  display: block;
 }
 
 button,

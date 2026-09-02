@@ -66,30 +66,6 @@
   color: var(--color-text-primary);
 }
 
-.auth-card__tools {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.auth-card__steps {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.auth-card__step {
-  width: 0.5rem;
-  height: 0.5rem;
-  padding: 0;
-  border-radius: var(--radius-pill);
-  background: var(--color-border);
-}
-
-.auth-card__step.is-active {
-  background: var(--color-primary);
-}
-
 .auth-card__brand {
   display: flex;
   justify-content: center;
@@ -106,30 +82,44 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
+  justify-content: flex-start;
+  width: 100%;
+  gap: var(--space-3);
   margin-bottom: var(--space-5);
 }
 
 .auth-method {
   display: inline-flex;
   align-items: center;
+  flex: 0 0 auto;
   gap: var(--space-2);
   min-height: var(--control-height-sm);
-  padding: 0 var(--space-3);
+  padding: 0;
   border-radius: var(--radius-pill);
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   font-size: var(--text-sm);
   font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
   white-space: nowrap;
+}
+
+.auth-method:hover {
+  color: var(--color-text-primary);
 }
 
 .auth-method svg {
   width: 1rem;
   height: 1rem;
+  flex: 0 0 auto;
+  max-width: none;
+}
+
+.auth-method svg[fill="none"] {
+  stroke: currentColor;
 }
 
 .auth-method.is-active {
+  padding: 0 var(--space-3);
   background: var(--color-surface-hover);
   color: var(--color-primary);
 }
@@ -189,8 +179,12 @@
   padding-right: 4.75rem;
 }
 
+.auth-link-slot {
+  min-height: calc(var(--text-sm) * 1.375);
+}
+
 .auth-link {
-  align-self: flex-start;
+  display: inline-block;
   margin-top: calc(var(--space-1) * -1);
   color: var(--color-primary);
   font-size: var(--text-sm);

@@ -67,6 +67,10 @@
   --control-height-sm: 2.25rem;
   --control-height: 2.75rem;
   --control-height-lg: 3.25rem;
+  --control-chevron-size: 0.75rem;
+  --control-chevron-inset: var(--space-4);
+  --control-chevron-gap: var(--space-3);
+  --control-affix-end: calc(var(--control-chevron-inset) + var(--control-chevron-size) + var(--control-chevron-gap));
   --shell-header-height: 4.875rem;
   --shell-sidebar-width: 3.875rem;
   --shell-main-width: 81.25rem;
@@ -74,7 +78,7 @@
   --shell-banner-top: 1.8125rem;
   --shell-content-top: var(--shell-banner-top); /* header → first page content */
   --shell-banner-bottom: 1.25rem;
-  --shell-banner-ratio-mobile: 1 / 1;
+  --shell-banner-ratio-mobile: 1080 / 867;
   --shell-shortcut-height: 4.375rem;
   --shell-shortcut-gap: 0.625rem;
   --shell-provider-width: 9.875rem;
@@ -199,6 +203,7 @@
   --color-on-danger: var(--color-on-error);
   --color-info: var(--color-secondary);
   --logo-mark: var(--color-primary);
+  --control-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237a7a74' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
 }
 
 [data-theme="light"] {
@@ -244,4 +249,5 @@
   --color-on-danger: var(--color-on-error);
   --color-info: var(--color-secondary);
   --logo-mark: var(--color-primary);
+  --control-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7690' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
 }

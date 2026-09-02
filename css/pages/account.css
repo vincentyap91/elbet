@@ -134,7 +134,7 @@
 .money-card .field__control,
 .money-card input,
 .money-card select {
-  background: var(--color-bg);
+  background-color: var(--color-bg);
 }
 
 .money-card__title {
@@ -1444,13 +1444,10 @@
 }
 
 .profile-mobile__trophy {
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: var(--radius-pill);
-  background:
-    radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--color-primary) 55%, white), transparent 55%),
-    linear-gradient(160deg, var(--color-surface-hover), var(--color-surface));
-  border: var(--border-width) solid var(--color-border);
+  display: block;
+  width: 1.75rem;
+  height: 1.75rem;
+  object-fit: contain;
 }
 
 .profile-mobile__balance {

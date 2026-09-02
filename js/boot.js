@@ -5,6 +5,66 @@
   Nexa.root = src.replace(/js\/boot\.js(?:\?.*)?$/, "");
   if (Nexa.root && Nexa.root.slice(-1) !== "/") Nexa.root += "/";
 
+  const CAPTURE_KEY = "elbet:figma-capture";
+
+  function captureParams() {
+    const raw = location.search || "";
+    if (!raw) return new URLSearchParams();
+    const rest = (raw.charAt(0) === "?" ? raw.slice(1) : raw).replace(/\?/g, "&");
+    return new URLSearchParams(rest);
+  }
+
+  function pageFile() {
+    return location.pathname.split("/").pop() || "index.html";
+  }
+
+  Nexa.isFigmaCapture = function isFigmaCapture() {
+    if (/figmacapture=/.test(location.hash)) return true;
+    try {
+      if (sessionStorage.getItem(CAPTURE_KEY) === "1") return true;
+    } catch {
+      /* ignore */
+    }
+    return captureParams().has("figma-capture");
+  };
+
+  function persistCapture() {
+    try {
+      sessionStorage.setItem(CAPTURE_KEY, "1");
+    } catch {
+      /* ignore */
+    }
+  }
+
+  function stripCaptureQuery() {
+    const raw = location.search || "";
+    if (!raw) return;
+    const extraQ = raw.slice(1).indexOf("?") !== -1;
+    const params = captureParams();
+    if (!params.has("figma-capture") && !extraQ) return;
+    params.delete("figma-capture");
+    const query = params.toString();
+    const next = pageFile() + (query ? "?" + query : "") + (location.hash || "");
+    const current = pageFile() + raw + (location.hash || "");
+    if (next !== current) history.replaceState({}, "", next);
+  }
+
+  Nexa.captureToFigma = function captureToFigma() {
+    persistCapture();
+    if (document.querySelector("script[data-figma-capture], script[src*='html-to-design/capture.js']")) return;
+    const tag = document.createElement("script");
+    tag.src = "https://mcp.figma.com/mcp/html-to-design/capture.js";
+    tag.async = true;
+    tag.dataset.figmaCapture = "1";
+    document.head.appendChild(tag);
+  };
+
+  if (Nexa.isFigmaCapture()) {
+    persistCapture();
+    stripCaptureQuery();
+    Nexa.captureToFigma();
+  }
+
   const files = [
     "js/core/dom.js",
     "js/core/events.js",
@@ -67,14 +127,17 @@
       file.indexOf("app.js") >= 0 ||
       file.indexOf("icons.js") >= 0 ||
       file.indexOf("data/account.js") >= 0 ||
-      file.indexOf("pages/account.js") >= 0
+      file.indexOf("pages/account.js") >= 0 ||
+      file.indexOf("pages/promotion.js") >= 0 ||
+      file.indexOf("pages/update.js") >= 0 ||
+      file.indexOf("pages/money-shell.js") >= 0
     );
   }
 
   function loadNext(index) {
     if (index >= files.length) return;
     const next = document.createElement("script");
-    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=auth3" : "");
+    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=capfix2" : "");
     next.onload = function () {
       loadNext(index + 1);
     };

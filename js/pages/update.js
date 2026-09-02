@@ -11,7 +11,8 @@
     const id = params.get("id") || "";
     const item = Nexa.UPDATES.byId(id);
     if (!item) {
-      location.replace("updates.html");
+      if (typeof Nexa.isFigmaCapture === "function" && Nexa.isFigmaCapture()) return;
+      location.replace("updates.html" + (location.hash || ""));
       return;
     }
 

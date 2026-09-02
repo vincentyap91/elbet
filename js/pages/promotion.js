@@ -11,7 +11,8 @@
     const id = params.get("id") || "";
     const item = Nexa.PROMOTIONS.byId(id);
     if (!item) {
-      location.replace("promotions.html");
+      if (typeof Nexa.isFigmaCapture === "function" && Nexa.isFigmaCapture()) return;
+      location.replace("promotions.html" + (location.hash || ""));
       return;
     }
 

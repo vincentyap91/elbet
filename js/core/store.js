@@ -23,6 +23,14 @@
     return state[key];
   };
 
+  Nexa.vipTrophySrc = function vipTrophySrc(tier) {
+    var known = { Normal: 1, Bronze: 1, Silver: 1, Gold: 1, Platinum: 1 };
+    var label = String(tier || state.vipTier || "Bronze");
+    var file = known[label] ? label : "Bronze";
+    var path = "assets/images/vip/" + file + ".png";
+    return typeof Nexa.asset === "function" ? Nexa.asset(path) : path;
+  };
+
   Nexa.snapshot = function snapshot() {
     return { ...state };
   };
@@ -112,6 +120,7 @@
     let file = location.pathname.split("/").pop() || "index.html";
     if (!AUTH_FILE.test(file)) file = "index.html";
     const params = new URLSearchParams(location.search);
+    params.delete("figma-capture");
     if (flag === "voucher") params.set("voucher", "1");
     const query = params.toString();
     return file + (query ? "?" + query : "") + (location.hash || "");

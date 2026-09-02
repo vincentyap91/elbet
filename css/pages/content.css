@@ -687,7 +687,7 @@
     grid-column: 1;
     width: 100%;
     max-width: none;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: var(--shell-banner-ratio-mobile);
   }
 
   .promo-detail__arrow--prev {

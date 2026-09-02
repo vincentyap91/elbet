@@ -618,29 +618,6 @@
   .page--catalog {
     --shell-section-gap: var(--space-6);
     --event-cluster-gap: var(--space-4);
-    /* Catalog mobile webps are ~1080×867; homepage 1/1 would crop them. */
-    --shell-banner-ratio-mobile: 1080 / 867;
-  }
-
-  /* Show the full mobile banner (no 12rem / 1/1 crop). */
-  .page--catalog .event-hero {
-    min-height: 0;
-    height: auto;
-  }
-
-  .page--catalog .event-hero picture {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .page--catalog .event-hero .event-hero__image {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: var(--shell-banner-ratio-mobile);
-    object-fit: contain;
-    object-position: center;
   }
 
   .page--catalog .catalog-head {

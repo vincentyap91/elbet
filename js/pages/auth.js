@@ -162,9 +162,6 @@
     Nexa.qsa("[data-auth-step]", root).forEach(function (pane) {
       pane.hidden = pane.getAttribute("data-auth-step") !== step;
     });
-    Nexa.qsa("[data-auth-dot]", root).forEach(function (dot) {
-      dot.classList.toggle("is-active", dot.getAttribute("data-auth-dot") === step);
-    });
     const form = root.querySelector("[data-auth-form]");
     if (form) syncSubmit(form);
   }
