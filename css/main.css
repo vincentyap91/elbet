@@ -2,6 +2,7 @@
 @import url("reset.css");
 @import url("../design-system/typography.css");
 @import url("base.css");
+@import url("boot-splash.css");
 @import url("layout.css");
 @import url("../design-system/components.css");
 @import url("../design-system/responsive.css");

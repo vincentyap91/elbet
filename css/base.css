@@ -33,6 +33,10 @@ body::-webkit-scrollbar-track,
   background: var(--color-surface);
 }
 
+html:not(.is-ready) {
+  overflow: hidden;
+}
+
 html:not(.is-ready) body {
   opacity: 0;
 }

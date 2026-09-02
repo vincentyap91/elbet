@@ -151,6 +151,7 @@
   --z-dropdown: 200;
   --z-modal: 300;
   --z-toast: 400;
+  --z-boot: 500;
 
   --focus-ring: 0 0 0 3px color-mix(in srgb, var(--color-primary) 42%, transparent);
   --color-primary-soft: color-mix(in srgb, var(--color-primary) 14%, transparent);

@@ -97,9 +97,86 @@
     }
   }
 
+  const SPLASH_MIN_MS = 2000;
+  const SPLASH_EXIT_MS = 400;
+  let revealPromise = null;
+
+  function hideSplash(urgent) {
+    if (
+      !urgent &&
+      typeof Nexa.holdBootSplash === "function" &&
+      Nexa.holdBootSplash()
+    ) {
+      document.documentElement.classList.add("is-ready");
+      var held = document.getElementById("boot-splash");
+      if (held && !held.dataset.holdBound) {
+        held.dataset.holdBound = "1";
+        held.addEventListener("click", function () {
+          revealPromise = null;
+          hideSplash(true);
+        });
+      }
+      return Promise.resolve();
+    }
+
+    if (revealPromise) return revealPromise;
+
+    revealPromise = new Promise(function (resolve) {
+      const html = document.documentElement;
+      const splash = document.getElementById("boot-splash");
+
+      function finish() {
+        html.classList.add("is-ready");
+        if (!splash) {
+          resolve();
+          return;
+        }
+        splash.classList.add("is-leaving");
+        splash.setAttribute("aria-hidden", "true");
+        window.setTimeout(function () {
+          if (splash.parentNode) splash.remove();
+          resolve();
+        }, SPLASH_EXIT_MS);
+      }
+
+      if (!splash || urgent) {
+        finish();
+        return;
+      }
+
+      const img = splash.querySelector(".boot-splash__mark");
+      const markReady = new Promise(function (markResolve) {
+        if (!img || img.classList.contains("is-on") || (img.complete && img.naturalWidth)) {
+          markResolve();
+          return;
+        }
+        img.addEventListener("load", markResolve, { once: true });
+        img.addEventListener("error", markResolve, { once: true });
+        window.setTimeout(markResolve, 1400);
+      });
+
+      markReady.then(function () {
+        if (img) img.classList.add("is-on");
+        const visibleAt = Nexa.splashMarkAt || Nexa.splashAt || performance.now();
+        let wait = Math.max(0, SPLASH_MIN_MS - (performance.now() - visibleAt));
+        try {
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            wait = Math.min(wait, 120);
+          }
+        } catch {
+          /* ignore */
+        }
+        window.setTimeout(finish, wait);
+      });
+    });
+
+    return revealPromise;
+  }
+
   async function start() {
     const failsafe = window.setTimeout(() => {
-      document.documentElement.classList.add("is-ready");
+      if (typeof Nexa.holdBootSplash === "function" && Nexa.holdBootSplash()) return;
+      hideSplash(true);
     }, FAILSAFE_MS);
 
     Nexa.initTheme();
@@ -147,7 +224,7 @@
     }
 
     window.clearTimeout(failsafe);
-    document.documentElement.classList.add("is-ready");
+    await hideSplash();
     Nexa.markReady();
     Nexa.emit("app:ready");
   }
