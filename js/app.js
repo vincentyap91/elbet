@@ -97,7 +97,7 @@
     }
   }
 
-  const SPLASH_SHOW_MIN_MS = 360;
+  const SPLASH_CYCLE_MS = 2000;
   const SPLASH_EXIT_MS = 320;
   let revealPromise = null;
 
@@ -127,9 +127,9 @@
     revealPromise = new Promise(function (resolve) {
       const html = document.documentElement;
       const splash = document.getElementById("boot-splash");
-      html.classList.add("is-ready");
 
       function leave() {
+        html.classList.add("is-ready");
         if (!splash || !splash.parentNode) {
           resolve();
           return;
@@ -147,19 +147,53 @@
         }, SPLASH_EXIT_MS);
       }
 
-      if (!splash || urgent) {
+      if (!splash) {
         leave();
         return;
       }
 
-      var shown = Nexa.splashMarkAt || Nexa.splashAt || 0;
-      var wait = shown ? Math.max(0, SPLASH_SHOW_MIN_MS - (performance.now() - shown)) : 0;
+      var reduced = false;
       try {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) wait = 0;
+        reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       } catch {
         /* ignore */
       }
-      window.setTimeout(leave, wait);
+
+      function remainingCycle() {
+        var start = Nexa.splashAnimAt || Nexa.splashMarkAt || Nexa.splashAt || performance.now();
+        return Math.max(0, SPLASH_CYCLE_MS - (performance.now() - start));
+      }
+
+      function finishCycle() {
+        html.classList.add("is-ready");
+        var wait = 0;
+        try {
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) wait = 0;
+          else if (urgent && typeof Nexa.holdBootSplash === "function" && Nexa.holdBootSplash()) wait = 0;
+          else wait = remainingCycle();
+        } catch {
+          wait = remainingCycle();
+        }
+        window.setTimeout(leave, wait);
+      }
+
+      if (splash.classList.contains("is-visible") && (Nexa.splashAnimAt || reduced)) {
+        finishCycle();
+        return;
+      }
+
+      var tries = 0;
+      var poll = window.setInterval(function () {
+        tries += 1;
+        if (
+          !splash.parentNode ||
+          (splash.classList.contains("is-visible") && (Nexa.splashAnimAt || reduced)) ||
+          tries > 40
+        ) {
+          window.clearInterval(poll);
+          finishCycle();
+        }
+      }, 50);
     });
 
     return revealPromise;

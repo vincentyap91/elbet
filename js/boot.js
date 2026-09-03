@@ -68,11 +68,11 @@
   };
 
   Nexa.cancelBootSplash = function cancelBootSplash() {
-    Nexa._splashCancelled = true;
     if (Nexa._splashTimer) {
       window.clearTimeout(Nexa._splashTimer);
       Nexa._splashTimer = 0;
     }
+    if (!document.getElementById("boot-splash")) Nexa._splashCancelled = true;
   };
 
   function mountBootSplash() {
@@ -104,10 +104,19 @@
       img.height = 285;
     }
     img.src = Nexa.root + (reduced ? "assets/images/logo.png" : "assets/images/logo-animated.svg");
+
+    function noteAnimStart() {
+      if (Nexa.splashAnimAt) return;
+      if (!splash.classList.contains("is-visible")) return;
+      if (!reduced && !img.classList.contains("is-on")) return;
+      Nexa.splashAnimAt = performance.now();
+    }
+
     img.addEventListener(
       "load",
       function () {
         img.classList.add("is-on");
+        noteAnimStart();
       },
       { once: true }
     );
@@ -115,6 +124,7 @@
       "error",
       function () {
         img.classList.add("is-on");
+        noteAnimStart();
       },
       { once: true }
     );
@@ -130,12 +140,14 @@
 
     window.requestAnimationFrame(function () {
       window.requestAnimationFrame(function () {
-        if (Nexa._splashCancelled || !splash.parentNode) {
-          if (splash.parentNode) splash.remove();
+        if (!splash.parentNode) return;
+        if (Nexa._splashCancelled && !splash.classList.contains("is-visible")) {
+          splash.remove();
           return;
         }
         splash.classList.add("is-visible");
         Nexa.splashMarkAt = performance.now();
+        noteAnimStart();
       });
     });
   }
@@ -222,7 +234,7 @@
   function loadNext(index) {
     if (index >= files.length) return;
     const next = document.createElement("script");
-    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash4" : "");
+    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash5" : "");
     next.onload = function () {
       loadNext(index + 1);
     };
