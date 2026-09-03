@@ -202,8 +202,8 @@ svg { overflow: visible; }
 #elbet_logo_extracted_transparent_1 {
   transform-origin: 0 0;
   animation:
-    kf_elbet_logo_extracted_transparent_1_transform_0 2s linear infinite,
-    kf_elbet_logo_extracted_transparent_1_opacity_0 2s linear infinite;
+    kf_elbet_logo_extracted_transparent_1_transform_0 2s linear 1 forwards,
+    kf_elbet_logo_extracted_transparent_1_opacity_0 2s linear 1 forwards;
 }
 @keyframes kf_Group_1_1_transform_0 {
   0% {
@@ -240,8 +240,8 @@ svg { overflow: visible; }
 #Group_1_1 {
   transform-origin: 0 0;
   animation:
-    kf_Group_1_1_transform_0 2s linear infinite,
-    kf_Group_1_1_opacity_0 2s linear infinite;
+    kf_Group_1_1_transform_0 2s linear 1 forwards,
+    kf_Group_1_1_opacity_0 2s linear 1 forwards;
 }
 </style>
 <g id="Frame_2">

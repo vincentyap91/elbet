@@ -103,7 +103,7 @@
       img.width = 567;
       img.height = 285;
     }
-    img.src = Nexa.root + (reduced ? "assets/images/logo.png" : "assets/images/logo-animated.svg");
+    img.src = Nexa.root + (reduced ? "assets/images/logo.png" : "assets/images/logo-animated.svg?v=once");
 
     function noteAnimStart() {
       if (Nexa.splashAnimAt) return;
@@ -234,7 +234,7 @@
   function loadNext(index) {
     if (index >= files.length) return;
     const next = document.createElement("script");
-    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash5" : "");
+    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash6" : "");
     next.onload = function () {
       loadNext(index + 1);
     };
