@@ -67,56 +67,87 @@
     }
   };
 
+  Nexa.cancelBootSplash = function cancelBootSplash() {
+    Nexa._splashCancelled = true;
+    if (Nexa._splashTimer) {
+      window.clearTimeout(Nexa._splashTimer);
+      Nexa._splashTimer = 0;
+    }
+  };
+
+  function mountBootSplash() {
+    if (Nexa._splashCancelled) return;
+    if (document.getElementById("boot-splash")) return;
+    if (document.documentElement.classList.contains("is-ready")) return;
+
+    var reduced = false;
+    try {
+      reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    } catch {
+      /* ignore */
+    }
+
+    var splash = document.createElement("div");
+    splash.id = "boot-splash";
+    splash.className = "boot-splash";
+    splash.setAttribute("role", "status");
+    splash.setAttribute("aria-live", "polite");
+    splash.setAttribute("aria-label", "Loading");
+
+    var img = document.createElement("img");
+    img.className = "boot-splash__mark" + (reduced ? " boot-splash__mark--static" : "");
+    img.alt = "";
+    img.decoding = "async";
+    img.fetchPriority = "high";
+    if (!reduced) {
+      img.width = 567;
+      img.height = 285;
+    }
+    img.src = Nexa.root + (reduced ? "assets/images/logo.png" : "assets/images/logo-animated.svg");
+    img.addEventListener(
+      "load",
+      function () {
+        img.classList.add("is-on");
+      },
+      { once: true }
+    );
+    img.addEventListener(
+      "error",
+      function () {
+        img.classList.add("is-on");
+      },
+      { once: true }
+    );
+    if (img.complete && img.naturalWidth) img.classList.add("is-on");
+
+    splash.appendChild(img);
+    if (Nexa.holdBootSplash()) {
+      splash.classList.add("boot-splash--hold");
+      splash.setAttribute("title", "Click to continue");
+    }
+    document.documentElement.appendChild(splash);
+    Nexa.splashAt = performance.now();
+
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        if (Nexa._splashCancelled || !splash.parentNode) {
+          if (splash.parentNode) splash.remove();
+          return;
+        }
+        splash.classList.add("is-visible");
+        Nexa.splashMarkAt = performance.now();
+      });
+    });
+  }
+
   if (Nexa.isFigmaCapture()) {
     persistCapture();
     stripCaptureQuery();
     Nexa.captureToFigma();
+  } else if (Nexa.holdBootSplash()) {
+    mountBootSplash();
   } else {
-    (function mountBootSplash() {
-      if (document.getElementById("boot-splash")) return;
-      var reduced = false;
-      try {
-        reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      } catch {
-        /* ignore */
-      }
-      var splash = document.createElement("div");
-      splash.id = "boot-splash";
-      splash.className = "boot-splash";
-      splash.setAttribute("role", "status");
-      splash.setAttribute("aria-live", "polite");
-      splash.setAttribute("aria-label", "Loading");
-      var img = document.createElement("img");
-      img.className = "boot-splash__mark" + (reduced ? " boot-splash__mark--static" : "");
-      img.alt = "";
-      img.decoding = "async";
-      img.fetchPriority = "high";
-      if (!reduced) {
-        img.width = 567;
-        img.height = 285;
-      }
-      img.src = Nexa.root + (reduced ? "assets/images/logo.png" : "assets/images/logo-animated.svg");
-      function showMark() {
-        img.classList.add("is-on");
-        Nexa.splashMarkAt = performance.now();
-      }
-      if (img.complete && img.naturalWidth) showMark();
-      else {
-        img.addEventListener("load", showMark, { once: true });
-        img.addEventListener("error", showMark, { once: true });
-      }
-      splash.appendChild(img);
-      if (Nexa.holdBootSplash()) {
-        splash.classList.add("boot-splash--hold");
-        splash.setAttribute("title", "Click to continue");
-        var hint = document.createElement("p");
-        hint.className = "boot-splash__hint";
-        hint.textContent = "Click to continue";
-        splash.appendChild(hint);
-      }
-      document.documentElement.appendChild(splash);
-      Nexa.splashAt = performance.now();
-    })();
+    Nexa._splashTimer = window.setTimeout(mountBootSplash, 800);
   }
 
   const files = [
@@ -191,7 +222,7 @@
   function loadNext(index) {
     if (index >= files.length) return;
     const next = document.createElement("script");
-    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash3" : "");
+    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash4" : "");
     next.onload = function () {
       loadNext(index + 1);
     };

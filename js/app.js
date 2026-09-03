@@ -97,11 +97,13 @@
     }
   }
 
-  const SPLASH_MIN_MS = 2000;
-  const SPLASH_EXIT_MS = 400;
+  const SPLASH_SHOW_MIN_MS = 360;
+  const SPLASH_EXIT_MS = 320;
   let revealPromise = null;
 
   function hideSplash(urgent) {
+    if (typeof Nexa.cancelBootSplash === "function") Nexa.cancelBootSplash();
+
     if (
       !urgent &&
       typeof Nexa.holdBootSplash === "function" &&
@@ -111,6 +113,7 @@
       var held = document.getElementById("boot-splash");
       if (held && !held.dataset.holdBound) {
         held.dataset.holdBound = "1";
+        held.classList.add("is-visible");
         held.addEventListener("click", function () {
           revealPromise = null;
           hideSplash(true);
@@ -124,10 +127,15 @@
     revealPromise = new Promise(function (resolve) {
       const html = document.documentElement;
       const splash = document.getElementById("boot-splash");
+      html.classList.add("is-ready");
 
-      function finish() {
-        html.classList.add("is-ready");
-        if (!splash) {
+      function leave() {
+        if (!splash || !splash.parentNode) {
+          resolve();
+          return;
+        }
+        if (!splash.classList.contains("is-visible")) {
+          splash.remove();
           resolve();
           return;
         }
@@ -140,34 +148,18 @@
       }
 
       if (!splash || urgent) {
-        finish();
+        leave();
         return;
       }
 
-      const img = splash.querySelector(".boot-splash__mark");
-      const markReady = new Promise(function (markResolve) {
-        if (!img || img.classList.contains("is-on") || (img.complete && img.naturalWidth)) {
-          markResolve();
-          return;
-        }
-        img.addEventListener("load", markResolve, { once: true });
-        img.addEventListener("error", markResolve, { once: true });
-        window.setTimeout(markResolve, 1400);
-      });
-
-      markReady.then(function () {
-        if (img) img.classList.add("is-on");
-        const visibleAt = Nexa.splashMarkAt || Nexa.splashAt || performance.now();
-        let wait = Math.max(0, SPLASH_MIN_MS - (performance.now() - visibleAt));
-        try {
-          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-            wait = Math.min(wait, 120);
-          }
-        } catch {
-          /* ignore */
-        }
-        window.setTimeout(finish, wait);
-      });
+      var shown = Nexa.splashMarkAt || Nexa.splashAt || 0;
+      var wait = shown ? Math.max(0, SPLASH_SHOW_MIN_MS - (performance.now() - shown)) : 0;
+      try {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) wait = 0;
+      } catch {
+        /* ignore */
+      }
+      window.setTimeout(leave, wait);
     });
 
     return revealPromise;
