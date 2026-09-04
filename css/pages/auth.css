@@ -5,6 +5,7 @@
 
 [data-layout="auth"] .page {
   min-height: 100vh;
+  width: 100%;
   padding: var(--space-6) var(--space-4);
   display: grid;
   place-items: center;
@@ -12,6 +13,8 @@
 
 .auth-card {
   width: min(100%, 26rem);
+  min-width: 0;
+  max-width: 100%;
   padding: var(--space-6) var(--space-5);
   border-radius: var(--radius-lg);
   background: var(--color-surface-elevated);
@@ -80,10 +83,11 @@
 
 .auth-methods {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  min-width: 0;
   gap: var(--space-3);
   margin-bottom: var(--space-5);
 }
@@ -91,8 +95,9 @@
 .auth-method {
   display: inline-flex;
   align-items: center;
-  flex: 0 0 auto;
+  flex: 0 1 auto;
   gap: var(--space-2);
+  min-width: 0;
   min-height: var(--control-height-sm);
   padding: 0;
   border-radius: var(--radius-pill);
@@ -239,6 +244,7 @@
 }
 
 .auth-card__form {
+  min-width: 0;
   padding: var(--space-6) var(--space-5);
 }
 
@@ -337,6 +343,37 @@
 
 [data-layout="auth"] .toast-stack {
   bottom: var(--space-5);
+}
+
+@media (max-width: 639px) {
+  .auth-methods {
+    gap: var(--space-2);
+  }
+
+  .auth-method {
+    gap: var(--space-1);
+    font-size: var(--text-xs);
+  }
+
+  .auth-method svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .auth-method.is-active {
+    padding-inline: var(--space-2);
+  }
+}
+
+@media (max-width: 359px) {
+  .auth-methods {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .auth-method {
+    justify-content: flex-start;
+  }
 }
 
 @media (min-width: 768px) {

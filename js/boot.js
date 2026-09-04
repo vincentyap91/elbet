@@ -218,6 +218,8 @@
       file.indexOf("pages/update.js") >= 0 ||
       file.indexOf("pages/money-shell.js") >= 0 ||
       file.indexOf("hero.js") >= 0 ||
+      file.indexOf("header.js") >= 0 ||
+      file.indexOf("chat.js") >= 0 ||
       file.indexOf("templates.js") >= 0 ||
       file.indexOf("fragments.js") >= 0
     );
@@ -226,7 +228,7 @@
   function loadNext(index) {
     if (index >= files.length) return;
     const next = document.createElement("script");
-    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash8" : "");
+    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash9" : "");
     next.onload = function () {
       loadNext(index + 1);
     };

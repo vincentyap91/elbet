@@ -105,7 +105,7 @@
           </div>
         </div>
       </div>
-      <a class="site-header__tool icon-btn" data-auth="in" href="pending.html" aria-label="Pending Transactions" data-icon="chat"></a>
+      <button type="button" class="site-header__more icon-btn" data-auth="in" data-action="account-toggle" aria-expanded="false" aria-controls="account-menu" aria-haspopup="menu" aria-label="More" data-icon="dots"></button>
       <a class="site-header__tool icon-btn" data-auth="in" href="inbox.html" aria-label="Inbox" data-icon="mail"></a>
     </div>
   </div>
@@ -249,6 +249,10 @@
         <div class="site-drawer__links site-drawer__links--flush">
           <a href="contact.html" class="site-drawer__link" data-nav="contact"><img src="assets/images/menu/icon-contact.svg" alt="" /><span>Contact</span></a>
           <a href="responsible-gaming.html" class="site-drawer__link"><img src="assets/images/menu/icon-faq.svg" alt="" /><span>FAQ</span></a>
+          <button type="button" class="site-drawer__link" data-auth="in" data-action="logout">
+            <span data-icon="logout" aria-hidden="true"></span>
+            <span>Logout</span>
+          </button>
         </div>
       </section>
     </div>

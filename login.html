@@ -13,89 +13,100 @@
   </head>
   <body data-layout="auth">
     <main id="main" class="page page--auth" data-page="login">
-      <section class="auth-card" aria-labelledby="auth-title">
-        <div class="auth-card__head">
-          <h1 class="auth-card__title" id="auth-title">Login</h1>
-          <a class="auth-card__close" href="index.html" aria-label="Close">
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-          </a>
+      <section class="auth-card auth-card--split" aria-labelledby="auth-title">
+        <div class="auth-card__form">
+          <div class="auth-card__head">
+            <h1 class="auth-card__title" id="auth-title">Login</h1>
+            <a class="auth-card__close" href="index.html" aria-label="Close">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </a>
+          </div>
+          <div class="auth-card__brand">
+            <img src="assets/images/logo.png" alt="ELBET" />
+          </div>
+          <div class="auth-methods" role="tablist" aria-label="Sign in method">
+            <button type="button" class="auth-method is-active" role="tab" aria-selected="true" data-auth-method="username">
+              <svg viewBox="0 0 20 20" aria-hidden="true" fill="currentColor"><path d="M10 0C4.579 0 0 4.579 0 10C0 15.421 4.579 20 10 20C15.421 20 20 15.421 20 10C20 4.579 15.421 0 10 0ZM10 5C11.727 5 13 6.272 13 8C13 9.728 11.727 11 10 11C8.274 11 7 9.728 7 8C7 6.272 8.274 5 10 5ZM4.894 14.772C5.791 13.452 7.287 12.572 9 12.572H11C12.714 12.572 14.209 13.452 15.106 14.772C13.828 16.14 12.015 17 10 17C7.985 17 6.172 16.14 4.894 14.772Z"/></svg>
+              Username
+            </button>
+            <button type="button" class="auth-method" role="tab" aria-selected="false" data-auth-method="email">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 8l8 6 8-6"/></svg>
+              Email
+            </button>
+            <button type="button" class="auth-method" role="tab" aria-selected="false" data-auth-method="sms">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14v10H8l-3 3z"/></svg>
+              SMS
+            </button>
+            <button type="button" class="auth-method auth-method--wa" role="tab" aria-selected="false" data-auth-method="whatsapp">
+              <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 18.5l-1.2 3 3.2-1.1A8 8 0 1 0 6.5 18.5z"/><path d="M9.2 10.2c.2-.4.3-.4.6-.4h.5c.2 0 .4.1.5.3l.7 1.6c.1.2 0 .4-.1.6l-.4.5c-.1.1-.1.3 0 .4 1 1.4 2.3 2.4 3.8 3.1.2.1.4 0 .5-.1l.6-.5c.2-.1.4-.1.6 0l1.4.8c.2.1.3.3.2.6v.5c0 .3-.1.5-.4.6-1.4.6-3 .4-4.6-.4-1.7-.9-3.2-2.3-4.2-4.1-.8-1.4-1-2.9-.5-4.2z"/></svg>
+              Whatsapp
+            </button>
+          </div>
+          <form class="auth-form" data-auth-form novalidate>
+            <div class="auth-pane" data-auth-pane="username">
+              <div class="auth-field">
+                <label class="sr-only" for="login-username">Username</label>
+                <input id="login-username" name="username" type="text" autocomplete="username" placeholder="Username" />
+              </div>
+              <div class="auth-field">
+                <label class="sr-only" for="login-password">Password</label>
+                <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Password" />
+                <button type="button" class="auth-field__action" data-auth-reveal>Show</button>
+              </div>
+            </div>
+            <div class="auth-pane" data-auth-pane="email" hidden>
+              <div class="auth-field">
+                <label class="sr-only" for="login-email">Email</label>
+                <input id="login-email" name="email" type="email" autocomplete="email" placeholder="Email" />
+              </div>
+              <div class="auth-field">
+                <label class="sr-only" for="login-email-password">Password</label>
+                <input id="login-email-password" name="emailPassword" type="password" autocomplete="current-password" placeholder="Password" />
+                <button type="button" class="auth-field__action" data-auth-reveal>Show</button>
+              </div>
+            </div>
+            <div class="auth-pane" data-auth-pane="sms" hidden>
+              <div class="auth-field">
+                <label class="sr-only" for="login-sms">Mobile number</label>
+                <input id="login-sms" name="sms" type="tel" autocomplete="tel" placeholder="Mobile number" />
+              </div>
+              <div class="auth-field">
+                <label class="sr-only" for="login-sms-code">Verification code</label>
+                <input id="login-sms-code" name="smsCode" type="text" inputmode="numeric" placeholder="Verification Code" />
+                <button type="button" class="auth-field__action" data-auth-send>Send</button>
+              </div>
+            </div>
+            <div class="auth-pane" data-auth-pane="whatsapp" hidden>
+              <div class="auth-field">
+                <label class="sr-only" for="login-wa">WhatsApp number</label>
+                <input id="login-wa" name="whatsapp" type="tel" autocomplete="tel" placeholder="WhatsApp number" />
+              </div>
+              <div class="auth-field">
+                <label class="sr-only" for="login-wa-code">Verification code</label>
+                <input id="login-wa-code" name="waCode" type="text" inputmode="numeric" placeholder="Verification Code" />
+                <button type="button" class="auth-field__action" data-auth-send>Send</button>
+              </div>
+            </div>
+            <div class="auth-link-slot">
+              <a class="auth-link" href="forgot-password.html" data-auth-forgot>Forgot password?</a>
+            </div>
+            <button type="submit" class="btn btn--primary btn--full auth-submit is-idle" data-auth-submit>Sign in</button>
+          </form>
+          <p class="auth-foot">Do not have an account? <a href="register.html">Register now</a></p>
         </div>
-        <div class="auth-card__brand">
-          <img src="assets/images/logo.png" alt="ELBET" />
-        </div>
-        <div class="auth-methods" role="tablist" aria-label="Sign in method">
-          <button type="button" class="auth-method is-active" role="tab" aria-selected="true" data-auth-method="username">
-            <svg viewBox="0 0 20 20" aria-hidden="true" fill="currentColor"><path d="M10 0C4.579 0 0 4.579 0 10C0 15.421 4.579 20 10 20C15.421 20 20 15.421 20 10C20 4.579 15.421 0 10 0ZM10 5C11.727 5 13 6.272 13 8C13 9.728 11.727 11 10 11C8.274 11 7 9.728 7 8C7 6.272 8.274 5 10 5ZM4.894 14.772C5.791 13.452 7.287 12.572 9 12.572H11C12.714 12.572 14.209 13.452 15.106 14.772C13.828 16.14 12.015 17 10 17C7.985 17 6.172 16.14 4.894 14.772Z"/></svg>
-            Username
-          </button>
-          <button type="button" class="auth-method" role="tab" aria-selected="false" data-auth-method="email">
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 8l8 6 8-6"/></svg>
-            Email
-          </button>
-          <button type="button" class="auth-method" role="tab" aria-selected="false" data-auth-method="sms">
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14v10H8l-3 3z"/></svg>
-            SMS
-          </button>
-          <button type="button" class="auth-method auth-method--wa" role="tab" aria-selected="false" data-auth-method="whatsapp">
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 18.5l-1.2 3 3.2-1.1A8 8 0 1 0 6.5 18.5z"/><path d="M9.2 10.2c.2-.4.3-.4.6-.4h.5c.2 0 .4.1.5.3l.7 1.6c.1.2 0 .4-.1.6l-.4.5c-.1.1-.1.3 0 .4 1 1.4 2.3 2.4 3.8 3.1.2.1.4 0 .5-.1l.6-.5c.2-.1.4-.1.6 0l1.4.8c.2.1.3.3.2.6v.5c0 .3-.1.5-.4.6-1.4.6-3 .4-4.6-.4-1.7-.9-3.2-2.3-4.2-4.1-.8-1.4-1-2.9-.5-4.2z"/></svg>
-            Whatsapp
-          </button>
-        </div>
-        <form class="auth-form" data-auth-form novalidate>
-          <div class="auth-pane" data-auth-pane="username">
-            <div class="auth-field">
-              <label class="sr-only" for="login-username">Username</label>
-              <input id="login-username" name="username" type="text" autocomplete="username" placeholder="Username" />
-            </div>
-            <div class="auth-field">
-              <label class="sr-only" for="login-password">Password</label>
-              <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Password" />
-              <button type="button" class="auth-field__action" data-auth-reveal>Show</button>
-            </div>
+        <aside class="auth-card__media" aria-label="Brand ambassador">
+          <img class="auth-card__media-logo" src="assets/images/logo.png" alt="" />
+          <img class="auth-card__media-photo" src="assets/images/ambassador-chloe.png" alt="" />
+          <div class="auth-card__media-copy">
+            <p class="auth-card__media-tag">Play Here, Win Here</p>
+            <p>Chloe Lee</p>
+            <span>Brand Ambassador</span>
           </div>
-          <div class="auth-pane" data-auth-pane="email" hidden>
-            <div class="auth-field">
-              <label class="sr-only" for="login-email">Email</label>
-              <input id="login-email" name="email" type="email" autocomplete="email" placeholder="Email" />
-            </div>
-            <div class="auth-field">
-              <label class="sr-only" for="login-email-password">Password</label>
-              <input id="login-email-password" name="emailPassword" type="password" autocomplete="current-password" placeholder="Password" />
-              <button type="button" class="auth-field__action" data-auth-reveal>Show</button>
-            </div>
-          </div>
-          <div class="auth-pane" data-auth-pane="sms" hidden>
-            <div class="auth-field">
-              <label class="sr-only" for="login-sms">Mobile number</label>
-              <input id="login-sms" name="sms" type="tel" autocomplete="tel" placeholder="Mobile number" />
-            </div>
-            <div class="auth-field">
-              <label class="sr-only" for="login-sms-code">Verification code</label>
-              <input id="login-sms-code" name="smsCode" type="text" inputmode="numeric" placeholder="Verification Code" />
-              <button type="button" class="auth-field__action" data-auth-send>Send</button>
-            </div>
-          </div>
-          <div class="auth-pane" data-auth-pane="whatsapp" hidden>
-            <div class="auth-field">
-              <label class="sr-only" for="login-wa">WhatsApp number</label>
-              <input id="login-wa" name="whatsapp" type="tel" autocomplete="tel" placeholder="WhatsApp number" />
-            </div>
-            <div class="auth-field">
-              <label class="sr-only" for="login-wa-code">Verification code</label>
-              <input id="login-wa-code" name="waCode" type="text" inputmode="numeric" placeholder="Verification Code" />
-              <button type="button" class="auth-field__action" data-auth-send>Send</button>
-            </div>
-          </div>
-          <div class="auth-link-slot">
-            <a class="auth-link" href="forgot-password.html" data-auth-forgot>Forgot password?</a>
-          </div>
-          <button type="submit" class="btn btn--primary btn--full auth-submit is-idle" data-auth-submit>Sign in</button>
-        </form>
-        <p class="auth-foot">Do not have an account? <a href="register.html">Register now</a></p>
+        </aside>
       </section>
     </main>
     <div data-include="modal"></div>
     <div data-include="toast"></div>
-    <script src="js/boot.js?v=splash8"></script>
+    <script src="js/boot.js?v=splash9"></script>
   </body>
 </html>

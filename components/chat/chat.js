@@ -83,20 +83,25 @@
     function place() {
       const header = document.querySelector(".site-header");
       const trigger = document.querySelector(".site-header__chat");
+      const wide = window.matchMedia("(min-width: 1024px)").matches;
+
+      if (!wide) {
+        panel.style.top = "";
+        panel.style.left = "";
+        panel.style.right = "";
+        panel.style.width = "";
+        return;
+      }
+
       const top = header ? Math.round(header.getBoundingClientRect().bottom) : 0;
       panel.style.top = top + "px";
 
-      const wide = window.matchMedia("(min-width: 1024px)").matches;
-      if (wide && trigger) {
+      if (trigger) {
         const rect = trigger.getBoundingClientRect();
         const width = panel.offsetWidth || 360;
         const left = Math.max(12, Math.min(rect.right - width, window.innerWidth - width - 12));
         panel.style.left = left + "px";
         panel.style.right = "auto";
-        panel.style.width = "";
-      } else {
-        panel.style.left = "";
-        panel.style.right = "";
         panel.style.width = "";
       }
     }
@@ -105,6 +110,10 @@
       panel.hidden = !open;
       document.body.classList.toggle("is-chitchat-open", open);
       panel.setAttribute("aria-hidden", String(!open));
+      panel.setAttribute(
+        "aria-modal",
+        window.matchMedia("(min-width: 1024px)").matches ? "false" : String(open)
+      );
       triggers().forEach(function (btn) {
         btn.setAttribute("aria-expanded", String(open));
         btn.classList.toggle("is-open", open);

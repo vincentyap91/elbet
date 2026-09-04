@@ -8,7 +8,6 @@
     const overlay = Nexa.qs("[data-drawer-overlay]", header);
     const toggle = Nexa.qs("[data-action='nav-toggle']", header);
     const account = Nexa.qs(".site-header__account", header);
-    const userToggle = Nexa.qs("[data-action='account-toggle']", header);
     const accountMenu = Nexa.qs("[data-account-menu]", header);
 
     if (account && !account.innerHTML) {
@@ -45,7 +44,9 @@
 
     function setAccountOpen(open) {
       header.classList.toggle("is-account-open", open);
-      if (userToggle) userToggle.setAttribute("aria-expanded", String(open));
+      Nexa.qsa("[data-action='account-toggle']", header).forEach(function (el) {
+        el.setAttribute("aria-expanded", String(open));
+      });
       if (accountMenu) {
         if (open) accountMenu.removeAttribute("hidden");
         else accountMenu.setAttribute("hidden", "");
@@ -101,6 +102,7 @@
       }
       if (action === "logout") {
         event.preventDefault();
+        setOpen(false);
         setAccountOpen(false);
         Nexa.logout();
         window.location.href = "index.html";
@@ -128,7 +130,12 @@
 
     document.addEventListener("click", (event) => {
       if (!isAccountOpen()) return;
-      if (header.contains(event.target) && event.target.closest(".site-header__user")) return;
+      if (
+        header.contains(event.target) &&
+        event.target.closest(".site-header__user, .site-header__more, [data-account-menu]")
+      ) {
+        return;
+      }
       setAccountOpen(false);
     });
 

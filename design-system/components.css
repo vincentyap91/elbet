@@ -417,6 +417,7 @@
 }
 
 .site-header__actions {
+  position: relative;
   margin-left: auto;
   display: flex;
   align-items: center;
@@ -624,7 +625,8 @@ html.is-logged-in [data-auth="out"] {
   color: var(--color-primary);
 }
 
-.site-header__tool {
+.site-header__tool,
+.site-header__more {
   display: none;
   color: var(--color-text-primary);
 }
