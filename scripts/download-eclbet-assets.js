@@ -147,6 +147,7 @@ const files = [
   ["https://www.eclbet04.com/static/images/ECLBET/banners/en/desktop/ranking.webp", "assets/images/ranking/hero.webp"],
   ["https://www.eclbet04.com/static/images/ECLBET/banners/en/desktop/prediction.webp", "assets/images/prediction/hero.webp"],
   ["https://www.eclbet04.com/static/images/ECLBET/banners/en/desktop/personal-achievement.webp", "assets/images/achievements/hero.webp"],
+  ["https://www.eclbet04.com/static/images/ECLBET/banners/en/mobile/personal-achievement.webp", "assets/images/achievements/personal-achievement.webp"],
   ["https://www.eclbet04.com/static/images/ECLBET/banners/en/desktop/ticket-center.webp", "assets/images/ticket-center/hero.webp"],
   ["https://www.eclbet04.com/static/images/ECLBET/banners/en/mobile/ticket-center.webp", "assets/images/ticket-center/hero-mobile.webp"],
   ["https://www.eclbet04.com/static/images/ECLBET/banners/en/desktop/vip.webp", "assets/images/vip/hero.webp"],
