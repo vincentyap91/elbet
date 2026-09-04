@@ -753,11 +753,23 @@ button.catalog-meta-card__action:hover {
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    margin-bottom: var(--shell-title-gap);
+  }
+
+  .page--slots .catalog-browse__tools .catalog-browse__types {
+    flex: 0 0 auto;
+    padding-bottom: var(--space-3);
+    border-bottom: var(--border-width) solid var(--color-border);
   }
 
   .page--slots .catalog-browse__tools .catalog-search {
+    flex: 0 0 auto;
     width: 100%;
     max-width: none;
+    min-width: 0;
+    min-height: 0;
   }
 
   .page--catalog .catalog-browse__games-title,
