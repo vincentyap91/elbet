@@ -156,10 +156,8 @@
     persistCapture();
     stripCaptureQuery();
     Nexa.captureToFigma();
-  } else if (Nexa.holdBootSplash()) {
-    mountBootSplash();
   } else {
-    Nexa._splashTimer = window.setTimeout(mountBootSplash, 800);
+    mountBootSplash();
   }
 
   const files = [
@@ -234,7 +232,7 @@
   function loadNext(index) {
     if (index >= files.length) return;
     const next = document.createElement("script");
-    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash6" : "");
+    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash7" : "");
     next.onload = function () {
       loadNext(index + 1);
     };
