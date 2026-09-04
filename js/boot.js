@@ -80,13 +80,6 @@
     if (document.getElementById("boot-splash")) return;
     if (document.documentElement.classList.contains("is-ready")) return;
 
-    var reduced = false;
-    try {
-      reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    } catch {
-      /* ignore */
-    }
-
     var splash = document.createElement("div");
     splash.id = "boot-splash";
     splash.className = "boot-splash";
@@ -95,20 +88,18 @@
     splash.setAttribute("aria-label", "Loading");
 
     var img = document.createElement("img");
-    img.className = "boot-splash__mark" + (reduced ? " boot-splash__mark--static" : "");
+    img.className = "boot-splash__mark";
     img.alt = "";
     img.decoding = "async";
     img.fetchPriority = "high";
-    if (!reduced) {
-      img.width = 567;
-      img.height = 285;
-    }
-    img.src = Nexa.root + (reduced ? "assets/images/logo.png" : "assets/images/logo-animated.svg?v=once");
+    img.width = 567;
+    img.height = 285;
+    img.src = Nexa.root + "assets/images/logo-animated.svg?play=" + Date.now();
 
     function noteAnimStart() {
       if (Nexa.splashAnimAt) return;
       if (!splash.classList.contains("is-visible")) return;
-      if (!reduced && !img.classList.contains("is-on")) return;
+      if (!img.classList.contains("is-on")) return;
       Nexa.splashAnimAt = performance.now();
     }
 
@@ -232,7 +223,7 @@
   function loadNext(index) {
     if (index >= files.length) return;
     const next = document.createElement("script");
-    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash7" : "");
+    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash8" : "");
     next.onload = function () {
       loadNext(index + 1);
     };

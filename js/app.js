@@ -1,5 +1,5 @@
 (function (Nexa) {
-  const FAILSAFE_MS = 3000;
+  const FAILSAFE_MS = 10000;
   const AUTH_FILE = /^[a-z0-9][a-z0-9._-]*\.html$/i;
   const AUTH_BLOCKED = /^(login|register|forgot-password)\.html$/i;
 
@@ -160,8 +160,8 @@
       }
 
       function remainingCycle() {
-        var start = Nexa.splashAnimAt || Nexa.splashMarkAt || Nexa.splashAt || performance.now();
-        return Math.max(0, SPLASH_CYCLE_MS - (performance.now() - start));
+        if (!Nexa.splashAnimAt) return SPLASH_CYCLE_MS;
+        return Math.max(0, SPLASH_CYCLE_MS - (performance.now() - Nexa.splashAnimAt));
       }
 
       function finishCycle() {
@@ -185,11 +185,7 @@
       var tries = 0;
       var poll = window.setInterval(function () {
         tries += 1;
-        if (
-          !splash.parentNode ||
-          (splash.classList.contains("is-visible") && (Nexa.splashAnimAt || reduced)) ||
-          tries > 40
-        ) {
+        if (!splash.parentNode || Nexa.splashAnimAt || reduced || tries > 200) {
           window.clearInterval(poll);
           finishCycle();
         }
