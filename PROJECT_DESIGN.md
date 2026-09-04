@@ -10,6 +10,14 @@ If this lock and a token disagree, change the token to match this file. Do not s
 
 **Structure vs look:** the lobby **skeleton** is implemented and locked (ECLBET-inspired IA). This file still governs **visual identity**. Colors always come from ELBET tokens, even when a chrome piece is cloned from ECLBET. Do not use this document to reorder homepage blocks while `LAYOUT_LOCK.md` is ON.
 
+**Shipped (match these; do not invent a second system):**
+
+- Primary signal is **gold** `--color-primary` (`#edc34a` dark). Older drafts said “mint” for underlines and selected odds — that means primary gold in this repo.
+- Home mobile banners are **square 1:1** files. Token `--shell-home-banner-ratio-mobile`. Peek carousel, gold pager dots. Never crop with `1080/867` or `object-fit: cover`.
+- Inner-page mobile heroes stay `--shell-banner-ratio-mobile` (`1080 / 867`).
+- Type, space, and radius live in [`design-system/tokens.css`](design-system/tokens.css). Full tables: [`design-system/MASTER.md`](design-system/MASTER.md).
+- Cursor must follow [`.cursor/rules/design-system.mdc`](.cursor/rules/design-system.mdc) and [`.cursor/rules/home-hero.mdc`](.cursor/rules/home-hero.mdc).
+
 ---
 
 ## Design read
@@ -168,12 +176,12 @@ Layout families for **after the layout lock is lifted** (do not apply these as a
 
 | Element | Active | Not |
 | --- | --- | --- |
-| Desktop nav | 2px mint underline, text primary | Filled chip, mint background bar |
-| Mobile tab | Mint icon + label | Blob / pill background |
-| Odds | 1px mint border + `--color-surface-hover`. Selected stake = mint fill | Outer glow, scale bounce |
+| Desktop nav | 2px gold underline, text primary | Filled chip, gold background bar |
+| Mobile tab | Gold icon + label | Blob / pill background |
+| Odds | 1px gold border + `--color-surface-hover`. Selected stake = gold fill | Outer glow, scale bounce |
 | Tabs | Same underline as nav | Segmented control fill |
 | Live | Rose text + 6px geometric dot | Flame icon, card-wide pulse |
-| Focus | `--focus-ring` mint mix | Extra outline on top of glow |
+| Focus | `--focus-ring` (primary gold mix) | Extra outline on top of glow |
 
 ### Gradients
 
@@ -201,7 +209,7 @@ Elevated surfaces may use a **1px inset top highlight** (`color-mix` of white ~6
 - Default: 1px `--color-border` (cool, not white, not gold).
 - Hover on tappable tiles: border `color-mix` toward primary (~40%). Thickness stays 1px.
 - Featured promo: copper mix, still 1px.
-- Odds rest: 1px border, surface fill. Selected: mint border. Live: live-colored border, no 2–3px arcade outline.
+- Odds rest: 1px border, surface fill. Selected: gold border. Live: live-colored border, no 2–3px arcade outline.
 - No inner gold bevel. No 2px “selected stadium” rings.
 
 ### Icon treatment
@@ -226,17 +234,17 @@ Split, left-aligned, **one story**. Display type lives here only.
 - Copy column ~40%, media ~60% on desktop. Stack: media above copy on mobile, or copy first if the title is the offer.
 - Scrim from the left so type never sits on busy art.
 - Not centered. Not a gradient blob. Not auto-rotating five offers. If multiple campaigns exist: dots or a quiet pager, pause on hover.
-- Hero stack max 4 text elements (Taste). No trust strip, app-store badges, or “Play here, win here” inside the banner.
-- No ambassador.
+- **Shipped lobby hero is a photo carousel**, not this split layout. Desktop 1300×320. Mobile 1:1 peek + gold dots. Do not restyle it into a copy/media split while `LAYOUT_LOCK.md` is ON.
+- Hero stack max 4 text elements if a split banner is added later. No trust strip or app-store badges inside the banner.
 
 ### Navigation treatment
 
-- Type-first. Mint underline. Same labels everywhere.
+- Type-first. Gold underline. Same labels everywhere.
 - Logged-out: Log in (ghost) + Join (primary).
 - Logged-in: tabular balance + Deposit. Avatar opens Account, not a 20-item Function list.
 - Search is an icon that expands, or a compact field. Not a second hero.
 - Language stays a utility, not a billboard.
-- Drawer on small screens: list, hairline, mint on active. Not a mosaic of product tiles.
+- Drawer on small screens: list, hairline, gold on active. Not a mosaic of product tiles.
 
 ### Hover states
 
@@ -245,7 +253,7 @@ Split, left-aligned, **one story**. Display type lives here only.
 | Target | Hover | Active |
 | --- | --- | --- |
 | Button | Fill shift only | `scale(0.98)` |
-| Odds | Border toward mint + 1px lift | `scale(0.98)` |
+| Odds | Border toward primary + 1px lift | `scale(0.98)` |
 | Game card | Image `scale(1.03)`, play overlay | Overlay stays for focus |
 | Promo | `--shadow-sm` → `--shadow-md` | — |
 | Nav | Text → primary | Underline |

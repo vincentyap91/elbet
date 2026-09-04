@@ -1,0 +1,17 @@
+---
+description: Home lobby hero — desktop 1300×320, mobile square peek carousel with gold dots.
+globs: components/hero/**,index.html,pages/index.html,css/pages/home.css
+alwaysApply: false
+---
+
+# Home hero
+
+Desktop (`≥768px`): one full-bleed slide, height `--shell-banner-height` (320px), width 1300px column, arrows `--shell-arrow-size`.
+
+Mobile (`max-width: 767px`):
+
+- Assets in `assets/images/banners/mobile/` are **square (1:1)**. Ratio token: `--shell-home-banner-ratio-mobile`.
+- Centered slide with side peek `--shell-hero-peek` (`--space-8`). Keep prev/next arrows.
+- Show the full art: `object-fit: contain`. Do not use `cover` or `--shell-banner-ratio-mobile` (that 1080/867 box crops top/bottom).
+- Active slide: 2px inset `--color-primary`. Dots: `--shell-hero-dot`, active `--color-primary`, idle `color-mix` of primary into `--color-bg`.
+- CSS: [`components/hero/hero.css`](components/hero/hero.css). After HTML template edits run `node scripts/build-fragments.js`.

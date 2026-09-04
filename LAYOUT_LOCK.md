@@ -67,8 +67,10 @@ Do **not** restore the old ELBET lobby order (in-play rail → match list → ca
 | Sidebar width | `--shell-sidebar-width` → 62px |
 | Main width | `--shell-main-width` → 1300px |
 | Horizontal gutter | `(viewport − 1300) / 2` (≈302px at 1920) |
-| Banner | 1300 × 320 (`--shell-banner-height`), top gap `--shell-banner-top` |
-| Banner arrows | `--shell-arrow-size` 40px, vertically centered on banner |
+| Banner (desktop) | 1300 × 320 (`--shell-banner-height`), top gap `--shell-banner-top` |
+| Banner (mobile home) | Square 1:1 (`--shell-home-banner-ratio-mobile`), side peek `--shell-hero-peek`, `contain` (not `cover`) |
+| Banner arrows | `--shell-arrow-size` 40px desktop; 2rem overlay circles on mobile |
+| Banner dots (mobile) | `--shell-hero-dot`, `--color-primary` |
 | Shortcut cards | 4 × height `--shell-shortcut-height` 70px, gap `--shell-shortcut-gap` 10px |
 | Provider tiles | `--shell-provider-width` × `--shell-provider-height` |
 | Section gaps | `--shell-section-gap` 60px; shortcuts use `--shell-block-gap` |
@@ -110,7 +112,7 @@ Shared chrome is included via `data-include`. Do not duplicate header/sidebar/fo
 | ≥1440px | 1300px column, no extra horizontal padding on `.shell-main` |
 | 1024–1439px | Same tree; main `min(1300px, 100% − 48px)`; sidebar still overlay |
 | 768–1023px | Sidebar hidden; shortcuts 2×2; trust and app stack; table scrolls sideways |
-| &lt;768px | Compact header; bottom mobile nav; chat can shrink — **do not reorder sections** |
+| &lt;768px | Compact header; bottom mobile nav; chat can shrink — **do not reorder sections**. Home hero is a **1:1 peek carousel** (`--shell-home-banner-ratio-mobile`, peek `--shell-hero-peek`, gold dots). Do not crop those slides. |
 
 ---
 

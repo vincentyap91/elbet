@@ -216,7 +216,10 @@
       file.indexOf("pages/account.js") >= 0 ||
       file.indexOf("pages/promotion.js") >= 0 ||
       file.indexOf("pages/update.js") >= 0 ||
-      file.indexOf("pages/money-shell.js") >= 0
+      file.indexOf("pages/money-shell.js") >= 0 ||
+      file.indexOf("hero.js") >= 0 ||
+      file.indexOf("templates.js") >= 0 ||
+      file.indexOf("fragments.js") >= 0
     );
   }
 

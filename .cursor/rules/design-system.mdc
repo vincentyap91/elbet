@@ -1,0 +1,17 @@
+---
+description: ELBET design system is the source of truth for color, type, space, radius, and shipped chrome.
+alwaysApply: true
+---
+
+# Design system
+
+Read [`design-system/MASTER.md`](design-system/MASTER.md) and [`design-system/tokens.css`](design-system/tokens.css) before changing UI. Identity: [`PROJECT_DESIGN.md`](PROJECT_DESIGN.md).
+
+- Never invent hex, px gaps, or radii in page CSS. Edit the token, then use `var(--…)`.
+- Dark `--color-primary` is gold `#edc34a`. Go-states, selected, focus, and **pager dots** use primary — not `--color-success`, not operator yellow.
+- `--color-success` is wins / odds-up only. `--color-live` is live status only.
+- Type: `--font-display` / `--font-body` / `--font-numeric`. Section titles `--text-xl`. No Inter. No new font CDN.
+- Space is the 4px scale (`--space-1`…`--space-10`). Title → content is `--shell-title-gap`. Block → block is `--shell-section-gap`.
+- Radius: tools `--radius-sm`, buttons `--radius-md`, cards/banners `--radius-lg`. Not pills on primary buttons.
+- Home mobile hero is **1:1** (`--shell-home-banner-ratio-mobile`), peek `--shell-hero-peek`, `object-fit: contain`. Inner-page mobile heroes stay `--shell-banner-ratio-mobile` (`1080 / 867`).
+- Logo file is only [`assets/images/logo.png`](assets/images/logo.png).

@@ -1,7 +1,7 @@
 (function (Nexa) {
   const fragmentCache = new Map();
   const templateCache = new Map();
-  const CACHE_PREFIX = "elbet:include:";
+  const CACHE_PREFIX = "elbet:include:v2:";
 
   function isFileProtocol() {
     return location.protocol === "file:";

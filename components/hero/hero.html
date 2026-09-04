@@ -1,9 +1,12 @@
 <template>
   <div class="hero" data-ref="root">
-    <div class="hero__viewport">
-      <div class="hero__track" data-ref="track"></div>
+    <div class="hero__stage">
+      <div class="hero__viewport">
+        <div class="hero__track" data-ref="track"></div>
+      </div>
+      <button type="button" class="hero__arrow hero__arrow--prev" data-ref="prev" aria-label="Previous slide"></button>
+      <button type="button" class="hero__arrow hero__arrow--next" data-ref="next" aria-label="Next slide"></button>
     </div>
-    <button type="button" class="hero__arrow hero__arrow--prev" data-ref="prev" aria-label="Previous slide"></button>
-    <button type="button" class="hero__arrow hero__arrow--next" data-ref="next" aria-label="Next slide"></button>
+    <div class="hero__dots" data-ref="dots" hidden></div>
   </div>
 </template>

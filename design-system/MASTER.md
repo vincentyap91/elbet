@@ -15,6 +15,26 @@ Eclbet is a **UX / layout reference** for the locked lobby skeleton. If a cloned
 
 ---
 
+## Shipped locks (do not drift)
+
+These are already in the product. Match them. Do not “improve” with a second ratio, mint pagers, or cropped home art.
+
+| Surface | Ratio / size | Color / type | Gap |
+| --- | --- | --- | --- |
+| Lobby desktop hero | 1300 × 320 (`--shell-banner-height`) | Image `cover` | Top `--shell-banner-top`, bottom `--shell-banner-bottom` |
+| Lobby mobile hero | **1:1** `--shell-home-banner-ratio-mobile` | `object-fit: contain`; active ring `--color-primary` | Peek `--shell-hero-peek`; dots `--shell-hero-dot` |
+| Inner-page mobile hero | `--shell-banner-ratio-mobile` (`1080 / 867`) | `cover` | `--space-4` stack |
+| Home pager dots | `--shell-hero-dot` (8px) | Active `--color-primary`; idle primary mixed into `--color-bg` | `--space-2` between dots |
+| Section title → content | — | `--text-xl`, `--weight-medium` | `--shell-title-gap` (16px) |
+| Lobby section → section | — | — | `--shell-section-gap` (60px) |
+| Header / sidebar / main | 78px / 62px / 1300px | Surfaces from tokens | See [`LAYOUT_LOCK.md`](../LAYOUT_LOCK.md) |
+| Wordmark | `assets/images/logo.png` | Tracking `--tracking-logo` | Do not replace the file |
+| Boot splash | `logo-animated.svg` | Field `--color-bg` | Plays once ~2s |
+
+`--color-success` is **not** a pager or nav color. It is wins / odds-up only.
+
+---
+
 ## Identity
 
 **ELBET** — a dark, precise betting product. Gold is the go-color, not a wash.

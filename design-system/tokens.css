@@ -78,7 +78,10 @@
   --shell-banner-top: 1.8125rem;
   --shell-content-top: var(--shell-banner-top); /* header → first page content */
   --shell-banner-bottom: 1.25rem;
-  --shell-banner-ratio-mobile: 1080 / 867;
+  --shell-banner-ratio-mobile: 1080 / 867; /* inner-page event heroes */
+  --shell-home-banner-ratio-mobile: 1 / 1; /* lobby mobile slides (square JPGs) */
+  --shell-hero-peek: var(--space-8); /* mobile home: side peek each edge */
+  --shell-hero-dot: 0.5rem;
   --shell-shortcut-height: 4.375rem;
   --shell-shortcut-gap: 0.625rem;
   --shell-provider-width: 9.875rem;
