@@ -99,6 +99,7 @@
         : (view === "banking" ? key === "banking" : key === "personal");
       if (key === "security") open = false;
       trigger.setAttribute("aria-expanded", open ? "true" : "false");
+      Nexa.syncCollapsible(panel, open);
       panel.hidden = !open;
       acc.classList.toggle("is-open", open);
     });
@@ -661,7 +662,7 @@
         if (acc && panel) {
           var open = accTrigger.getAttribute("aria-expanded") === "true";
           accTrigger.setAttribute("aria-expanded", open ? "false" : "true");
-          panel.hidden = open;
+          Nexa.setCollapsible(panel, !open);
           acc.classList.toggle("is-open", !open);
         }
         return;

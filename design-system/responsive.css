@@ -312,6 +312,23 @@
     transform: rotate(180deg);
   }
 
+  .site-drawer__group::details-content {
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+    block-size: 0;
+    interpolate-size: allow-keywords;
+    transition:
+      block-size var(--duration-med) var(--ease-out),
+      opacity var(--duration-med) var(--ease-out),
+      content-visibility var(--duration-med) allow-discrete;
+  }
+
+  .site-drawer__group[open]::details-content {
+    opacity: 1;
+    block-size: auto;
+  }
+
   .site-drawer__links {
     display: flex;
     flex-direction: column;
@@ -524,6 +541,12 @@
   .game-card:hover .game-card__play,
   .game-card:focus-within .game-card__play {
     background: transparent;
+  }
+}
+
+@media (max-width: 1023px) and (prefers-reduced-motion: reduce) {
+  .site-drawer__group::details-content {
+    transition: opacity var(--duration-fast) var(--ease-out);
   }
 }
 

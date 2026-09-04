@@ -23,17 +23,7 @@
       }
     });
 
-    Nexa.qsa("[data-acc-trigger]", root).forEach(function (trigger, i) {
-      const panel = Nexa.qsa("[data-acc-panel]", root)[i];
-      if (!panel) return;
-      trigger.addEventListener("click", function () {
-        const open = trigger.getAttribute("aria-expanded") === "true";
-        trigger.setAttribute("aria-expanded", open ? "false" : "true");
-        panel.hidden = open;
-        const acc = trigger.closest(".rebate-acc");
-        if (acc) acc.classList.toggle("is-open", !open);
-      });
-    });
+    Nexa.bindAccordion(root);
 
     Nexa.qsa("[data-rebate-claim]", root).forEach(function (btn) {
       btn.addEventListener("click", function () {

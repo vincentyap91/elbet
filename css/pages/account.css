@@ -1820,6 +1820,22 @@
     display: none;
   }
 
+  .is-profile-chrome .profile-acc__panel {
+    interpolate-size: allow-keywords;
+    overflow: hidden;
+    opacity: 0;
+    block-size: 0;
+    transition:
+      block-size var(--duration-med) var(--ease-out),
+      opacity var(--duration-med) var(--ease-out);
+  }
+
+  .is-profile-chrome .profile-acc.is-open .profile-acc__panel,
+  .is-profile-chrome .profile-acc__panel.is-open {
+    block-size: auto;
+    opacity: 1;
+  }
+
   .is-profile-chrome .profile-acc--security-mobile {
     display: block;
   }

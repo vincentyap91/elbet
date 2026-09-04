@@ -106,28 +106,59 @@
       }
     }
 
+    function cancelHide() {
+      if (panel._hideTimer) {
+        window.clearTimeout(panel._hideTimer);
+        panel._hideTimer = 0;
+      }
+    }
+
+    function settleClosed() {
+      cancelHide();
+      panel.classList.remove("is-open");
+      panel.hidden = true;
+      document.body.classList.remove("is-chitchat-open");
+      panel.setAttribute("aria-hidden", "true");
+      panel.setAttribute("aria-modal", "false");
+      triggers().forEach(function (btn) {
+        btn.setAttribute("aria-expanded", "false");
+        btn.classList.remove("is-open");
+      });
+      if (rulesPanel) rulesPanel.hidden = true;
+    }
+
     function setOpen(open) {
-      panel.hidden = !open;
-      document.body.classList.toggle("is-chitchat-open", open);
-      panel.setAttribute("aria-hidden", String(!open));
-      panel.setAttribute(
-        "aria-modal",
-        window.matchMedia("(min-width: 1024px)").matches ? "false" : String(open)
-      );
+      const wide = window.matchMedia("(min-width: 1024px)").matches;
       triggers().forEach(function (btn) {
         btn.setAttribute("aria-expanded", String(open));
         btn.classList.toggle("is-open", open);
         if (open) btn.classList.remove("has-unread");
       });
+      panel.setAttribute("aria-hidden", String(!open));
+      panel.setAttribute("aria-modal", wide ? "false" : String(open));
+
       if (open) {
+        cancelHide();
+        panel.hidden = false;
+        document.body.classList.add("is-chitchat-open");
         place();
         log.scrollTop = log.scrollHeight;
+        void panel.offsetWidth;
+        panel.classList.add("is-open");
         window.setTimeout(function () {
           input && input.focus();
         }, 0);
-      } else if (rulesPanel) {
-        rulesPanel.hidden = true;
+        return;
       }
+
+      if (panel.hidden) return;
+      if (!panel.classList.contains("is-open")) {
+        settleClosed();
+        return;
+      }
+      panel.classList.remove("is-open");
+      const ms = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 160 : wide ? 240 : 360;
+      panel._hideTimer = window.setTimeout(settleClosed, ms);
     }
 
     function toggle() {

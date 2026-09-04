@@ -20,6 +20,16 @@
   background: var(--color-bg-elevated);
   border: var(--border-width) solid var(--color-border);
   box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateY(100%);
+  transition:
+    opacity var(--duration-med) var(--ease-out),
+    transform var(--duration-med) var(--ease-out);
+}
+
+.toast.is-open {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .toast--success {
@@ -49,5 +59,12 @@
 @media (min-width: 1024px) {
   .toast-stack {
     bottom: var(--space-5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    transform: none;
+    transition: opacity var(--duration-fast) var(--ease-out);
   }
 }

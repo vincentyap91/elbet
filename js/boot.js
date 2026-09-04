@@ -220,6 +220,14 @@
       file.indexOf("hero.js") >= 0 ||
       file.indexOf("header.js") >= 0 ||
       file.indexOf("chat.js") >= 0 ||
+      file.indexOf("modal.js") >= 0 ||
+      file.indexOf("toast.js") >= 0 ||
+      file.indexOf("loader.js") >= 0 ||
+      file.indexOf("pages/lottery.js") >= 0 ||
+      file.indexOf("pages/ranking-board.js") >= 0 ||
+      file.indexOf("pages/personal-achievement.js") >= 0 ||
+      file.indexOf("pages/vip.js") >= 0 ||
+      file.indexOf("pages/rebates.js") >= 0 ||
       file.indexOf("templates.js") >= 0 ||
       file.indexOf("fragments.js") >= 0
     );
@@ -228,7 +236,7 @@
   function loadNext(index) {
     if (index >= files.length) return;
     const next = document.createElement("script");
-    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash9" : "");
+    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash11" : "");
     next.onload = function () {
       loadNext(index + 1);
     };

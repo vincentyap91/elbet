@@ -3,6 +3,29 @@
     return Nexa.qs("[data-toast-root]");
   }
 
+  function motionMs() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 120 : 200;
+  }
+
+  function dismiss(toast) {
+    if (!toast || toast.dataset.leaving === "1") return;
+    toast.dataset.leaving = "1";
+    toast.classList.remove("is-open");
+    let done = false;
+    function finish() {
+      if (done) return;
+      done = true;
+      toast.remove();
+    }
+    toast.addEventListener("transitionend", function onEnd(event) {
+      if (event.target !== toast) return;
+      if (event.propertyName !== "transform" && event.propertyName !== "opacity") return;
+      toast.removeEventListener("transitionend", onEnd);
+      finish();
+    });
+    window.setTimeout(finish, motionMs() + 40);
+  }
+
   function show(detail) {
     detail = detail || {};
     const root = getRoot();
@@ -20,14 +43,16 @@
     close.className = "toast__close";
     close.setAttribute("aria-label", "Dismiss");
     close.innerHTML = Nexa.iconSvg("close");
-    close.addEventListener("click", () => toast.remove());
+    close.addEventListener("click", () => dismiss(toast));
 
     toast.append(message, close);
     root.append(toast);
+    void toast.offsetWidth;
+    toast.classList.add("is-open");
 
     const timeout = detail.timeout === 0 ? 0 : detail.timeout || 3200;
     if (timeout) {
-      window.setTimeout(() => toast.remove(), timeout);
+      window.setTimeout(() => dismiss(toast), timeout);
     }
   }
 

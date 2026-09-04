@@ -1,26 +1,74 @@
 (function (Nexa) {
+  let hideTimer = 0;
+  let hideOnEnd = null;
+
   function getRoot() {
     return Nexa.qs("[data-modal-root]");
   }
 
-  function close() {
-    const root = getRoot();
-    if (!root) return;
+  function dialogOf(root) {
+    return Nexa.qs("[data-ref='dialog']", root);
+  }
+
+  function motionMs(root) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return 120;
+    if (root.classList.contains("modal--alert")) return 200;
+    if (window.matchMedia("(min-width: 768px)").matches) return 200;
+    return 320;
+  }
+
+  function cancelHide(root) {
+    if (hideTimer) {
+      window.clearTimeout(hideTimer);
+      hideTimer = 0;
+    }
+    if (hideOnEnd) {
+      root.removeEventListener("transitionend", hideOnEnd);
+      hideOnEnd = null;
+    }
+  }
+
+  function settleClosed(root) {
+    cancelHide(root);
+    root.classList.remove("is-open");
     root.hidden = true;
     document.body.classList.remove("is-modal-open");
     root.classList.remove("modal--alert");
-    const dialog = Nexa.qs("[data-ref='dialog']", root);
+    const dialog = dialogOf(root);
     if (dialog) dialog.classList.remove("modal__dialog--sm", "modal__dialog--lg", "modal__dialog--alert");
     Nexa.emit("app:modal:closed");
+  }
+
+  function close() {
+    const root = getRoot();
+    if (!root || root.hidden) return;
+    if (!root.classList.contains("is-open")) {
+      settleClosed(root);
+      return;
+    }
+    cancelHide(root);
+    root.classList.remove("is-open");
+    hideOnEnd = function (event) {
+      if (event.target !== dialogOf(root)) return;
+      if (event.propertyName !== "transform" && event.propertyName !== "opacity") return;
+      settleClosed(root);
+    };
+    root.addEventListener("transitionend", hideOnEnd);
+    hideTimer = window.setTimeout(function () {
+      settleClosed(root);
+    }, motionMs(root) + 40);
   }
 
   function open(detail) {
     detail = detail || {};
     const root = getRoot();
     if (!root) return;
-    const dialog = Nexa.qs("[data-ref='dialog']", root);
+    const dialog = dialogOf(root);
     const body = Nexa.qs("[data-ref='body']", root);
     const footer = Nexa.qs("[data-ref='footer']", root);
+    const wasOpen = !root.hidden && root.classList.contains("is-open");
+
+    cancelHide(root);
 
     dialog.classList.remove("modal__dialog--sm", "modal__dialog--lg", "modal__dialog--alert");
     root.classList.remove("modal--alert");
@@ -58,6 +106,11 @@
 
     root.hidden = false;
     document.body.classList.add("is-modal-open");
+    if (wasOpen) return;
+
+    root.classList.remove("is-open");
+    void root.offsetWidth;
+    root.classList.add("is-open");
   }
 
   Nexa.initModal = function initModal() {

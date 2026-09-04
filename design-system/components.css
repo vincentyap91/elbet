@@ -99,7 +99,10 @@
   border: var(--border-width) solid transparent;
   color: var(--color-text-primary);
   background: transparent;
-  transition: background var(--duration-fast) var(--ease-out);
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
 }
 
 .icon-btn svg {
@@ -107,9 +110,15 @@
   height: var(--icon-size);
 }
 
-.icon-btn:hover {
-  background: var(--color-primary-soft);
-  color: var(--color-primary);
+.icon-btn:active:not(:disabled):not([disabled]) {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .icon-btn:hover {
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+  }
 }
 
 .icon-btn--ghost {
@@ -642,10 +651,30 @@ html.is-logged-in [data-auth="out"] {
   background: var(--color-surface-elevated);
   border: var(--border-width) solid var(--color-border);
   box-shadow: var(--shadow-lg);
+  transform-origin: top right;
+  opacity: 0;
+  transform: translateY(-0.25rem);
+  pointer-events: none;
+  transition:
+    opacity var(--duration-med) var(--ease-out),
+    transform var(--duration-med) var(--ease-out);
+}
+
+.site-header.is-account-open .account-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .account-menu[hidden] {
   display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .account-menu {
+    transform: none;
+    transition: opacity var(--duration-fast) var(--ease-out);
+  }
 }
 
 .account-menu__hello {
@@ -1261,10 +1290,20 @@ textarea::placeholder {
   display: none;
 }
 
+.modal:not(.is-open) {
+  pointer-events: none;
+}
+
 .modal__backdrop {
   position: absolute;
   inset: 0;
   background: var(--color-overlay);
+  opacity: 0;
+  transition: opacity var(--duration-slow) var(--ease-out);
+}
+
+.modal.is-open .modal__backdrop {
+  opacity: 1;
 }
 
 .modal__dialog {
@@ -1279,6 +1318,12 @@ textarea::placeholder {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+  transform: translateY(100%);
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.modal.is-open .modal__dialog {
+  transform: translateY(0);
 }
 
 .modal__dialog--sm {
@@ -1353,6 +1398,63 @@ textarea::placeholder {
   display: flex;
   justify-content: flex-end;
   gap: var(--space-3);
+}
+
+.modal--alert .modal__backdrop {
+  transition-duration: var(--duration-med);
+}
+
+.modal--alert .modal__dialog,
+.modal__dialog--alert {
+  transform: scale(0.96);
+  opacity: 0;
+  transition:
+    transform var(--duration-med) var(--ease-out),
+    opacity var(--duration-med) var(--ease-out);
+}
+
+.modal--alert.is-open .modal__dialog,
+.modal.is-open .modal__dialog--alert {
+  transform: scale(1);
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .modal__backdrop {
+    transition-duration: var(--duration-med);
+  }
+
+  .modal__dialog {
+    transform: scale(0.96);
+    opacity: 0;
+    transition:
+      transform var(--duration-med) var(--ease-out),
+      opacity var(--duration-med) var(--ease-out);
+  }
+
+  .modal.is-open .modal__dialog {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal__backdrop,
+  .modal__dialog,
+  .modal--alert .modal__dialog,
+  .modal__dialog--alert {
+    transform: none;
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--ease-out);
+  }
+
+  .modal.is-open .modal__backdrop,
+  .modal.is-open .modal__dialog,
+  .modal--alert.is-open .modal__dialog,
+  .modal.is-open .modal__dialog--alert {
+    transform: none;
+    opacity: 1;
+  }
 }
 
 /* ---- Badges ---- */
@@ -1818,6 +1920,7 @@ textarea::placeholder {
 
 @media (prefers-reduced-motion: reduce) {
   .btn,
+  .icon-btn,
   .odds,
   .game-card__media img,
   .game-card__play,

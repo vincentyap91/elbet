@@ -18,6 +18,18 @@
   border-radius: 0;
   box-shadow: none;
   padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+  opacity: 0;
+  transform: translateY(8%);
+  pointer-events: none;
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+}
+
+.chitchat.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .chitchat[hidden] {
@@ -312,6 +324,8 @@ body.is-chitchat-open {
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     padding: 0;
+    transform: translateY(-0.25rem);
+    transition-duration: var(--duration-med);
   }
 
   .chitchat__log {
@@ -320,5 +334,12 @@ body.is-chitchat-open {
 
   body.is-chitchat-open {
     overflow: unset;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chitchat {
+    transform: none;
+    transition: opacity var(--duration-fast) var(--ease-out);
   }
 }

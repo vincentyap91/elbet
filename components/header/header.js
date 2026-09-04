@@ -42,15 +42,41 @@
       return header.classList.contains("is-account-open");
     }
 
+    function cancelAccountHide() {
+      if (header._accountHideTimer) {
+        window.clearTimeout(header._accountHideTimer);
+        header._accountHideTimer = 0;
+      }
+    }
+
+    function settleAccountClosed() {
+      cancelAccountHide();
+      header.classList.remove("is-account-open");
+      Nexa.qsa("[data-action='account-toggle']", header).forEach(function (el) {
+        el.setAttribute("aria-expanded", "false");
+      });
+      if (accountMenu) accountMenu.hidden = true;
+    }
+
     function setAccountOpen(open) {
-      header.classList.toggle("is-account-open", open);
       Nexa.qsa("[data-action='account-toggle']", header).forEach(function (el) {
         el.setAttribute("aria-expanded", String(open));
       });
-      if (accountMenu) {
-        if (open) accountMenu.removeAttribute("hidden");
-        else accountMenu.setAttribute("hidden", "");
+      if (!accountMenu) {
+        header.classList.toggle("is-account-open", open);
+        return;
       }
+      if (open) {
+        cancelAccountHide();
+        accountMenu.hidden = false;
+        void accountMenu.offsetWidth;
+        header.classList.add("is-account-open");
+        return;
+      }
+      if (accountMenu.hidden && !isAccountOpen()) return;
+      header.classList.remove("is-account-open");
+      const ms = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 160 : 240;
+      header._accountHideTimer = window.setTimeout(settleAccountClosed, ms);
     }
 
     function syncAuthChrome() {

@@ -6,21 +6,7 @@
   }
 
   function bindAccordion(root) {
-    Nexa.qsa("[data-acc-trigger]", root).forEach(function (trigger, i) {
-      const acc = trigger.closest(".event-acc");
-      const panel = acc.querySelector("[data-acc-panel]");
-      if (!panel.id) panel.id = "event-acc-" + i;
-      trigger.setAttribute("aria-controls", panel.id);
-    });
-    root.addEventListener("click", function (event) {
-      const trigger = event.target.closest("[data-acc-trigger]");
-      if (!trigger) return;
-      const acc = trigger.closest(".event-acc");
-      const panel = acc.querySelector("[data-acc-panel]");
-      const open = trigger.getAttribute("aria-expanded") === "true";
-      trigger.setAttribute("aria-expanded", String(!open));
-      panel.hidden = open;
-    });
+    Nexa.bindAccordion(root);
   }
 
   function nextBonus(turnover) {

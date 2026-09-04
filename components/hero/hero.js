@@ -12,6 +12,7 @@
     const next = Nexa.qs("[data-ref='next']", node);
     const dotsWrap = Nexa.qs("[data-ref='dots']", node);
     const viewport = Nexa.qs(".hero__viewport", node);
+    const stage = Nexa.qs(".hero__stage", node);
 
     slides.forEach((slide) => {
       slide.classList.add("hero__slide");
@@ -33,10 +34,36 @@
 
     let index = 0;
     let peek = false;
+    let autoTimer = 0;
+    let resumeTimer = 0;
+    let autoScrolling = false;
+    let hovering = false;
+    const AUTO_MS = 4000;
+
     try {
       peek = window.matchMedia("(max-width: 767px)").matches;
     } catch {
       /* ignore */
+    }
+
+    function reducedMotion() {
+      try {
+        return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      } catch {
+        return false;
+      }
+    }
+
+    function fineHover() {
+      try {
+        return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      } catch {
+        return false;
+      }
+    }
+
+    function pageReady() {
+      return document.documentElement.classList.contains("is-ready");
     }
 
     function mark() {
@@ -55,32 +82,115 @@
       const slide = slides[index];
       if (!slide) return;
       const left = slide.offsetLeft - (viewport.clientWidth - slide.offsetWidth) / 2;
-      viewport.scrollTo({ left: Math.max(0, left), behavior: smooth ? "smooth" : "auto" });
+      autoScrolling = true;
+      viewport.scrollTo({
+        left: Math.max(0, left),
+        behavior: smooth && !reducedMotion() ? "smooth" : "auto",
+      });
+      window.setTimeout(function () {
+        autoScrolling = false;
+      }, smooth && !reducedMotion() ? 700 : 50);
     }
 
-    function sync(smooth) {
+    function setTransform(animate) {
+      if (reducedMotion()) {
+        track.classList.remove("is-instant");
+        track.style.transform = "";
+        return;
+      }
+      const next = "translate3d(" + -index * 100 + "%,0,0)";
+      if (!animate) {
+        track.classList.add("is-instant");
+        track.style.transform = next;
+        void track.offsetWidth;
+        track.classList.remove("is-instant");
+        return;
+      }
+      track.classList.remove("is-instant");
+      track.style.transform = next;
+    }
+
+    function paint(animate) {
       mark();
       if (peek) {
         track.style.transform = "";
-        scrollToActive(smooth);
-      } else {
-        track.style.transform = "translateX(" + index * -100 + "%)";
+        track.classList.remove("is-instant");
+        scrollToActive(animate);
+        return;
+      }
+      setTransform(animate);
+    }
+
+    function stopAuto() {
+      if (autoTimer) {
+        window.clearTimeout(autoTimer);
+        autoTimer = 0;
+      }
+      el.dataset.heroAuto = "off";
+    }
+
+    function clearResume() {
+      if (resumeTimer) {
+        window.clearTimeout(resumeTimer);
+        resumeTimer = 0;
       }
     }
 
-    function go(dir) {
-      if (!slides.length) return;
-      index = (index + dir + slides.length) % slides.length;
-      sync(true);
+    function canAuto() {
+      if (slides.length < 2) return false;
+      if (!pageReady()) return false;
+      if (document.hidden) return false;
+      if (hovering && fineHover() && !peek) return false;
+      return true;
     }
 
-    prev.addEventListener("click", () => go(-1));
-    next.addEventListener("click", () => go(1));
+    function tick() {
+      autoTimer = 0;
+      if (!canAuto()) return;
+      go(1, false);
+      scheduleAuto();
+    }
+
+    function scheduleAuto() {
+      if (autoTimer || !canAuto()) return;
+      autoTimer = window.setTimeout(tick, AUTO_MS);
+      el.dataset.heroAuto = "on";
+    }
+
+    function startAuto() {
+      if (!canAuto()) return;
+      if (autoTimer) return;
+      scheduleAuto();
+    }
+
+    function restartAuto() {
+      stopAuto();
+      clearResume();
+      startAuto();
+    }
+
+    function go(dir, fromUser) {
+      if (!slides.length) return;
+      const prevIndex = index;
+      index = (index + dir + slides.length) % slides.length;
+      const wrapped = Math.abs(index - prevIndex) > 1;
+      paint(!wrapped);
+      if (fromUser) restartAuto();
+    }
+
+    function goTo(i, fromUser) {
+      if (!slides.length) return;
+      const prevIndex = index;
+      index = ((i % slides.length) + slides.length) % slides.length;
+      const wrapped = Math.abs(index - prevIndex) > 1;
+      paint(!wrapped);
+      if (fromUser) restartAuto();
+    }
+
+    prev.addEventListener("click", () => go(-1, true));
+    next.addEventListener("click", () => go(1, true));
     dots.forEach((dot, i) => {
-      dot.addEventListener("click", () => {
-        index = i;
-        sync(true);
-      });
+      dot.addEventListener("click", () => goTo(i, true));
     });
 
     let touchX = null;
@@ -99,7 +209,7 @@
         const dx = event.changedTouches[0].clientX - touchX;
         touchX = null;
         if (Math.abs(dx) < 40) return;
-        go(dx < 0 ? 1 : -1);
+        go(dx < 0 ? 1 : -1, true);
       },
       { passive: true }
     );
@@ -126,14 +236,33 @@
             index = nearest;
             mark();
           }
+          if (!autoScrolling) {
+            stopAuto();
+            clearResume();
+            resumeTimer = window.setTimeout(restartAuto, 1500);
+          }
         });
       },
       { passive: true }
     );
 
+    if (stage) {
+      stage.addEventListener("mouseenter", () => {
+        if (!fineHover() || peek) return;
+        hovering = true;
+        stopAuto();
+      });
+      stage.addEventListener("mouseleave", () => {
+        if (!fineHover() || peek) return;
+        hovering = false;
+        startAuto();
+      });
+    }
+
     function onBreak(event) {
       peek = event.matches;
-      sync(false);
+      paint(false);
+      restartAuto();
     }
 
     try {
@@ -146,11 +275,32 @@
 
     window.addEventListener("resize", () => {
       if (peek) scrollToActive(false);
+      else paint(false);
     });
 
     el.append(node);
-    sync(false);
-    window.requestAnimationFrame(() => sync(false));
+    paint(false);
+    window.requestAnimationFrame(() => paint(false));
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stopAuto();
+      else startAuto();
+    });
+
+    function armAuto() {
+      startAuto();
+    }
+    Nexa.on("app:ready", armAuto);
+    if (Nexa.ready && typeof Nexa.ready.then === "function") Nexa.ready.then(armAuto);
+    if (pageReady()) armAuto();
+    else {
+      const readyWatch = new MutationObserver(function () {
+        if (!pageReady()) return;
+        readyWatch.disconnect();
+        armAuto();
+      });
+      readyWatch.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    }
   }
 
   Nexa.defineHero = async function defineHero() {
