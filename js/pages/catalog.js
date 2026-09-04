@@ -165,8 +165,29 @@
     const vendorsList = vendorProviders(config);
     const pillList = pillProviders(config);
     let activeProvider = "all";
+    let activeType = "all";
     let query = "";
     let vendorsExpanded = false;
+
+    if (types && Array.isArray(config.types) && config.types.length) {
+      types.innerHTML = config.types
+        .map(function (t, i) {
+          const on = i === 0;
+          return (
+            '<button type="button" class="event-pill' +
+            (on ? " is-active" : "") +
+            '" data-catalog-type="' +
+            t.id +
+            '" role="tab" aria-selected="' +
+            (on ? "true" : "false") +
+            '">' +
+            t.label +
+            "</button>"
+          );
+        })
+        .join("");
+      activeType = config.types[0].id || "all";
+    }
 
     if (pills) {
       pills.innerHTML = pillList
@@ -220,12 +241,18 @@
       updateViewAll();
     }
 
+    function matchType(game) {
+      if (activeType === "all") return true;
+      if (activeType === "top") return !!game.top;
+      return (game.type || "slot") === activeType;
+    }
+
     function filteredGames() {
       return config.games.filter(function (game) {
         const matchProvider = activeProvider === "all" || game.providerId === activeProvider;
         const q = query.trim().toLowerCase();
         const matchQuery = !q || game.name.toLowerCase().includes(q) || game.provider.toLowerCase().includes(q);
-        return matchProvider && matchQuery;
+        return matchProvider && matchType(game) && matchQuery;
       });
     }
 
@@ -278,11 +305,13 @@
       types.addEventListener("click", function (event) {
         const btn = event.target.closest("[data-catalog-type]");
         if (!btn) return;
+        activeType = btn.getAttribute("data-catalog-type") || "all";
         Nexa.qsa("[data-catalog-type]", types).forEach(function (el) {
           const on = el === btn;
           el.classList.toggle("is-active", on);
           el.setAttribute("aria-selected", on ? "true" : "false");
         });
+        paintGames();
       });
     }
 
@@ -293,7 +322,65 @@
       });
     }
 
+    if (pageKey === "slots") bindSlotsMeta(root);
+
     paintGames();
+  }
+
+  function money(value) {
+    return Number(value || 0).toLocaleString("en-MY", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
+
+  function slotsRebateLabel() {
+    if (!Nexa.get("isLoggedIn")) return "0.00%";
+    const vipLabel = String(Nexa.get("vipTier") || "Bronze").toLowerCase();
+    const tiers = (Nexa.VIP && Nexa.VIP.tiers) || [];
+    let tier = null;
+    for (let i = 0; i < tiers.length; i++) {
+      const t = tiers[i];
+      if (String(t.label || "").toLowerCase() === vipLabel || String(t.id || "").toLowerCase() === vipLabel) {
+        tier = t;
+        break;
+      }
+    }
+    if (!tier && tiers.length) tier = tiers[0];
+    const slots = tier && tier.rebate && tier.rebate.slots;
+    if (slots == null || slots === "") return "0.00%";
+    return String(slots).indexOf("%") >= 0 ? String(slots) : Number(slots).toFixed(2) + "%";
+  }
+
+  function fillSlotsMeta(root) {
+    const meta = Nexa.qs("[data-slots-meta]", root);
+    if (!meta) return;
+    let bal = Nexa.get("balance");
+    if (typeof bal !== "number") bal = 0;
+    Nexa.setText(Nexa.qs("[data-slots-wallet]", meta), money(bal));
+    Nexa.setText(Nexa.qs("[data-slots-rebate]", meta), slotsRebateLabel());
+    Nexa.qsa("[data-icon]", meta).forEach(function (el) {
+      if (!el.innerHTML.trim()) el.innerHTML = Nexa.iconSvg(el.dataset.icon);
+    });
+  }
+
+  function bindSlotsMeta(root) {
+    const meta = Nexa.qs("[data-slots-meta]", root);
+    if (!meta) return;
+    fillSlotsMeta(root);
+    meta.addEventListener("click", function (event) {
+      if (!event.target.closest("[data-slots-wallet-refresh]")) return;
+      fillSlotsMeta(root);
+      Nexa.emit("app:toast:show", { type: "info", message: "Balance updated." });
+    });
+    if (typeof Nexa.on === "function") {
+      Nexa.on("app:auth:changed", function () {
+        fillSlotsMeta(root);
+      });
+      Nexa.on("app:store:changed", function (payload) {
+        if (!payload || payload.key === "balance" || payload.key === "vipTier") fillSlotsMeta(root);
+      });
+    }
   }
 
   Nexa.initCatalogPage = function initCatalogPage() {

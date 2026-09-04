@@ -44,6 +44,7 @@
     calendar: svg('<rect x="4" y="6" width="16" height="14" rx="2"/><path d="M8 4v4M16 4v4M4 11h16"/>'),
     phone: svg('<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/>'),
     refresh: svg('<path d="M21 12a9 9 0 1 1-2.3-6"/><path d="M21 3v6h-6"/>'),
+    lock: svg('<rect x="6" y="11" width="12" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>'),
     edit: svg('<path d="M4 16.5V20h3.5L19 8.5 15.5 5 4 16.5z"/><path d="M13.5 7l3.5 3.5"/>'),
     help: svg('<circle cx="12" cy="12" r="8"/><path d="M9.6 9.4a2.4 2.4 0 114.2 1.6c-.7.7-1.8 1.2-1.8 2.5"/><path d="M12 17h.01"/>'),
     coin: svg('<circle cx="12" cy="12" r="8"/><path d="M12 7v10M9.5 9.2c.7-.8 1.6-1.2 2.5-1.2 1.7 0 3 1 3 2.4s-1.3 2.2-3.2 2.2h-1.2c-1.8 0-3.1.9-3.1 2.2 0 1.4 1.4 2.4 3.2 2.4 1 0 1.9-.4 2.6-1.1"/>'),

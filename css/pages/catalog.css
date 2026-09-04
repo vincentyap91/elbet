@@ -556,10 +556,96 @@
   background: var(--color-surface-hover);
 }
 
+/* Slots-only wallet + membership rebate strip */
+.catalog-slots-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.catalog-meta-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: var(--control-height);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  border: var(--border-width) solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.catalog-meta-card__text {
+  min-width: 0;
+}
+
+.catalog-meta-card__label {
+  margin: 0 0 var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+}
+
+.catalog-meta-card__value {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-numeric);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-numeric);
+  line-height: var(--leading-tight);
+}
+
+.catalog-meta-card__action {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-height-sm);
+  height: var(--control-height-sm);
+  padding: 0;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+button.catalog-meta-card__action:hover {
+  color: var(--color-primary);
+  border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-border));
+}
+
+.catalog-meta-card__action--static {
+  cursor: default;
+  color: var(--color-primary);
+}
+
+.catalog-meta-card__action svg {
+  width: 1rem;
+  height: 1rem;
+}
+
 .catalog-browse__types {
+  display: flex;
   flex: 1 1 auto;
+  flex-wrap: nowrap;
+  gap: var(--space-2);
   min-width: 0;
   margin-bottom: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.catalog-browse__types .event-pill {
+  flex: 0 0 auto;
 }
 
 .catalog-browse__tools .event-pill {
@@ -658,10 +744,20 @@
   /* Browse pages — vendor grid + 3-col hot games */
   .page--catalog .catalog-browse__toolbar,
   .page--slots .catalog-logo-chips,
-  .page--slots .catalog-browse__tools,
   .page--fast-game .catalog-logo-chips,
   .page--fast-game .catalog-browse__tools {
     display: none;
+  }
+
+  .page--slots .catalog-browse__tools {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page--slots .catalog-browse__tools .catalog-search {
+    width: 100%;
+    max-width: none;
   }
 
   .page--catalog .catalog-browse__games-title,

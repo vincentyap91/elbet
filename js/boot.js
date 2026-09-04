@@ -197,6 +197,7 @@
   if (page === "ranking-board") files.push("js/data/ranking-board.js", "js/pages/ranking-board.js");
   if (page === "prediction") files.push("js/data/prediction.js", "js/pages/prediction.js");
   if (page === "personal-achievement") files.push("js/data/achievements.js", "js/pages/personal-achievement.js");
+  if (page === "slots") files.push("js/data/vip.js");
   if (page === "esports" || page === "sports" || page === "live" || page === "slots" || page === "fast-game") {
     files.push("js/data/catalog.js", "js/pages/catalog.js");
   }
@@ -228,6 +229,9 @@
       file.indexOf("pages/personal-achievement.js") >= 0 ||
       file.indexOf("pages/vip.js") >= 0 ||
       file.indexOf("pages/rebates.js") >= 0 ||
+      file.indexOf("pages/catalog.js") >= 0 ||
+      file.indexOf("data/catalog.js") >= 0 ||
+      file.indexOf("data/vip.js") >= 0 ||
       file.indexOf("templates.js") >= 0 ||
       file.indexOf("fragments.js") >= 0
     );
@@ -236,7 +240,7 @@
   function loadNext(index) {
     if (index >= files.length) return;
     const next = document.createElement("script");
-    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash11" : "");
+    next.src = Nexa.root + files[index] + (needBust(files[index]) ? "?v=splash14" : "");
     next.onload = function () {
       loadNext(index + 1);
     };
