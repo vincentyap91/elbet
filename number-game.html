@@ -9,7 +9,7 @@
         document.documentElement.dataset.theme = localStorage.getItem("elbet:theme") || "dark";
       } catch (e) {}
     </script>
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/main.css?v=past-pd2" />
   </head>
   <body data-layout="shell">
     <div data-include="header"></div>
@@ -24,6 +24,44 @@
           </picture>
         </a>
 
+        <section class="ng-pity" data-auth="in" aria-labelledby="ng-pity-title">
+          <h2 class="ng-pity__title" id="ng-pity-title">Pity Bar</h2>
+          <div class="ng-pity__bar">
+            <div class="ng-pity__start">
+              <p class="ng-pity__value" data-ng-pity-attempts>
+                <span class="ng-pity__count">32/300</span
+                ><span class="ng-pity__unit">Attempt(s)</span>
+              </p>
+              <p class="ng-pity__hint" data-ng-pity-hint>Number of Incorrect or Predictions</p>
+            </div>
+            <div class="ng-pity__meter">
+              <div
+                class="ng-pity__track"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="300"
+                aria-valuenow="32"
+                aria-label="Pity progress"
+                data-ng-pity-bar
+              >
+                <div class="ng-pity__fill" data-ng-pity-fill></div>
+              </div>
+              <div class="ng-pity__scale" data-ng-pity-scale>
+                <span>0<span class="ng-pity__scale-unit"> Attempt</span></span>
+                <span>100<span class="ng-pity__scale-unit"> Attempt</span></span>
+                <span>200<span class="ng-pity__scale-unit"> Attempt</span></span>
+                <span>300<span class="ng-pity__scale-unit"> Attempt</span></span>
+              </div>
+            </div>
+            <div class="ng-pity__end">
+              <p class="ng-pity__reward" data-ng-pity-reward>MYR 500</p>
+              <p class="ng-pity__note" data-ng-pity-note>
+                Reward will be automatically credited upon meeting the requirement
+              </p>
+            </div>
+          </div>
+        </section>
+
         <div class="event-pills" role="tablist" aria-label="Number Game views">
           <button type="button" class="event-pill is-active" id="ng-tab-current" role="tab" aria-selected="true" aria-controls="ng-panel-current" data-event-tab="current">
             Current <span class="badge badge--live">Live</span>
@@ -31,7 +69,7 @@
           <button type="button" class="event-pill" id="ng-tab-past" role="tab" aria-selected="false" aria-controls="ng-panel-past" data-event-tab="past">Past</button>
           <button type="button" class="event-pill" id="ng-tab-record" role="tab" aria-selected="false" aria-controls="ng-panel-record" data-event-tab="record">My Record</button>
           <button type="button" class="event-pill" id="ng-tab-all" role="tab" aria-selected="false" aria-controls="ng-panel-all" data-event-tab="all">
-            All prediction
+            All prediction <span class="badge badge--live">Live</span>
           </button>
         </div>
 
@@ -81,7 +119,7 @@
                     <button type="button" class="event-pill" role="tab" aria-selected="false" data-ng-mode="auto">Auto</button>
                   </div>
                   <button type="button" class="ng-spin__tutorial" data-ng-tutorial>
-                    <img src="assets/images/number-game/icon-bulb.svg" alt="" />
+                    <span class="ng-spin__tutorial-icon" aria-hidden="true"></span>
                     Video Tutorial
                   </button>
                 </div>
@@ -119,30 +157,37 @@
         </div>
 
         <div class="event-panel" id="ng-panel-past" role="tabpanel" aria-labelledby="ng-tab-past" data-event-panel="past" hidden>
-          <div class="ng-history" data-ng-history></div>
+          <div class="pd-grid" data-ng-past></div>
         </div>
 
         <div class="event-panel" id="ng-panel-record" role="tabpanel" aria-labelledby="ng-tab-record" data-event-panel="record" hidden>
-          <div class="event-empty" data-ng-record role="status">
+          <div class="event-empty" data-auth="out" data-ng-record-gate role="status">
             <h2 class="event-empty__title">Sign in to see your record</h2>
             <p class="event-empty__desc">Ticket history is stored on your account.</p>
             <a class="btn btn--primary" href="login.html">Log in</a>
           </div>
+          <div class="ng-board" data-auth="in" data-ng-record-board>
+            <div class="ng-board__cols" data-ng-record-cols></div>
+            <div class="ng-board__tools">
+              <div class="catalog-search">
+                <img class="catalog-search__icon" src="assets/images/icons/icon-search.svg" alt="" width="16" height="16" />
+                <input type="search" placeholder="Search predicted number" data-ng-record-search aria-label="Search my record" />
+              </div>
+              <div class="tc-pager" data-ng-record-pager role="navigation" aria-label="My Record pages"></div>
+            </div>
+          </div>
         </div>
 
         <div class="event-panel" id="ng-panel-all" role="tabpanel" aria-labelledby="ng-tab-all" data-event-panel="all" hidden>
-          <div class="event-table-wrap">
-            <table class="tx-table">
-              <caption class="sr-only">All Number Game predictions</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Nickname</th>
-                  <th scope="col">Region</th>
-                  <th scope="col">Predicted</th>
-                </tr>
-              </thead>
-              <tbody data-ng-all></tbody>
-            </table>
+          <div class="ng-board" data-ng-all-board>
+            <div class="ng-board__cols" data-ng-all-cols></div>
+            <div class="ng-board__tools">
+              <div class="catalog-search">
+                <img class="catalog-search__icon" src="assets/images/icons/icon-search.svg" alt="" width="16" height="16" />
+                <input type="search" placeholder="Search nickname or number" data-ng-all-search aria-label="Search all predictions" />
+              </div>
+              <div class="tc-pager" data-ng-all-pager role="navigation" aria-label="All prediction pages"></div>
+            </div>
           </div>
         </div>
       </div>

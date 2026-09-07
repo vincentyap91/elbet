@@ -1,0 +1,25 @@
+<template id="quest-modal-template">
+  <div class="quest-panel quest-panel--mobile">
+    <div class="quest-panel__head">
+      <h2 class="quest-panel__title" id="quest-modal-title">Quest</h2>
+    </div>
+    <ul class="quest-list quest-list--mobile" data-quest-list="mobile"></ul>
+    <section class="quest-status" aria-label="Current Status" data-quest-status>
+      <h3 class="quest-status__title">Current Status</h3>
+      <div class="quest-status__grid quest-status__grid--stack">
+        <div class="quest-status__card quest-status__card--tier">
+          <img class="quest-status__trophy" data-quest-trophy src="assets/images/vip/Bronze.png" alt="" />
+          <span class="quest-status__tier" data-quest-tier>Bronze</span>
+        </div>
+        <div class="quest-status__card">
+          <span class="quest-status__label" data-quest-deposit-label>Current Deposit:</span>
+          <span class="quest-status__value" data-quest-deposit>MYR 60,810.00</span>
+        </div>
+        <div class="quest-status__card">
+          <span class="quest-status__label" data-quest-next-label>Amount Required for Next Tier Upgrade:</span>
+          <span class="quest-status__value" data-quest-next>MYR 339,190.00</span>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>

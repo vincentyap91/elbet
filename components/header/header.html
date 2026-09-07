@@ -53,11 +53,60 @@
     <div class="site-header__actions">
       <a class="site-header__account icon-btn" data-auth="out" href="login.html" aria-label="Account"></a>
       <ui-icon-button class="site-header__chat has-unread" name="chat" label="ChitChat" data-action="chat-open"></ui-icon-button>
-      <a class="site-header__quest site-header__quest--live" href="promotions.html">
-        <img src="assets/images/icons/quest.svg" alt="" />
-        Quest
-        <span class="header-live">Live</span>
-      </a>
+      <div class="site-header__quest-wrap">
+        <button
+          type="button"
+          class="site-header__quest site-header__quest--live"
+          data-action="quest-toggle"
+          aria-expanded="false"
+          aria-haspopup="dialog"
+          aria-controls="quest-dropdown"
+        >
+          <img src="assets/images/icons/quest.svg" alt="" />
+          Quest
+          <span class="header-live">Live</span>
+        </button>
+        <div
+          class="quest-dropdown"
+          id="quest-dropdown"
+          data-quest-dropdown
+          hidden
+          role="dialog"
+          aria-modal="false"
+          aria-labelledby="quest-dropdown-title"
+        >
+          <div class="quest-panel quest-panel--desktop">
+            <div class="quest-panel__head">
+              <h2 class="quest-panel__title" id="quest-dropdown-title">Quest</h2>
+              <button
+                type="button"
+                class="icon-btn icon-btn--ghost icon-btn--sm"
+                data-action="quest-close"
+                aria-label="Close"
+                data-icon="close"
+              ></button>
+            </div>
+            <ul class="quest-list quest-list--desktop" data-quest-list="desktop"></ul>
+            <section class="quest-status" aria-label="Current Status" data-quest-status>
+              <h3 class="quest-status__title">Current Status</h3>
+              <div class="quest-status__grid">
+                <div class="quest-status__card quest-status__card--tier">
+                  <img class="quest-status__trophy" data-quest-trophy src="assets/images/vip/Bronze.png" alt="" />
+                  <span class="quest-status__tier" data-quest-tier>Bronze</span>
+                </div>
+                <div class="quest-status__card">
+                  <span class="quest-status__label" data-quest-deposit-label>Current Deposit:</span>
+                  <span class="quest-status__value" data-quest-deposit>MYR 60,810.00</span>
+                </div>
+                <div class="quest-status__card">
+                  <span class="quest-status__label" data-quest-next-label>Amount Required for Next Tier Upgrade:</span>
+                  <span class="quest-status__value" data-quest-next>MYR 339,190.00</span>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
       <ui-button variant="ghost" data-auth="out" href="login.html">Log in</ui-button>
       <ui-button variant="primary" data-auth="out" href="register.html">Join</ui-button>
       <div class="site-header__user" data-auth="in">
@@ -124,11 +173,11 @@
             </span>
           </span>
         </a>
-        <a class="site-drawer__quest" href="promotions.html">
+        <button type="button" class="site-drawer__quest" data-action="quest-toggle" aria-expanded="false" aria-haspopup="dialog">
           <img src="assets/images/icons/quest.svg" alt="" />
           <span>Quest</span>
           <span class="header-live">Live</span>
-        </a>
+        </button>
       </div>
       <details class="site-drawer__group">
         <summary class="site-drawer__summary">
@@ -257,4 +306,5 @@
       </section>
     </div>
   </aside>
+  <div data-include="quest"></div>
 </header>

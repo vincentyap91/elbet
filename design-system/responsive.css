@@ -190,6 +190,7 @@
 
   .site-header__chat,
   .site-header__quest,
+  .site-header__quest-wrap,
   .site-header__user,
   .site-header__actions ui-button {
     display: none;

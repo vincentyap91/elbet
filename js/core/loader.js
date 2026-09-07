@@ -118,6 +118,7 @@
     Nexa.initChat();
     Nexa.initModal();
     Nexa.initToast();
+    Nexa.initQuest();
     markNav();
   };
 })(window.Nexa = window.Nexa || {});

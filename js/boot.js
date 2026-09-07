@@ -180,6 +180,8 @@
     "components/mobile-nav/mobile-nav.js",
     "components/modal/modal.js",
     "components/toast/toast.js",
+    "js/data/quest.js",
+    "components/quest/quest.js",
     "js/core/loader.js",
     "js/app.js",
   ];
@@ -220,6 +222,7 @@
       file.indexOf("pages/money-shell.js") >= 0 ||
       file.indexOf("hero.js") >= 0 ||
       file.indexOf("header.js") >= 0 ||
+      file.indexOf("quest.js") >= 0 ||
       file.indexOf("chat.js") >= 0 ||
       file.indexOf("modal.js") >= 0 ||
       file.indexOf("toast.js") >= 0 ||

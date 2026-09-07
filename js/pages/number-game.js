@@ -36,14 +36,96 @@
   }
 
   function rowHtml(item) {
+    const you = item.you ? ' class="is-you"' : "";
     return (
-      "<tr><td class=\"tx-table__name\">" +
+      "<tr" +
+      you +
+      '><td class="tx-table__name">' +
       item.nick +
       "</td><td>" +
       item.region +
       '</td><td class="event-num">' +
       item.predicted +
       "</td></tr>"
+    );
+  }
+
+  function recordRowHtml(item) {
+    return (
+      "<tr><td>" +
+      item.no +
+      '</td><td class="event-num">' +
+      item.predicted +
+      "</td><td>" +
+      item.datetime +
+      "</td></tr>"
+    );
+  }
+
+  function chunk(list, size) {
+    const out = [];
+    for (let i = 0; i < list.length; i += size) out.push(list.slice(i, i + size));
+    return out;
+  }
+
+  function pageSlice(list, page, pageSize) {
+    const start = (page - 1) * pageSize;
+    return list.slice(start, start + pageSize);
+  }
+
+  function renderPager(el, page, totalPages, attr) {
+    if (!el) return;
+    if (totalPages <= 1) {
+      el.innerHTML = "";
+      return;
+    }
+    const buttons = [];
+    const maxButtons = 5;
+    let start = Math.max(1, page - 2);
+    let end = Math.min(totalPages, start + maxButtons - 1);
+    start = Math.max(1, end - maxButtons + 1);
+    for (let i = start; i <= end; i++) {
+      buttons.push(
+        '<button type="button" class="tc-pager__btn' +
+          (i === page ? " is-active" : "") +
+          '" data-' +
+          attr +
+          '-page="' +
+          i +
+          '" aria-label="Page ' +
+          i +
+          '"' +
+          (i === page ? ' aria-current="page"' : "") +
+          ">" +
+          i +
+          "</button>"
+      );
+    }
+    if (page < totalPages) {
+      buttons.push(
+        '<button type="button" class="tc-pager__btn" data-' +
+          attr +
+          '-page="' +
+          (page + 1) +
+          '" aria-label="Next page">&gt;</button>'
+      );
+    }
+    el.innerHTML = buttons.join("");
+  }
+
+  function tableWrap(caption, heads, bodyHtml) {
+    return (
+      '<div class="event-table-wrap"><table class="tx-table"><caption class="sr-only">' +
+      caption +
+      "</caption><thead><tr>" +
+      heads
+        .map(function (h) {
+          return "<th scope=\"col\">" + h + "</th>";
+        })
+        .join("") +
+      "</tr></thead><tbody>" +
+      bodyHtml +
+      "</tbody></table></div>"
     );
   }
 
@@ -83,6 +165,47 @@
     Nexa.setText(Nexa.qs("[data-ng-local]", root), "Local Currency: " + data.localCurrency + " " + money(data.grandLocal));
     Nexa.setText(Nexa.qs("[data-ng-tickets-left]", root), String(data.ticketsLeft));
 
+    const pity = data.pity || {};
+    const pityCurrent = Number(pity.current) || 0;
+    const pityMax = Math.max(1, Number(pity.max) || 300);
+    const pityPct = Math.max(0, Math.min(100, (pityCurrent / pityMax) * 100));
+    const attemptsEl = Nexa.qs("[data-ng-pity-attempts]", root);
+    if (attemptsEl) {
+      const count = document.createElement("span");
+      count.className = "ng-pity__count";
+      count.textContent = pityCurrent + "/" + pityMax;
+      const unit = document.createElement("span");
+      unit.className = "ng-pity__unit";
+      unit.textContent = pity.attemptsSuffix || "Attempt(s)";
+      attemptsEl.replaceChildren(count, unit);
+    }
+    Nexa.setText(
+      Nexa.qs("[data-ng-pity-reward]", root),
+      (pity.currency || data.localCurrency || "MYR") + " " + money(pity.reward || 0)
+    );
+    Nexa.setText(Nexa.qs("[data-ng-pity-hint]", root), pity.subtitle || "");
+    Nexa.setText(Nexa.qs("[data-ng-pity-note]", root), pity.note || "");
+    const pityBar = Nexa.qs("[data-ng-pity-bar]", root);
+    const pityFill = Nexa.qs("[data-ng-pity-fill]", root);
+    if (pityBar) {
+      pityBar.setAttribute("aria-valuemin", "0");
+      pityBar.setAttribute("aria-valuemax", String(pityMax));
+      pityBar.setAttribute("aria-valuenow", String(pityCurrent));
+    }
+    if (pityFill) pityFill.style.width = pityPct + "%";
+    const pityScale = Nexa.qs("[data-ng-pity-scale]", root);
+    if (pityScale && Array.isArray(pity.scale)) {
+      pityScale.innerHTML = pity.scale
+        .map(function (n) {
+          return (
+            "<span>" +
+            n +
+            '<span class="ng-pity__scale-unit"> Attempt</span></span>'
+          );
+        })
+        .join("");
+    }
+
     const countdown = Nexa.qs("[data-ng-countdown]", root);
     function tick() {
       Nexa.setText(countdown, formatRemain(remainMs()));
@@ -108,36 +231,143 @@
       .join("");
 
     Nexa.qs("[data-ng-latest]", root).innerHTML = data.latest.map(rowHtml).join("");
-    Nexa.qs("[data-ng-all]", root).innerHTML = data.latest
-      .concat(data.latest.map(function (item, i) {
-        return { nick: item.nick, region: item.region, predicted: randomFour() + (i % 9) };
-      }))
-      .map(rowHtml)
-      .join("");
 
-    Nexa.qs("[data-ng-history]", root).innerHTML = data.history
-      .map(function (draw) {
+    const pastEl = Nexa.qs("[data-ng-past]", root);
+    if (pastEl) {
+      pastEl.innerHTML = (data.past || [])
+        .map(function (batch) {
+          return (
+            '<article class="pd-card">' +
+            '<img class="pd-card__icon" src="assets/images/number-game/icon-game.svg" alt="" />' +
+            '<h2 class="pd-card__title">Number Game</h2>' +
+            '<p class="pd-card__dates">' +
+            batch.batch +
+            "th · No of Batch · " +
+            batch.period +
+            "</p>" +
+            '<div class="pd-card__status"><span class="badge">Ended</span></div>' +
+            '<p class="pd-card__prize">USD ' +
+            money(batch.grandUsd) +
+            '</p><p class="pd-card__prize-label">Grand Prize Total</p>' +
+            '<p class="pd-card__dates">Mini Prize Pool · USD ' +
+            money(batch.miniUsd) +
+            " · " +
+            money(batch.totalPredicted) +
+            " predicted</p>" +
+            '<p class="pd-card__ended-label">Date Ended</p>' +
+            '<p class="pd-card__ended">' +
+            batch.endedLabel +
+            "</p>" +
+            '<div class="pd-card__actions">' +
+            '<button type="button" class="btn btn--ghost" data-ng-rules>Rules</button>' +
+            '<button type="button" class="btn btn--primary" data-ng-past-check data-batch="' +
+            batch.batch +
+            '">Check Now</button>' +
+            "</div></article>"
+          );
+        })
+        .join("");
+    }
+
+    const PAGE_SIZE = 30;
+    const COLS = 3;
+    const COL_SIZE = PAGE_SIZE / COLS;
+
+    function bindBoard(opts) {
+      const colsEl = Nexa.qs(opts.colsSel, root);
+      const pagerEl = Nexa.qs(opts.pagerSel, root);
+      const searchEl = Nexa.qs(opts.searchSel, root);
+      if (!colsEl) return;
+      let page = 1;
+      let query = "";
+
+      function filtered() {
+        const q = query.trim().toLowerCase();
+        if (!q) return opts.rows.slice();
+        return opts.rows.filter(function (row) {
+          return opts.match(row, q);
+        });
+      }
+
+      function paint() {
+        const rows = filtered();
+        const totalPages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+        if (page > totalPages) page = totalPages;
+        const slice = pageSlice(rows, page, PAGE_SIZE);
+        const groups = chunk(slice, COL_SIZE);
+        while (groups.length < COLS) groups.push([]);
+        colsEl.innerHTML = groups
+          .map(function (group, index) {
+            return tableWrap(
+              opts.caption + " column " + (index + 1),
+              opts.heads,
+              group.map(opts.rowHtml).join("") ||
+                '<tr><td colspan="' +
+                  opts.heads.length +
+                  '">No results</td></tr>'
+            );
+          })
+          .join("");
+        renderPager(pagerEl, page, totalPages, opts.pageAttr);
+      }
+
+      if (searchEl) {
+        searchEl.addEventListener("input", function () {
+          query = searchEl.value || "";
+          page = 1;
+          paint();
+        });
+      }
+
+      if (pagerEl) {
+        pagerEl.addEventListener("click", function (event) {
+          const btn = event.target.closest("[data-" + opts.pageAttr + "-page]");
+          if (!btn) return;
+          page = Number(btn.getAttribute("data-" + opts.pageAttr + "-page")) || 1;
+          paint();
+        });
+      }
+
+      paint();
+    }
+
+    bindBoard({
+      colsSel: "[data-ng-all-cols]",
+      pagerSel: "[data-ng-all-pager]",
+      searchSel: "[data-ng-all-search]",
+      pageAttr: "ng-all",
+      rows: data.predictions || data.latest || [],
+      heads: ["Nickname", "Region", "Predicted"],
+      caption: "All predictions",
+      rowHtml: rowHtml,
+      match: function (row, q) {
         return (
-          '<article class="ng-history__card"><p class="ng-history__date">' +
-          draw.date +
-          '</p><div class="ng-history__prizes">' +
-          '<article class="ng-net"><p class="ng-net__amount">' +
-          draw.eth +
-          '</p><div class="ng-net__row"><img class="ng-net__icon" src="assets/images/number-game/eth.png" alt="" />ETH</div></article>' +
-          '<article class="ng-net"><p class="ng-net__amount">' +
-          draw.trc +
-          '</p><div class="ng-net__row"><img class="ng-net__icon" src="assets/images/number-game/trc20.png" alt="" />TRC20</div></article>' +
-          '<article class="ng-net"><p class="ng-net__amount">' +
-          draw.bep +
-          '</p><div class="ng-net__row"><img class="ng-net__icon" src="assets/images/number-game/bep20.png" alt="" />BEP20</div></article>' +
-          "</div></article>"
+          String(row.nick).toLowerCase().indexOf(q) !== -1 ||
+          String(row.region).toLowerCase().indexOf(q) !== -1 ||
+          String(row.predicted).indexOf(q) !== -1
         );
-      })
-      .join("");
+      },
+    });
 
-    if (Nexa.get("isLoggedIn")) {
-      Nexa.qs("[data-ng-record]", root).innerHTML =
-        '<h2 class="event-empty__title">No tickets this round</h2><p class="event-empty__desc">Submit a number on the Current tab to see it here.</p>';
+    const recordBoard = Nexa.qs("[data-ng-record-board]", root);
+    if (recordBoard && (data.myRecord || []).length) {
+      bindBoard({
+        colsSel: "[data-ng-record-cols]",
+        pagerSel: "[data-ng-record-pager]",
+        searchSel: "[data-ng-record-search]",
+        pageAttr: "ng-record",
+        rows: data.myRecord,
+        heads: ["No.", "Predicted", "Date and time"],
+        caption: "My record",
+        rowHtml: recordRowHtml,
+        match: function (row, q) {
+          return (
+            String(row.no).indexOf(q) !== -1 ||
+            String(row.predicted).indexOf(q) !== -1 ||
+            String(row.datetime).toLowerCase().indexOf(q) !== -1
+          );
+        },
+      });
     }
 
     let mode = "manual";
@@ -233,6 +463,33 @@
       }
       if (event.target.closest("[data-ng-rules]")) {
         openBody("<p>" + data.rules + "</p>", "Number Game rules");
+        return;
+      }
+      const pastCheck = event.target.closest("[data-ng-past-check]");
+      if (pastCheck) {
+        const id = Number(pastCheck.getAttribute("data-batch"));
+        const batch = (data.past || []).find(function (item) {
+          return item.batch === id;
+        });
+        if (!batch) return;
+        openBody(
+          '<div class="ng-past__metrics ng-past__metrics--3">' +
+            '<div class="ng-past__metric"><p class="ng-past__metric-label">ETH</p><p class="ng-past__metric-value event-num">' +
+            batch.eth +
+            "</p></div>" +
+            '<div class="ng-past__metric"><p class="ng-past__metric-label">TRC20</p><p class="ng-past__metric-value event-num">' +
+            batch.trc +
+            "</p></div>" +
+            '<div class="ng-past__metric"><p class="ng-past__metric-label">BEP20</p><p class="ng-past__metric-value event-num">' +
+            batch.bep +
+            "</p></div></div>" +
+            '<p class="event-note">Winning numbers for batch ' +
+            batch.batch +
+            " · " +
+            batch.endedLabel +
+            "</p>",
+          batch.batch + "th · Number Game"
+        );
         return;
       }
       if (event.target.closest("[data-ng-tutorial]")) {

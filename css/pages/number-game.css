@@ -1,3 +1,232 @@
+.ng-pity {
+  margin-bottom: var(--event-cluster-gap);
+}
+
+.ng-pity__title {
+  margin: 0 0 var(--shell-title-gap);
+  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+}
+
+.ng-pity__bar {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  padding: var(--space-card);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+}
+
+.ng-pity__start,
+.ng-pity__end {
+  min-width: 0;
+}
+
+.ng-pity__value {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-numeric);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: var(--tracking-numeric);
+  line-height: var(--leading-tight);
+}
+
+.ng-pity__count {
+  font: inherit;
+}
+
+.ng-pity__unit {
+  margin-left: var(--space-2);
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  letter-spacing: normal;
+}
+
+.ng-pity__hint {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
+}
+
+.ng-pity__reward {
+  margin: 0;
+  color: var(--color-primary);
+  font-family: var(--font-numeric);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: var(--tracking-numeric);
+  line-height: var(--leading-tight);
+}
+
+.ng-pity__note {
+  margin: var(--space-1) 0 0;
+  color: var(--color-primary);
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
+}
+
+.ng-pity__meter {
+  min-width: 0;
+  width: 100%;
+}
+
+.ng-pity__track {
+  height: 0.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.ng-pity__fill {
+  height: 100%;
+  width: 0%;
+  border-radius: inherit;
+  background: var(--color-primary);
+  transition: width var(--duration-med) var(--ease-out);
+}
+
+.ng-pity__scale {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
+}
+
+.ng-pity__scale span {
+  flex: 1 1 0;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.ng-pity__scale-unit {
+  font-weight: var(--weight-regular);
+}
+
+.ng-pity__scale span:nth-child(2),
+.ng-pity__scale span:nth-child(3) {
+  text-align: center;
+}
+
+.ng-pity__scale span:last-child {
+  text-align: right;
+}
+
+@media (max-width: 767px) {
+  .ng-pity__bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "start reward"
+      "meter meter"
+      "note note";
+    align-items: start;
+    column-gap: var(--space-4);
+    row-gap: var(--space-3);
+    padding: var(--space-card);
+  }
+
+  .ng-pity__start {
+    grid-area: start;
+  }
+
+  .ng-pity__end {
+    display: contents;
+  }
+
+  .ng-pity__reward {
+    grid-area: reward;
+    justify-self: end;
+    text-align: right;
+    font-size: var(--text-md);
+  }
+
+  .ng-pity__note {
+    grid-area: note;
+    margin-top: 0;
+    text-align: left;
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+  }
+
+  .ng-pity__meter {
+    grid-area: meter;
+    padding-block: var(--space-1);
+  }
+
+  .ng-pity__value {
+    font-size: var(--text-md);
+    font-weight: var(--weight-medium);
+  }
+
+  .ng-pity__unit {
+    display: inline;
+    margin-left: var(--space-2);
+    margin-top: 0;
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .ng-pity__hint {
+    margin-top: var(--space-1);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .ng-pity__track {
+    height: 0.75rem;
+  }
+
+  .ng-pity__scale {
+    margin-top: var(--space-2);
+    gap: 0;
+  }
+
+  .ng-pity__scale-unit {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .ng-pity__bar {
+    grid-template-columns: auto minmax(0, 1fr) minmax(11rem, 15rem);
+    align-items: center;
+    gap: var(--space-5);
+    padding: var(--space-5) var(--space-6);
+  }
+
+  .ng-pity__value {
+    font-size: var(--text-lg);
+    white-space: nowrap;
+  }
+
+  .ng-pity__end {
+    text-align: right;
+  }
+
+  .ng-pity__track {
+    height: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ng-pity__fill {
+    transition: none;
+  }
+}
+
 .ng-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 20.5rem;
@@ -191,10 +420,14 @@
   box-shadow: var(--focus-ring);
 }
 
-.ng-spin__tutorial img {
+.ng-spin__tutorial-icon {
+  display: block;
   width: 1.125rem;
   height: 1.125rem;
   flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask: url("../../assets/images/number-game/icon-bulb.svg") center / contain no-repeat;
+  mask: url("../../assets/images/number-game/icon-bulb.svg") center / contain no-repeat;
 }
 
 .ng-spin__row {
@@ -314,6 +547,206 @@
   text-align: right;
 }
 
+/* Past panel — same layout as Prediction cards (inlined so cache/import order cannot drop styles) */
+#ng-panel-past .pd-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+#ng-panel-past .pd-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-card);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  text-align: center;
+  min-height: 100%;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  #ng-panel-past .pd-card:hover {
+    background: var(--color-surface-hover);
+  }
+}
+
+#ng-panel-past .pd-card:focus-within {
+  box-shadow: var(--focus-ring);
+}
+
+#ng-panel-past .pd-card__icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: var(--space-3);
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  object-fit: contain;
+}
+
+#ng-panel-past .pd-card__title {
+  margin: 0 0 var(--space-1);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+}
+
+#ng-panel-past .pd-card__dates {
+  margin: 0 0 var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+#ng-panel-past .pd-card__status {
+  margin-bottom: var(--space-3);
+}
+
+#ng-panel-past .pd-card__prize {
+  margin: 0;
+  font-family: var(--font-numeric);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: var(--tracking-numeric);
+  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
+}
+
+#ng-panel-past .pd-card__prize-label {
+  margin: 0 0 var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+#ng-panel-past .pd-card__ended-label {
+  margin: 0 0 var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+#ng-panel-past .pd-card__ended {
+  width: 100%;
+  margin: 0 0 var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  border: var(--border-width) solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  font-family: var(--font-numeric);
+  font-variant-numeric: tabular-nums;
+}
+
+#ng-panel-past .pd-card__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  margin-top: auto;
+}
+
+#ng-panel-past .pd-card__actions .btn {
+  width: 100%;
+}
+
+@media (max-width: 1279px) {
+  #ng-panel-past .pd-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1023px) {
+  #ng-panel-past .pd-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  #ng-panel-past .pd-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Past Check Now modal metrics */
+.ng-past__metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.ng-past__metrics--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ng-past__metric {
+  min-width: 0;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+}
+
+.ng-past__metric-label {
+  margin: 0 0 var(--space-1);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.ng-past__metric-value {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-numeric);
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+  font-variant-numeric: tabular-nums;
+}
+
+.ng-board {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.ng-board__cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.ng-board__cols .event-table-wrap {
+  min-width: 0;
+}
+
+.ng-board__tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.ng-board__tools .catalog-search {
+  flex: 1 1 12rem;
+  max-width: 20rem;
+}
+
+.ng-board__tools .tc-pager {
+  margin-top: 0;
+}
+
+.ng-board .tx-table .event-num {
+  font-family: var(--font-numeric);
+  font-variant-numeric: tabular-nums;
+}
+
 .ng-history {
   display: grid;
   gap: var(--space-3);
@@ -343,6 +776,97 @@
   background: var(--color-bg);
 }
 
+@media (max-width: 767px) {
+  .ng-spin__head {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .ng-spin__modes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: var(--space-3);
+  }
+
+  .ng-spin__modes .event-pill {
+    width: 100%;
+  }
+
+  .ng-spin__tutorial {
+    justify-self: end;
+    min-height: var(--tap-min);
+  }
+
+  .ng-spin__row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: var(--space-3);
+    row-gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .ng-spin__row .control-inline {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    --control-inline-height: var(--control-height);
+  }
+
+  .ng-spin__field {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+  }
+
+  .ng-spin__actions {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    margin-left: 0;
+    gap: var(--space-3);
+  }
+
+  .ng-spin__actions .btn {
+    width: 100%;
+    min-height: var(--tap-min);
+  }
+
+  .ng-spin__row .event-note {
+    grid-column: 1 / -1;
+    margin: 0;
+  }
+
+  .ng-spin__submit {
+    margin-top: var(--space-5);
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .ng-spin__submit > .btn {
+    width: 100%;
+    min-height: var(--tap-min);
+  }
+
+  .ng-spin__foot {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 0;
+    font-size: var(--text-xs);
+  }
+
+  .ng-spin__foot .event-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap-min);
+    font-size: var(--text-xs);
+  }
+}
+
 @media (max-width: 1023px) {
   .ng-layout {
     grid-template-columns: 1fr;
@@ -363,5 +887,15 @@
 
   .ng-history__prizes {
     grid-template-columns: 1fr;
+  }
+
+  .ng-board__tools .catalog-search {
+    max-width: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .ng-board__cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
