@@ -557,10 +557,6 @@
 }
 
 @media (max-width: 1023px) {
-  [data-layout="shell"] .page--inner {
-    padding-bottom: calc(var(--space-6) + var(--mobile-nav-height));
-  }
-
   .event-metrics {
     grid-template-columns: 1fr;
   }

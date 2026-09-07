@@ -440,10 +440,6 @@
     display: none;
   }
 
-  [data-layout="shell"] .page--home {
-    padding-bottom: calc(var(--space-6) + var(--mobile-nav-height));
-  }
-
   [data-layout="shell"] .mobile-nav {
     display: grid;
   }
